@@ -1,7 +1,7 @@
 .header {
     max-width: 882px;
     height: 74px;
-    margin: 45px auto 0;
+    margin: 45px auto 40px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
