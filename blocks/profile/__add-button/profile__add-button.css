@@ -1,5 +1,15 @@
-.add__button {
+.profile__add-button {
+  background-image: url(../../../images/add-button.svg);
   width: 150px;
   height: 50px;
+  background-size: contain;
   align-self: center;
+}
+
+@media screen and (max-width: 660px) {
+  .profile__add-button {
+    background-image: url(../../../images/add-button_large.svg);
+    width: 282px;
+    height: 50px;
+  }
 }
