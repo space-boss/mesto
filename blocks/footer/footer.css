@@ -4,3 +4,9 @@
   max-width: 882px;
   height: 18px;
 }
+
+@media screen and (max-width: 900px) {
+  .footer {
+    width: calc(100% - 19px*2);
+  }
+}
