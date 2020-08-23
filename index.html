@@ -10,7 +10,17 @@
 
 <body class="root">
     <section class="popup">
-      <div class="popup__container">
+        <div class="popup__container">
+        <img class="popup__close" src="../mesto/images/close-button.svg">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <fieldset class="popup__input">
+          <input type="text" class="popup__input-field" id="username" name="username" placeholder="Жак-Ив Кусто">
+          <input type="text" class="popup__input-field" id="occupation" name="occupation" placeholder="Исследователь океана">
+        </fieldset>
+
+        <fieldset class="popup__submit">
+          <button type="submit" class="popup__submit-button"><p class="popup__button-text">Сохранить</p></button>
+        </fieldset>
 
       </div>
     </section>
