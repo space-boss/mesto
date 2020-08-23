@@ -5,6 +5,12 @@
   top: 45px;
   height: 24px;
   width: 24px;
+  cursor: pointer;
+  transition: opacity .4s;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 660px) {
