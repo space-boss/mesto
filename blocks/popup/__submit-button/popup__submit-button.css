@@ -6,6 +6,13 @@
   border: 0;
   cursor: pointer;
   transition: opacity .4s;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF
 }
 
 .popup__submit-button:hover {
