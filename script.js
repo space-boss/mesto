@@ -23,8 +23,8 @@ let formElement = document.querySelector('.popup__form');
 
 function formSubmitHandler (evt) {
 
-    var newName = document.getElementById('username').value;
-    var newJob = document.getElementById("job").value;
+    var newName = document.querySelector('.popup__name').value;
+    var newJob = document.querySelector('.popup__job').value;
 
     let userName = document.querySelector('.profile__title');
     let job = document.querySelector('.profile__subtitle');
