@@ -2,7 +2,7 @@ let editProfile = document.querySelector('.profile__edit-button');
 
 editProfile.addEventListener('click', function () {
   let popup = document.querySelector('.popup');
-  popup.classList.add('popup__opened');
+  popup.classList.add('popup_opened');
 })
 
 
@@ -13,7 +13,7 @@ popupClosed.addEventListener('click', closePopup);
 
 function closePopup () {
   let popup = document.querySelector('.popup');
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 }
 
 
