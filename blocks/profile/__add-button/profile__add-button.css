@@ -6,6 +6,8 @@
   align-self: center;
   cursor: pointer;
   transition: opacity .4s;
+  border: 0;
+  background-color: transparent;
 }
 
 .profile__add-button:hover {
