@@ -18,5 +18,6 @@
   .profile {
     flex-direction: column;
     height: 286px;
+    margin-bottom: 36px;
   }
 }
