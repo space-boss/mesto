@@ -6,43 +6,13 @@
   padding: 0;
   border: none;
   border-bottom: 1px solid #CCCCCC;
-  opacity: none;
-}
-
-input::placeholder {
-  font-family: inherit;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: black;
-}
-
-input::-webkit-input-placeholder {
-  font-family: inherit;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: black;
+  background-color: transparent;
 }
 
 
-input::-moz-placeholder {
-    font-family: inherit;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    color: black;
-  }
-
-
-input::-ms-input-placeholder {
-  font-family: inherit;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: black;
+@media screen and (max-width: 575px) {
+  .popup__input-field {
+    width: calc(100% - 30px*2);
+    margin: 0 30px 10px;
+ }
 }

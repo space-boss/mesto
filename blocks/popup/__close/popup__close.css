@@ -2,10 +2,11 @@
   position: absolute;
   width: 40.7px;
   height: 40.7px;
-  top: -35px;
-  right: -35px;
+  top: -40px;
+  right: -38px;
+  padding: 0;
   background-image: url(../../../images/close-button.svg);
-  background-size: contain;
+  background-size: inherit;
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
