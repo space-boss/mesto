@@ -17,61 +17,61 @@
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <img class="profile__pic" src="images/Avatar.svg" alt="Аватар пользователя">
+          <div class="profile__pic" style="background-image:url('./images/Avatar.svg')" alt="Аватар пользователя"></div>
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button>
+          <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
 
-        <button type="button" class="profile__add-button"></button>
+        <button type="button" class="profile__add-button" aria-label="Добавить новое место"></button>
       </section>
 
      <section class="places">
        <div class="place">
-         <img class="place__cover" src="./images/iceland.jpg" alt="Исландия">
+         <div class="place__cover" style="background-image:url('./images/iceland.jpg')" alt="Исландия"></div>
          <div class="place__description">
           <h2 class="place__title">Исландия</h2>
-          <button type="button" class="place__like"></button>
+          <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
         </div>
       </div>
 
       <div class="place">
-        <img class="place__cover" src="./images/antwerpen.jpeg" alt="Антверпенский порт">
+        <div class="place__cover" style="background-image:url('./images/antwerpen.jpeg')" alt="Антверпенский порт"></div>
         <div class="place__description">
           <h2 class="place__title">Порт в Антверпене</h2>
-          <button type="button" class="place__like"></button>
+          <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
         </div>
       </div>
 
       <div class="place">
-        <img class="place__cover" src="./images/capetown.jpg" alt="Мыс Доброй Надежды">
+        <div class="place__cover" style="background-image:url('./images/capetown.jpg')" alt="Мыс Доброй Надежды"></div>
         <div class="place__description">
           <h2 class="place__title">Мыс Доброй Надежды</h2>
-          <button type="button" class="place__like"></button>
+          <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
         </div>
       </div>
 
       <div class="place">
-        <img class="place__cover" src="./images/mariana.jpg" alt="Марианская Впадина">
+        <div class="place__cover" style="background-image:url('./images/mariana.jpg')" alt="Марианская Впадина"></div>
         <div class="place__description">
           <h2 class="place__title">Марианская Впадина</h2>
-          <button type="button" class="place__like"></button>
+          <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
         </div>
       </div>
 
       <div class="place">
-        <img class="place__cover" src="./images/teriberka.jpg" alt="Териберка">
+        <div class="place__cover" style="background-image:url('./images/teriberka.jpg')" alt="Териберка"></div>
         <div class="place__description">
           <h2 class="place__title">Териберка</h2>
-          <button type="button" class="place__like"></button>
+          <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
         </div>
       </div>
 
       <div class="place">
-        <img class="place__cover" src="./images/caribbean-island.jpg" alt="Карибские острова">
+        <div class="place__cover" style="background-image:url('./images/caribbean-island.jpg')" alt="Карибские острова"></div>
         <div class="place__description">
           <h2 class="place__title">Карибские острова</h2>
-          <button type="button" class="place__like"></button>
+          <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
         </div>
       </div>
 
@@ -85,7 +85,7 @@
 
     <div class="popup">
       <div class="popup__container">
-      <button type="button" class="popup__close"></button>
+      <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form name="editProfile" method="post" class="popup__form">
         <input type="text" class="popup__input-field popup__input-field_name" name="username" placeholder="Имя">
