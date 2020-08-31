@@ -1,9 +1,8 @@
 .profile__subtitle {
-  position: absolute;
-  top: 81.91px;
-  left: 152.59px;
-
+  grid-area: jobinfo;
   margin: 0;
+  padding: 9px 2px 0;
+  justify-self: start;
 
   font-style: normal;
   font-weight: normal;
@@ -12,26 +11,12 @@
   color: #FFFFFF;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 672px) {
   .profile__subtitle {
-    position: relative;
     font-size: 14px;
     line-height: 1.2;
-    top: 0;
-    left: 0;
-    margin: 0 auto;
-  }
-}
-
-
-@media screen and (max-width: 660px) {
-  .profile__title {
-    position: relative;
-    top: 0;
-    left: 0;
-    font-size: 27px;
-    line-height: 207%;
-    margin: 0 auto;
+    justify-self: center;
+    margin: 5px;
   }
 }
 
