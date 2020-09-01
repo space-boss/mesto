@@ -1,6 +1,6 @@
 .profile {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 69.5px 1fr;
     grid-template-columns: 146px 311px 24px 396px;
     grid-template-areas:
     "userpic username edit add"
@@ -21,8 +21,8 @@
 
 @media screen and (max-width: 672px) {
   .profile {
-    grid-template-rows: 120px 52px 28px 86px;
-    grid-template-columns: 1fr 42px;
+    grid-template-rows: 120px 66px 1fr 1fr;
+    grid-template-columns: fit-content(250px) 42px;
     grid-template-areas:
     "userpic userpic"
     "username edit"
@@ -31,7 +31,7 @@
     grid-gap: 0;
     height: 286px;
     width: 282px;
-    margin-bottom: 36px;
+    margin-bottom: 0 auto 36px;
     justify-items: center;
     text-align: center;
   }
