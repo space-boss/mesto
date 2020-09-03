@@ -4,13 +4,13 @@ let formElement = document.querySelector('.popup__form');
 let popup = document.querySelector('.popup');
 let userName = document.querySelector('.profile__title');
 let job = document.querySelector('.profile__subtitle');
-let nameInput = document.querySelector('.popup__input-field_name');
-let jobInput = document.querySelector('.popup__input-field_job');
+let nameInput = document.querySelector('.popup__input-field_value_name');
+let jobInput = document.querySelector('.popup__input-field_value_job');
 
 function openPopup () {
+  nameInput.value = userName.textContent;
+  jobInput.value = job.textContent;
   popup.classList.add('popup_opened');
-  nameInput.placeholder = userName.textContent;
-  jobInput.placeholder = job.textContent;
 }
 
 function closePopup () {
