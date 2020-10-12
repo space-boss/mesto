@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MESTO</title>
     <link rel="stylesheet" href="./pages/index.css">
+    <script src="./scripts/script.js" defer></script>
 </head>
 
 <body class="root">
@@ -24,6 +25,8 @@
       </section>
 
      <section class="places">
+
+      <!--
        <div class="place">
          <div class="place__cover" style="background-image:url('./images/iceland.jpg');"></div>
          <div class="place__description">
@@ -70,7 +73,7 @@
           <h2 class="place__title">Карибские острова</h2>
           <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
         </div>
-      </div>
+      </div> -->
 
     </section>
 
@@ -95,8 +98,16 @@
     </div>
   </div>
 
+  <template class="template">
+    <div class="place">
+      <div class="place__cover" style="background-image:url(${element.backgroundImage});"></div>
+      <div class="place__description">
+        <h2 class="place__title">${element.title}</h2>
+        <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
+      </div>
+    </div>
+  </template>
 
-    <script src="./scripts/script.js"></script>
 
 </body>
 </html>
