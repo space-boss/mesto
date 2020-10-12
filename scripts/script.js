@@ -42,7 +42,7 @@ const jobInput = document.querySelector('.popup__input-field_value_job');
 
 const renderCards = () => {
   const items = cards.map(element => {
-    return getItems(element);
+    return getCards(element);
   }).join('');
 
   places.insertAdjacentHTML('afterbegin', items);
@@ -60,7 +60,7 @@ const getCards = (data) => {
 
 const addCards = () => {
   addButton.addEventListener('click', () => {
-    const item = getItems( {
+    const item = getCards( {
       title: ''
     });
   places.insertAdjacentHTML('afterbegin', item);
