@@ -98,6 +98,21 @@
     </div>
   </div>
 
+  <div class="popup popup__place">
+    <div class="popup__container">
+    <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
+    <h3 class="popup__title">Новое место</h3>
+    <form name="editProfile" method="post" class="popup__form">
+      <input type="text" class="popup__input-field popup__input-field_value_place" name="place" placeholder="Название">
+      <input type="text" class="popup__input-field popup__input-field_value_placeurl" name="placeUrl" placeholder="Ссылка на картинку">
+
+      <button type="submit" class="popup__submit-button">Сохранить</button>
+
+    </form>
+
+  </div>
+</div>
+
   <template class="template">
     <div class="place">
       <div class="place__cover" style="background-image:url(${element.backgroundImage});"></div>
