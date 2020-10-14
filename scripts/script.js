@@ -1,29 +1,28 @@
 const cards = [
   { title: 'Исландия',
-    backgroundImage: './images/iceland.jpg',
+    backgroundImage: 'background-image:url(./images/iceland.jpg)',
   },
 
   { title: 'Порт в Антверпене',
-    backgroundImage: './images/antwerpen.jpeg',
+    backgroundImage: 'background-image:url(./images/antwerpen.jpeg)',
   },
 
   { title: 'Мыс Доброй Надежды',
-    backgroundImage: './images/capetown.jpg',
+    backgroundImage: 'background-image:url(./images/capetown.jpg)',
   },
 
   { title: 'Марианская Впадина',
-    backgroundImage: './images/mariana.jpg',
+    backgroundImage: 'background-image:url(./images/mariana.jpg)',
   },
 
   { title: 'Териберка',
-    backgroundImage: './images/teriberka.jpg',
+    backgroundImage: 'background-image:url(./images/teriberka.jpg)',
   },
 
   { title: 'Карибские острова',
-    backgroundImage: './images/caribbean-island.jpg',
+    backgroundImage: 'background-image:url(./images/caribbean-island.jpg)',
   },
 ];
-
 
 const places = document.querySelector('.places');
 const addButton = document.querySelector('.profile__add-button');
@@ -42,32 +41,29 @@ const jobInput = document.querySelector('.popup__input-field_value_job');
 
 
 const getCards = (data) => {
-  return (`<div class="place">
-            <div class="place__cover" style="background-image:url(${data.backgroundImage});"></div>
-              <div class="place__description">
-              <h2 class="place__title">${data.title}</h2>
-              <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
-             </div>
-          </div>`);
+  const card = template.content.cloneNode(true);
+
+  card.querySelector('.place__title').innerText = data.title;
+  card.querySelector('.place__cover').style = data.backgroundImage;
+
+  return card;
 };
+
 
 const renderCards = () => {
-  const items = cards.map(element => {
-    return getCards(element);
-  }).join('');
+  const items = cards.map(element => getCards(element));
 
-  places.insertAdjacentHTML('afterbegin', items);
+  places.append(...items)
 };
-
-renderCards();
-
 
 const addCards = () => {
   addButton.addEventListener('click', () => {
     const item = getCards( {
       title: inputPlaceName.value
     });
-   places.insertAdjacentHTML('afterbegin', item);
+   places.prepend(item);
+
+   input.value = '';
   })
 };
 
@@ -90,6 +86,9 @@ function formSubmitHandler (evt) {
 
   closePopup ();
 }
+
+
+renderCards();
 
 
 popupCards.addEventListener('click', openPopup);
