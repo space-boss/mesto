@@ -25,15 +25,18 @@ const cards = [
 ];
 
 const places = document.querySelector('.places');
-const addButton = document.querySelector('.profile__add-button');
+const addPlace = document.querySelector('.profile__add-button');
 const template = document.querySelector('.template');
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 
-const popupOpened = document.querySelector('.profile__edit-button');
-const popupCards = document.querySelector('.profile__add-button');
-const popupClosed = document.querySelector('.popup__close');
-const formElement = document.querySelector('.popup__form');
+const editProfile = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
+
+const popupClosed = document.querySelectorAll('.popup__close');
+const formElement = document.querySelector('.popup__form');
+const popupProfile = document.querySelector('.popup__profile');
+const popupPlace = document.querySelector('.popup__place');
+
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
@@ -56,8 +59,9 @@ const renderCards = () => {
   places.append(...items)
 };
 
+
 const addCards = () => {
-  addButton.addEventListener('click', () => {
+  addPlace.addEventListener('click', () => {
     const item = getCards( {
       title: inputPlaceName.value
     });
@@ -68,14 +72,21 @@ const addCards = () => {
 };
 
 
-function openPopup () {
+function openPopupProfile (evt) {
+  console.log(evt);
   nameInput.value = userName.textContent;
   jobInput.value = job.textContent;
-  popup.classList.add('popup_opened');
+  popupProfile.classList.toggle('popup_opened');
 }
 
-function closePopup () {
-  popup.classList.remove('popup_opened');
+
+function openPopupPlace () {
+  popupPlace.classList.toggle('popup_opened');
+}
+
+function closePopup (evt) {
+  const eventTarget = evt.target;
+  eventTarget.parentElement.parentElement.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler (evt) {
@@ -91,10 +102,13 @@ function formSubmitHandler (evt) {
 renderCards();
 
 
-popupCards.addEventListener('click', openPopup);
 
-popupOpened.addEventListener('click', openPopup);
+editProfile.addEventListener('click', openPopupProfile);
 
-popupClosed.addEventListener('click', closePopup);
+addPlace.addEventListener('click', openPopupPlace);
+
+popupClosed.forEach( (button) => {
+button.addEventListener('click', closePopup);
+});
 
 formElement.addEventListener('submit', formSubmitHandler);
