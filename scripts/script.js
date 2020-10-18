@@ -26,8 +26,10 @@ const cards = [
 
 const places = document.querySelector('.places');
 const addPlace = document.querySelector('.profile__add-button');
+const savePlace = document.querySelector('.popup__submit-button_place');
 const template = document.querySelector('.template');
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
+const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
 
 const editProfile = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
@@ -60,25 +62,11 @@ const renderCards = () => {
 };
 
 
-const addCards = () => {
-  addPlace.addEventListener('click', () => {
-    const item = getCards( {
-      title: inputPlaceName.value
-    });
-   places.prepend(item);
-
-   input.value = '';
-  })
-};
-
-
 function openPopupProfile (evt) {
-  console.log(evt);
   nameInput.value = userName.textContent;
   jobInput.value = job.textContent;
   popupProfile.classList.toggle('popup_opened');
 }
-
 
 function openPopupPlace () {
   popupPlace.classList.toggle('popup_opened');
@@ -89,25 +77,38 @@ function closePopup (evt) {
   eventTarget.parentElement.parentElement.classList.toggle('popup_opened');
 }
 
+
+const addCards = () => {
+  savePlace.addEventListener('click', (event) => {
+    event.preventDefault();
+    const item = getCards({
+      title: inputPlaceName.value,
+      backgroundImage: `background-image:url(${inputPlaceUrl.value})`
+    });
+
+   places.prepend(item);
+   inputPlaceName.value = '';
+   closePopup(evt);
+  });
+};
+
 function formSubmitHandler (evt) {
   evt.preventDefault();
-
   userName.textContent = nameInput.value;
   job.textContent = jobInput.value;
 
-  closePopup ();
+  closePopup(evt);
 }
 
-
 renderCards();
-
+addCards();
 
 
 editProfile.addEventListener('click', openPopupProfile);
 
 addPlace.addEventListener('click', openPopupPlace);
 
-popupClosed.forEach( (button) => {
+popupClosed.forEach((button) => {
 button.addEventListener('click', closePopup);
 });
 
