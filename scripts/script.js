@@ -30,6 +30,7 @@ const savePlace = document.querySelector('.popup__submit-button_place');
 const template = document.querySelector('.template');
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
+const placeLikePressed = document.querySelector('.place__like_pressed');
 
 const editProfile = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
@@ -44,12 +45,15 @@ const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
-
 const getCards = (data) => {
   const card = template.content.cloneNode(true);
 
   card.querySelector('.place__title').innerText = data.title;
   card.querySelector('.place__cover').style = data.backgroundImage;
+
+  const likePlace = card.querySelector('.place__like');
+
+  likePlace.addEventListener('click', handlerLike)
 
   return card;
 };
@@ -100,6 +104,11 @@ function formSubmitHandler (evt) {
   closePopup(evt);
 }
 
+const handlerLike = (evt) => {
+  const likeTarget = evt.target;
+  likeTarget.classList.toggle('place__like_pressed');
+}
+
 renderCards();
 addCards();
 
@@ -112,4 +121,6 @@ popupClosed.forEach((button) => {
 button.addEventListener('click', closePopup);
 });
 
+
 formElement.addEventListener('submit', formSubmitHandler);
+
