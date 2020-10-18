@@ -1,8 +1,8 @@
-.place__like {
-  background-image: url(../../../images/like-button.svg);
+.place__like_pressed {
+  background-image: url(../../../../images/like-button-pressed.svg);
   display: flex;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   width: 20.76px;
   height: 18.13px;
@@ -13,6 +13,3 @@
   cursor: pointer;
 }
 
-.place__liked:hover {
-  opacity: 0.6;
-}
