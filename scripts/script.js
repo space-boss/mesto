@@ -45,6 +45,7 @@ const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
+
 const getCards = (data) => {
   const card = template.content.cloneNode(true);
 
@@ -52,8 +53,10 @@ const getCards = (data) => {
   card.querySelector('.place__cover').style = data.backgroundImage;
 
   const likePlace = card.querySelector('.place__like');
+  const deletePlace = card.querySelector('.place__delete');
 
-  likePlace.addEventListener('click', handlerLike)
+  likePlace.addEventListener('click', handlerLike);
+  deletePlace.addEventListener('click', handlerDelete);
 
   return card;
 };
@@ -108,6 +111,11 @@ const handlerLike = (evt) => {
   const likeTarget = evt.target;
   likeTarget.classList.toggle('place__like_pressed');
 }
+
+const handlerDelete = (evt) => {
+  evt.target.closest('.place').remove();
+}
+
 
 renderCards();
 addCards();
