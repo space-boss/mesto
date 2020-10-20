@@ -34,39 +34,43 @@
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup popup__profile">
+    <section class="popup popup__profile">
       <div class="popup__container">
-      <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
-      <h3 class="popup__title">Редактировать профиль</h3>
-      <form name="editProfile" method="post" class="popup__form">
-        <input type="text" class="popup__input-field popup__input-field_value_name" name="username" placeholder="Имя">
-        <input type="text" class="popup__input-field popup__input-field_value_job" name="job" placeholder="О себе">
+        <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form name="editProfile" method="post" class="popup__form">
+          <input type="text" class="popup__input-field popup__input-field_value_name" name="username" placeholder="Имя">
+          <input type="text" class="popup__input-field popup__input-field_value_job" name="job" placeholder="О себе">
+          <button type="submit" class="popup__submit-button">Сохранить</button>
+        </form>
+      </div>
+    </section>
 
-        <button type="submit" class="popup__submit-button">Сохранить</button>
+    <section class="popup popup__place">
+      <div class="popup__container">
+        <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
+        <h3 class="popup__title">Новое место</h3>
+        <form name="editProfile" method="post" class="popup__form">
+          <input type="text" class="popup__input-field popup__input-field_value_place" name="place" placeholder="Название">
+          <input type="text" class="popup__input-field popup__input-field_value_placeurl" name="placeUrl" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__submit-button popup__submit-button_place">Сохранить</button>
+        </form>
+     </div>
+    </section>
 
-      </form>
+    <section class="popup popup__zoom" id="popup">
+      <div class="popup__picture">
+        <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
+        <img class="popup__img" src="" alt="Изображение места">
+        <p class="popup__caption"></p>
+      </div>
+    </section>
 
-    </div>
-  </div>
-
-  <div class="popup popup__place">
-    <div class="popup__container">
-    <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
-    <h3 class="popup__title">Новое место</h3>
-    <form name="editProfile" method="post" class="popup__form">
-      <input type="text" class="popup__input-field popup__input-field_value_place" name="place" placeholder="Название">
-      <input type="text" class="popup__input-field popup__input-field_value_placeurl" name="placeUrl" placeholder="Ссылка на картинку">
-
-      <button type="submit" class="popup__submit-button popup__submit-button_place">Сохранить</button>
-
-    </form>
-
-  </div>
-</div>
 
   <template class="template">
-    <div class="place">
-      <div class="place__cover"><button type="button" class="place__delete" aria-label="Удалить элемeнт"></button></div>
+      <div class="place">
+      <button type="button" class="place__delete" aria-label="Удалить элемeнт"></button>
+      <img class="place__cover" src="" alt="Изображение места">
       <div class="place__description">
         <h2 class="place__title"></h2>
         <button type="button" class="place__like" aria-label="Добавить в избранное"></button>

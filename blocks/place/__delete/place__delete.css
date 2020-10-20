@@ -1,8 +1,8 @@
 .place__delete {
   background-image: url(../../../images/delete-button.svg);
-  position: relative;
-  top: 18px;
-  left: 249px;
+  position: absolute;
+  display: block;
+  margin: 18px 16.3px 0 250.3px;
   z-index: 5;
 
   width: 18px;
