@@ -49,6 +49,7 @@ const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
+
 // builds one card
 const getCards = (data) => {
   const card = template.content.cloneNode(true);
@@ -74,6 +75,7 @@ const getCards = (data) => {
   return card;
 };
 
+
 // renders all cards to the page
 const renderCards = () => {
   const items = cards.map(element => getCards(element));
@@ -82,16 +84,23 @@ const renderCards = () => {
 };
 
 
-function openPopupProfile (evt) {
+function openPopupProfile(evt) {
   nameInput.value = userName.textContent;
   jobInput.value = job.textContent;
   popupProfile.classList.toggle('popup_opened');
 }
 
-
-function closePopup (evt) {
+function closePopup(evt) {
   const eventTarget = evt.target;
   eventTarget.parentElement.parentElement.classList.toggle('popup_opened');
+}
+
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  userName.textContent = nameInput.value;
+  job.textContent = jobInput.value;
+
+  closePopup(evt);
 }
 
 const addCards = () => {
@@ -104,7 +113,8 @@ const addCards = () => {
 
    places.prepend(item);
    inputPlaceName.value = '';
-   closePopup();
+   inputPlaceUrl.value = '';
+   closePopup(evt);
   });
 };
 
@@ -112,19 +122,10 @@ function openPopupPlace () {
   popupPlace.classList.toggle('popup_opened');
 }
 
-function formSubmitHandler (evt) {
-  evt.preventDefault();
-  userName.textContent = nameInput.value;
-  job.textContent = jobInput.value;
-
-  closePopup(evt);
-}
-
 const handlerLike = (evt) => {
   const likeTarget = evt.target;
   likeTarget.classList.toggle('place__like_pressed');
 }
-
 
 const handlerDelete = (evt) => {
   evt.target.closest('.place').remove();
@@ -140,8 +141,10 @@ editProfile.addEventListener('click', openPopupProfile);
 addPlace.addEventListener('click', openPopupPlace);
 
 popupClosed.forEach((button) => {
-button.addEventListener('click', closePopup);
+  button.addEventListener('click', closePopup);
 });
+
+//savePlace.addEventListener('submit', closePopup);
 
 formElement.addEventListener('submit', formSubmitHandler);
 
