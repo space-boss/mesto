@@ -1,4 +1,3 @@
-
 const cards = [
   { title: 'Исландия',
     backgroundImage: './images/iceland.jpg',
@@ -84,16 +83,6 @@ const renderCards = () => {
   places.append(...items)
 };
 
-=======
-let popupOpened = document.querySelector('.profile__edit-button');
-let popupClosed = document.querySelector('.popup__close');
-let formElement = document.querySelector('.popup__form');
-let popup = document.querySelector('.popup');
-let userName = document.querySelector('.profile__title');
-let job = document.querySelector('.profile__subtitle');
-let nameInput = document.querySelector('.popup__input-field_value_name');
-let jobInput = document.querySelector('.popup__input-field_value_job');
-
 
 function openPopupProfile(evt) {
   nameInput.value = userName.textContent;
@@ -149,9 +138,6 @@ addCards();
 editProfile.addEventListener('click', openPopupProfile);
 
 addPlace.addEventListener('click', openPopupPlace);
-
-popupOpened.addEventListener('click', openPopup);
-
 
 popupClosed.forEach((button) => {
   button.addEventListener('click', closePopup);
