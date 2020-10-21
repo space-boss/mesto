@@ -1,6 +1,5 @@
 .place__like {
   background-image: url(../../../images/like-button.svg);
-  display: flex;
   position: relative;
   z-index: 2;
 
@@ -11,9 +10,5 @@
   border: 0;
   background-color: transparent;
   cursor: pointer;
-}
 
-.place__liked:hover {
-  opacity: 0.6;
-  transition: ease-in-out 0.4s;
 }
