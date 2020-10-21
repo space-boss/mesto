@@ -99,13 +99,12 @@ function formSubmitHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   job.textContent = jobInput.value;
-
   closePopup(evt);
 }
 
 const addCards = () => {
-  savePlace.addEventListener('click', (event) => {
-    event.preventDefault();
+  savePlace.addEventListener('click', (evt) => {
+    evt.preventDefault();
     const item = getCards({
       title: inputPlaceName.value,
       backgroundImage: inputPlaceUrl.value
@@ -114,7 +113,7 @@ const addCards = () => {
    places.prepend(item);
    inputPlaceName.value = '';
    inputPlaceUrl.value = '';
-   closePopup(evt);
+   popupPlace.classList.toggle('popup_opened');
   });
 };
 
@@ -143,8 +142,6 @@ addPlace.addEventListener('click', openPopupPlace);
 popupClosed.forEach((button) => {
   button.addEventListener('click', closePopup);
 });
-
-//savePlace.addEventListener('submit', closePopup);
 
 formElement.addEventListener('submit', formSubmitHandler);
 
