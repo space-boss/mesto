@@ -1,0 +1,16 @@
+.popup__input-field_error {
+  position: absolute;
+  width: 358px;
+  height: 25px;
+  margin: 0 0 0 36px;
+  color: red;
+  background-color: white;
+  display: block;
+  box-sizing: border-box;
+  text-align: start;
+
+  -ms-transform: translate(-100%);
+  -webkit-transform: translate(-100%);
+  transform: translateY(-100%);
+}
+
