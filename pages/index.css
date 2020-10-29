@@ -8,7 +8,12 @@
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__input-field/popup__input-field.css);
+@import url(../blocks/popup/__input-field/_error/popup__input-field_error.css);
+@import url(../blocks/popup/__input-field/_invalid/popup__input-field_invalid.css);
+
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
+@import url(../blocks/popup/__submit-button/_invalid/popup__submit-button_invalid.css);
+
 @import url(../blocks/popup/__picture/popup__picture.css);
 @import url(../blocks/popup/__img/popup__img.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
