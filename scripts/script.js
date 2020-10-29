@@ -33,7 +33,7 @@ const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl
 const placeLikePressed = document.querySelector('.place__like_pressed');
 
 const editProfile = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+const popups = document.querySelectorAll('.popup');
 
 const popupClosed = document.querySelectorAll('.popup__close');
 const formElement = document.querySelector('.popup__form');
@@ -67,11 +67,10 @@ const getCards = (data) => {
 
   function openPopupZoom (evt) {
     const eventTarget = evt.target;
-    zoomPlace.classList.toggle('popup_opened');
+    togglePopup(zoomPlace);
     zoomPlaceImg.src = data.backgroundImage;
     zoomPlaceCaption.innerText = data.title;
   }
-
   return card;
 };
 
@@ -83,18 +82,32 @@ const renderCards = () => {
   places.append(...items)
 };
 
+//opens popups
+function togglePopup(popup) {
+  popup.classList.toggle('popup_opened');
+}
+
+function openPopupPlace() {
+  togglePopup(popupPlace);
+}
 
 function openPopupProfile(evt) {
   nameInput.value = userName.textContent;
   jobInput.value = job.textContent;
-  popupProfile.classList.toggle('popup_opened');
+  togglePopup(popupProfile);
 }
 
+//closes all popups
 function closePopup(evt) {
   const eventTarget = evt.target;
-  eventTarget.parentElement.parentElement.classList.toggle('popup_opened');
+  if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || evt.key === 'Escape') {
+    popups.forEach((p) => {
+      p.classList.remove('popup_opened');
+    });
+  }
 }
 
+//edits profile
 function formSubmitHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
@@ -102,6 +115,7 @@ function formSubmitHandler(evt) {
   closePopup(evt);
 }
 
+//adds a new custom card
 const addCards = () => {
   savePlace.addEventListener('click', (evt) => {
     evt.preventDefault();
@@ -117,9 +131,6 @@ const addCards = () => {
   });
 };
 
-function openPopupPlace () {
-  popupPlace.classList.toggle('popup_opened');
-}
 
 const handlerLike = (evt) => {
   const likeTarget = evt.target;
@@ -130,7 +141,6 @@ const handlerDelete = (evt) => {
   evt.target.closest('.place').remove();
 }
 
-
 renderCards();
 addCards();
 
@@ -139,8 +149,9 @@ editProfile.addEventListener('click', openPopupProfile);
 
 addPlace.addEventListener('click', openPopupPlace);
 
-popupClosed.forEach((button) => {
-  button.addEventListener('click', closePopup);
+popups.forEach((p) => {
+  addEventListener('click', closePopup);
+  addEventListener('keydown', closePopup)
 });
 
 formElement.addEventListener('submit', formSubmitHandler);
