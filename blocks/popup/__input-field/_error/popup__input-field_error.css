@@ -4,7 +4,6 @@
   height: 25px;
   margin: 0 0 0 36px;
   color: red;
-  background-color: white;
   display: block;
   box-sizing: border-box;
   text-align: start;
@@ -14,3 +13,12 @@
   transform: translateY(-100%);
 }
 
+@media screen and (max-width: 575px) {
+  .popup__input-field_error {
+    width: calc(100% - 30px*2);
+    margin: 0 30px 10px;
+    transform: translateY(-20%);
+    -ms-transform: translate(-20%);
+    -webkit-transform: translate(-20%);
+  }
+}
