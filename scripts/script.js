@@ -100,7 +100,16 @@ function openPopupProfile(evt) {
 //closes all popups
 function closePopup(evt) {
   const eventTarget = evt.target;
-  if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || evt.key === 'Escape') {
+  if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || eventTarget.classList.contains('popup__submit-button') || evt.key === 'Escape') {
+    popups.forEach((p) => {
+      p.classList.remove('popup_opened');
+    });
+  }
+}
+
+//closes popups on background
+function closePopupOnBackground(evt) {
+  if (eventTarget.classList.contains('popup')) {
     popups.forEach((p) => {
       p.classList.remove('popup_opened');
     });
@@ -151,7 +160,8 @@ addPlace.addEventListener('click', openPopupPlace);
 
 popups.forEach((p) => {
   addEventListener('click', closePopup);
-  addEventListener('keydown', closePopup)
+  addEventListener('keydown', closePopup);
+  addEventListener('dblclick', closePopupOnBackground);
 });
 
 formElement.addEventListener('submit', formSubmitHandler);
