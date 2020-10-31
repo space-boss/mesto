@@ -1,24 +1,22 @@
 .popup__input-field_error {
   position: absolute;
   width: 358px;
-  height: 25px;
+  min-height: 25px;
+  line-height: 1.2;
   margin: 0 0 0 36px;
   color: red;
+  background: rgba(255, 255, 255, 0.7);
   display: block;
   box-sizing: border-box;
-  text-align: start;
 
-  -ms-transform: translate(-100%);
-  -webkit-transform: translate(-100%);
-  transform: translateY(-100%);
+  transform: translateY(-80%);
 }
 
 @media screen and (max-width: 575px) {
   .popup__input-field_error {
+    min-height: fit-content;
     width: calc(100% - 30px*2);
     margin: 0 30px 10px;
-    transform: translateY(-20%);
-    -ms-transform: translate(-20%);
-    -webkit-transform: translate(-20%);
+    transform: translateY(-18%);
   }
 }
