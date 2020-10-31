@@ -33,29 +33,29 @@ const toggleButtonState = (form, buttonElement, {formSelector, ...rest}) => {
 
 
 const setEventListeners = (form, {formSelector, ...rest}) => {
- const inputElements = Array.from(form.querySelectorAll(rest.inputSelector));
- const buttonElement = form.querySelector(rest.submitButtonSelector);
+  const inputElements = Array.from(form.querySelectorAll(rest.inputSelector));
+  const buttonElement = form.querySelector(rest.submitButtonSelector);
 
- inputElements.forEach((input) => {
-  input.addEventListener('input', (evt) => {
-    checkInputValidity(form, evt.target, {formSelector, ...rest});
-    toggleButtonState(form, buttonElement, {formSelector, ...rest});
- });
-});
-    toggleButtonState(form, buttonElement, {formSelector, ...rest});
+  inputElements.forEach((input) => {
+    input.addEventListener('input', (evt) => {
+      checkInputValidity(form, evt.target, {formSelector, ...rest});
+      toggleButtonState(form, buttonElement, {formSelector, ...rest});
+    });
+  });
+  toggleButtonState(form, buttonElement, {formSelector, ...rest});
 };
 
 
 
 const enableValidation = ({formSelector, ...rest}) => {
- const formElements = Array.from(document.querySelectorAll(formSelector));
+  const formElements = Array.from(document.querySelectorAll(formSelector));
 
- formElements.forEach((form) => {
+  formElements.forEach((form) => {
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-  });
+    });
     setEventListeners(form, {formSelector, ...rest});
- });
+  });
 }
 
 enableValidation({
