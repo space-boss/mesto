@@ -2,4 +2,9 @@
   width: 282px;
   height: 282px;
   background-size: cover;
+  cursor: pointer;
+}
+
+.place__cover:hover {
+  opacity: 0.95;
 }
