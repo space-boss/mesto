@@ -83,7 +83,6 @@ function togglePopup(popup) {
 function openPopupPlace() {
   togglePopup(popupPlace);
   document.addEventListener('keydown', closeOnEsc);
-
 };
 
 function openPopupProfile(evt) {
@@ -93,24 +92,29 @@ function openPopupProfile(evt) {
   document.addEventListener('keydown', closeOnEsc);
 };
 
-//adds logic of closing popup on esc
-const closeOnEsc = (evt) => {
-  const activePopup = document.querySelector('popup_opened');
-  if (evt.key === 'Escape'){
-    closePopup(activePopup);
-  };
-  console.log('hey girl!')
-};
 
 //closes all popups
 function closePopup(evt) {
   const eventTarget = evt.target;
-  if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || eventTarget.classList.contains('popup__submit-button') || evt.key === 'Escape') {
+  if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || eventTarget.classList.contains('popup__submit-button')) {
     popups.forEach((p) => {
       p.classList.remove('popup_opened');
     });
-  }
-}
+  };
+  eventTarget.removeEventListener('keydown', closeOnEsc);
+};
+
+//logic of closing popup on esc
+function closeOnEsc(evt) {
+  const eventTarget = evt.target;
+  if (evt.key === 'Escape') {
+    popups.forEach((p) => {
+      p.classList.remove('popup_opened');
+    });
+  document.removeEventListener('keydown', closeOnEsc);
+  };
+};
+
 
 //edits profile
 function submitFormHandler(evt) {
@@ -159,4 +163,3 @@ window.addEventListener('click', closePopup);
 savePlace.addEventListener('click', addCards);
 
 formElement.addEventListener('submit', submitFormHandler);
-
