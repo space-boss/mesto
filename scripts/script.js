@@ -160,6 +160,4 @@ addPlace.addEventListener('click', openPopupPlace);
 
 window.addEventListener('click', closePopup);
 
-savePlace.addEventListener('click', addCards);
-
 formElement.addEventListener('submit', submitFormHandler);
