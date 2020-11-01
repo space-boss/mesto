@@ -4,6 +4,6 @@
   box-shadow: none;
   border: none;
   outline-style: none;
-  background-color: none;
+  background-color: transparent;
   overflow: hidden;
 }

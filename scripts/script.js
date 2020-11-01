@@ -12,7 +12,7 @@ const cards = [{
   backgroundImage: './images/mariana.jpg'
 }, {
   title: 'Териберка',
-   backgroundImage: './images/teriberka.jpg'
+  backgroundImage: './images/teriberka.jpg'
 }, {
   title: 'Карибские острова',
   backgroundImage: './images/caribbean-island.jpg'
@@ -72,7 +72,7 @@ const getCard= (data) => {
 const renderCards = () => {
   const items = cards.map(getCard);
 
-  places.append(...items)
+  places.append(...items);
 };
 
 //opens popups
