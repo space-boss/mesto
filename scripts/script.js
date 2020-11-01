@@ -12,7 +12,7 @@ const cards = [{
   backgroundImage: './images/mariana.jpg'
 }, {
   title: 'Териберка',
-   backgroundImage: './images/teriberka.jpg'
+  backgroundImage: './images/teriberka.jpg'
 }, {
   title: 'Карибские острова',
   backgroundImage: './images/caribbean-island.jpg'
@@ -52,17 +52,16 @@ const getCard= (data) => {
 
   const likePlace = card.querySelector('.place__like');
   const deletePlace = card.querySelector('.place__delete');
-  const imgPlace = card.querySelector('.place__cover');
+  const buttonZoomPlace = card.querySelector('.place__cover-button');
 
   likePlace.addEventListener('click', handleLike);
   deletePlace.addEventListener('click', deleteCard);
-  imgPlace.addEventListener('click', openPopupZoom);
+  buttonZoomPlace.addEventListener('click', openPopupZoom);
 
   function openPopupZoom (evt) {
     togglePopup(zoomPlace);
     zoomPlaceImg.src = data.backgroundImage;
     zoomPlaceCaption.innerText = data.title;
-    document.addEventListener('keydown', closeOnEsc);
   }
   return card;
 };
@@ -72,57 +71,56 @@ const getCard= (data) => {
 const renderCards = () => {
   const items = cards.map(getCard);
 
-  places.append(...items)
+  places.append(...items);
 };
 
 //opens popups
 function togglePopup(popup) {
   popup.classList.add('popup_opened');
-};
+  document.addEventListener('keydown', closeOnEsc);
+}
 
 function openPopupPlace() {
   togglePopup(popupPlace);
-  document.addEventListener('keydown', closeOnEsc);
-};
+}
 
-function openPopupProfile(evt) {
+function openPopupProfile() {
   nameInput.value = userName.textContent;
   jobInput.value = job.textContent;
   togglePopup(popupProfile);
-  document.addEventListener('keydown', closeOnEsc);
-};
+}
+
+//closes popup
+function closePopup() {
+  popups.forEach((p) => {
+    p.classList.remove('popup_opened');
+  });
+  document.removeEventListener('keydown', closeOnEsc);
+}
 
 
-//closes all popups
-function closePopup(evt) {
+//checks if popup should be closed
+function checkIfShouldClosePopup(evt) {
   const eventTarget = evt.target;
   if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || eventTarget.classList.contains('popup__submit-button')) {
-    popups.forEach((p) => {
-      p.classList.remove('popup_opened');
-    });
-  };
-  eventTarget.removeEventListener('keydown', closeOnEsc);
-};
+    closePopup();
+  }
+}
 
-//logic of closing popup on esc
+//checks if popup should be closed if esc is pressed
 function closeOnEsc(evt) {
-  const eventTarget = evt.target;
   if (evt.key === 'Escape') {
-    popups.forEach((p) => {
-      p.classList.remove('popup_opened');
-    });
-  document.removeEventListener('keydown', closeOnEsc);
-  };
-};
-
+    closePopup();
+  }
+}
 
 //edits profile
 function submitFormHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   job.textContent = jobInput.value;
-  closePopup(evt);
-};
+  checkIfShouldClosePopup(evt);
+}
 
 //adds a new custom card
 const addCards = () => {
@@ -137,7 +135,7 @@ const addCards = () => {
     inputPlaceName.value = '';
     inputPlaceUrl.value = '';
     popupPlace.classList.toggle('popup_opened');
-  })
+  });
 };
 
 
@@ -158,6 +156,6 @@ editProfile.addEventListener('click', openPopupProfile);
 
 addPlace.addEventListener('click', openPopupPlace);
 
-window.addEventListener('click', closePopup);
+window.addEventListener('click', checkIfShouldClosePopup);
 
 formElement.addEventListener('submit', submitFormHandler);
