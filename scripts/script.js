@@ -1,3 +1,5 @@
+import {Card} from './card.js'
+
 const cards = [{
   title: 'Исландия',
   backgroundImage: './images/iceland.jpg'
@@ -21,7 +23,7 @@ const cards = [{
 const places = document.querySelector('.places');
 const addPlace = document.querySelector('.profile__add-button');
 const savePlace = document.querySelector('.popup__submit-button_place');
-const template = document.querySelector('.template');
+const template = '.template';
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
 
@@ -44,11 +46,7 @@ const jobInput = document.querySelector('.popup__input-field_value_job');
 
 
 // builds one card
-const getCard= (data) => {
-  const card = template.content.cloneNode(true);
-
-  card.querySelector('.place__title').innerText = data.title;
-  card.querySelector('.place__cover').src = data.backgroundImage;
+/*const getCard = (data) => {
 
   const likePlace = card.querySelector('.place__like');
   const deletePlace = card.querySelector('.place__delete');
@@ -63,16 +61,15 @@ const getCard= (data) => {
     zoomPlaceImg.src = data.backgroundImage;
     zoomPlaceCaption.innerText = data.title;
   }
-  return card;
 };
+*/
 
-
-// renders all cards to the page
+/* // renders all cards to the page
 const renderCards = () => {
   const items = cards.map(getCard);
 
   places.append(...items);
-};
+}; */
 
 //opens popups
 function togglePopup(popup) {
@@ -123,6 +120,16 @@ function submitFormHandler(evt) {
 }
 
 //adds a new custom card
+const addCards = (title, backgroundImage) => {
+
+  const item = new Card(title, backgroundImage, template);
+  item.generateCard(places);
+};
+
+cards.forEach(addCards);
+
+
+/*//adds a new custom card
 const addCards = () => {
   savePlace.addEventListener('click', (evt) => {
     evt.preventDefault();
@@ -136,7 +143,7 @@ const addCards = () => {
     inputPlaceUrl.value = '';
     popupPlace.classList.toggle('popup_opened');
   });
-};
+}; */
 
 
 const handleLike = (evt) => {
@@ -148,8 +155,6 @@ const deleteCard = (evt) => {
   evt.target.closest('.place').remove();
 };
 
-renderCards();
-addCards();
 
 
 editProfile.addEventListener('click', openPopupProfile);
