@@ -150,16 +150,6 @@ function submitFormHandler(evt) {
   checkIfShouldClosePopup(evt);
 }
 
-const handleLike = (evt) => {
-  const likeTarget = evt.target;
-  likeTarget.classList.toggle('place__like_pressed');
-};
-
-const deleteCard = (evt) => {
-  evt.target.closest('.place').remove();
-};
-
-
 
 editProfile.addEventListener('click', openPopupProfile);
 
