@@ -1,3 +1,5 @@
+import {Card} from './card.js';
+
 const cards = [{
   title: 'Исландия',
   backgroundImage: './images/iceland.jpg'
@@ -18,10 +20,11 @@ const cards = [{
   backgroundImage: './images/caribbean-island.jpg'
 }];
 
+
 const places = document.querySelector('.places');
 const addPlace = document.querySelector('.profile__add-button');
 const savePlace = document.querySelector('.popup__submit-button_place');
-const template = document.querySelector('.template');
+const template = '.template';
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
 
@@ -44,7 +47,7 @@ const jobInput = document.querySelector('.popup__input-field_value_job');
 
 
 // builds one card
-const getCard= (data) => {
+/*const getCard= (data) => {
   const card = template.content.cloneNode(true);
 
   card.querySelector('.place__title').innerText = data.title;
@@ -64,15 +67,40 @@ const getCard= (data) => {
     zoomPlaceCaption.innerText = data.title;
   }
   return card;
+};*/
+
+// renders cards to the page
+cards.forEach((item) => {
+  const card = new Card(item, template);
+  const cardElement = card.generateCard();
+
+  places.append(cardElement);
+});
+
+
+//adds a new custom card
+const addCards = () => {
+  savePlace.addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+
+    const newCard = {};
+
+    newCard.title = inputPlaceName.value;
+    newCard.backgroundImage = inputPlaceUrl.value;
+
+    const cardItem = new Card(newCard, template);
+    const newCardElement = cardItem.generateCard();
+
+    places.prepend(newCardElement);
+    inputPlaceName.value = '';
+    inputPlaceUrl.value = '';
+    popupPlace.classList.toggle('popup_opened');
+  });
 };
 
+addCards();
 
-// renders all cards to the page
-const renderCards = () => {
-  const items = cards.map(getCard);
-
-  places.append(...items);
-};
 
 //opens popups
 function togglePopup(popup) {
@@ -122,23 +150,6 @@ function submitFormHandler(evt) {
   checkIfShouldClosePopup(evt);
 }
 
-//adds a new custom card
-const addCards = () => {
-  savePlace.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    const item = getCard({
-      title: inputPlaceName.value,
-      backgroundImage: inputPlaceUrl.value
-    });
-
-    places.prepend(item);
-    inputPlaceName.value = '';
-    inputPlaceUrl.value = '';
-    popupPlace.classList.toggle('popup_opened');
-  });
-};
-
-
 const handleLike = (evt) => {
   const likeTarget = evt.target;
   likeTarget.classList.toggle('place__like_pressed');
@@ -148,8 +159,6 @@ const deleteCard = (evt) => {
   evt.target.closest('.place').remove();
 };
 
-renderCards();
-addCards();
 
 
 editProfile.addEventListener('click', openPopupProfile);
