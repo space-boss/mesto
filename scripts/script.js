@@ -1,3 +1,5 @@
+import {Card} from './card.js';
+
 const cards = [{
   title: 'Исландия',
   backgroundImage: './images/iceland.jpg'
@@ -18,24 +20,20 @@ const cards = [{
   backgroundImage: './images/caribbean-island.jpg'
 }];
 
+
 const places = document.querySelector('.places');
 const addPlace = document.querySelector('.profile__add-button');
 const savePlace = document.querySelector('.popup__submit-button_place');
-const template = document.querySelector('.template');
+const template = '.template';
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
 
 const editProfile = document.querySelector('.profile__edit-button');
 const popups = document.querySelectorAll('.popup');
 
-const popupClosed = document.querySelectorAll('.popup__close');
 const formElement = document.querySelector('.popup__form');
 const popupProfile = document.querySelector('.popup__profile');
 const popupPlace = document.querySelector('.popup__place');
-
-const zoomPlace = document.querySelector('.popup__zoom');
-const zoomPlaceImg = document.querySelector('.popup__img');
-const zoomPlaceCaption = document.querySelector('.popup__caption');
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
@@ -43,36 +41,37 @@ const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
 
-// builds one card
-const getCard= (data) => {
-  const card = template.content.cloneNode(true);
+// renders cards to the page
+cards.forEach((item) => {
+  const card = new Card(item, template);
+  const cardElement = card.generateCard();
 
-  card.querySelector('.place__title').innerText = data.title;
-  card.querySelector('.place__cover').src = data.backgroundImage;
+  places.append(cardElement);
+});
 
-  const likePlace = card.querySelector('.place__like');
-  const deletePlace = card.querySelector('.place__delete');
-  const buttonZoomPlace = card.querySelector('.place__cover-button');
 
-  likePlace.addEventListener('click', handleLike);
-  deletePlace.addEventListener('click', deleteCard);
-  buttonZoomPlace.addEventListener('click', openPopupZoom);
+//adds a new custom card
+const addCards = () => {
+  savePlace.addEventListener('click', (evt) => {
+    evt.preventDefault();
 
-  function openPopupZoom (evt) {
-    togglePopup(zoomPlace);
-    zoomPlaceImg.src = data.backgroundImage;
-    zoomPlaceCaption.innerText = data.title;
-  }
-  return card;
+
+    const newCard = {};
+
+    newCard.title = inputPlaceName.value;
+    newCard.backgroundImage = inputPlaceUrl.value;
+
+    const cardItem = new Card(newCard, template);
+    const newCardElement = cardItem.generateCard();
+
+    places.prepend(newCardElement);
+    inputPlaceName.value = '';
+    inputPlaceUrl.value = '';
+    popupPlace.classList.toggle('popup_opened');
+  });
 };
 
-
-// renders all cards to the page
-const renderCards = () => {
-  const items = cards.map(getCard);
-
-  places.append(...items);
-};
+addCards();
 
 //opens popups
 function togglePopup(popup) {
@@ -121,35 +120,6 @@ function submitFormHandler(evt) {
   job.textContent = jobInput.value;
   checkIfShouldClosePopup(evt);
 }
-
-//adds a new custom card
-const addCards = () => {
-  savePlace.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    const item = getCard({
-      title: inputPlaceName.value,
-      backgroundImage: inputPlaceUrl.value
-    });
-
-    places.prepend(item);
-    inputPlaceName.value = '';
-    inputPlaceUrl.value = '';
-    popupPlace.classList.toggle('popup_opened');
-  });
-};
-
-
-const handleLike = (evt) => {
-  const likeTarget = evt.target;
-  likeTarget.classList.toggle('place__like_pressed');
-};
-
-const deleteCard = (evt) => {
-  evt.target.closest('.place').remove();
-};
-
-renderCards();
-addCards();
 
 
 editProfile.addEventListener('click', openPopupProfile);
