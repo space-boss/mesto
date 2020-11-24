@@ -48,7 +48,7 @@ export class Card {
     evt.target.closest('.place').remove();
   }
 
-  _openPopupZoom(evt) {
+  _openPopupZoom( ) {
 
     const _zoomPlace = document.querySelector('.popup__zoom');
     const _zoomPlaceImg = document.querySelector('.popup__img');

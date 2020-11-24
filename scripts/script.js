@@ -31,43 +31,15 @@ const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl
 const editProfile = document.querySelector('.profile__edit-button');
 const popups = document.querySelectorAll('.popup');
 
-const popupClosed = document.querySelectorAll('.popup__close');
 const formElement = document.querySelector('.popup__form');
 const popupProfile = document.querySelector('.popup__profile');
 const popupPlace = document.querySelector('.popup__place');
-
-const zoomPlace = document.querySelector('.popup__zoom');
-const zoomPlaceImg = document.querySelector('.popup__img');
-const zoomPlaceCaption = document.querySelector('.popup__caption');
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
-
-// builds one card
-/*const getCard= (data) => {
-  const card = template.content.cloneNode(true);
-
-  card.querySelector('.place__title').innerText = data.title;
-  card.querySelector('.place__cover').src = data.backgroundImage;
-
-  const likePlace = card.querySelector('.place__like');
-  const deletePlace = card.querySelector('.place__delete');
-  const buttonZoomPlace = card.querySelector('.place__cover-button');
-
-  likePlace.addEventListener('click', handleLike);
-  deletePlace.addEventListener('click', deleteCard);
-  buttonZoomPlace.addEventListener('click', openPopupZoom);
-
-  function openPopupZoom (evt) {
-    togglePopup(zoomPlace);
-    zoomPlaceImg.src = data.backgroundImage;
-    zoomPlaceCaption.innerText = data.title;
-  }
-  return card;
-};*/
 
 // renders cards to the page
 cards.forEach((item) => {
@@ -100,7 +72,6 @@ const addCards = () => {
 };
 
 addCards();
-
 
 //opens popups
 function togglePopup(popup) {
