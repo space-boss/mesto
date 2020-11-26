@@ -56,7 +56,6 @@ export class Card {
     const _zoomPlaceCaption = document.querySelector('.popup__caption');
 
     togglePopup(_zoomPlace);
-    /*_zoomPlace.classList.add('popup_opened');*/
     _zoomPlaceImg.src = this._backgroundImage;
     _zoomPlaceCaption.innerText = this._title;
   }
