@@ -1,4 +1,5 @@
 import {Card} from './card.js';
+import {FormValidator} from './formValidator.js';
 
 const cards = [{
   title: 'Исландия',
@@ -120,6 +121,22 @@ function submitFormHandler(evt) {
   job.textContent = jobInput.value;
   checkIfShouldClosePopup(evt);
 }
+
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input-field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_invalid',
+  inputErrorClass: 'popup__input-field_invalid',
+  errorClass: 'popup__input-field_error'
+}
+
+const formElements = Array.from(document.querySelectorAll('.popup__form'));
+
+formElements.forEach((form) => {
+  new FormValidator(validationSettings, form).enableValidation();
+});
+
 
 
 editProfile.addEventListener('click', openPopupProfile);
