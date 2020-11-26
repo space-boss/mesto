@@ -56,7 +56,6 @@ const addCards = () => {
   savePlace.addEventListener('click', (evt) => {
     evt.preventDefault();
 
-
     const newCard = {};
 
     newCard.title = inputPlaceName.value;
@@ -136,7 +135,6 @@ const formElements = Array.from(document.querySelectorAll('.popup__form'));
 formElements.forEach((form) => {
   new FormValidator(validationSettings, form).enableValidation();
 });
-
 
 
 editProfile.addEventListener('click', openPopupProfile);
