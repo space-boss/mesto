@@ -56,7 +56,6 @@ const addCards = () => {
   savePlace.addEventListener('click', (evt) => {
     evt.preventDefault();
 
-
     const newCard = {};
 
     newCard.title = inputPlaceName.value;
@@ -75,7 +74,7 @@ const addCards = () => {
 addCards();
 
 //opens popups
-function togglePopup(popup) {
+export function togglePopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeOnEsc);
 }
@@ -122,6 +121,7 @@ function submitFormHandler(evt) {
   checkIfShouldClosePopup(evt);
 }
 
+
 const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input-field',
@@ -136,7 +136,6 @@ const formElements = Array.from(document.querySelectorAll('.popup__form'));
 formElements.forEach((form) => {
   new FormValidator(validationSettings, form).enableValidation();
 });
-
 
 
 editProfile.addEventListener('click', openPopupProfile);
