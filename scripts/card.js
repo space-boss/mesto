@@ -5,7 +5,7 @@ export class Card {
     this._cardSelector = cardSelector;
   }
 
-  _getTemplate(){
+  _getTemplate() {
     const cardElement = document
     .querySelector(this._cardSelector)
     .content
