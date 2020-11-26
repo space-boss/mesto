@@ -74,7 +74,7 @@ const addCards = () => {
 addCards();
 
 //opens popups
-function togglePopup(popup) {
+export function togglePopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeOnEsc);
 }
@@ -120,6 +120,7 @@ function submitFormHandler(evt) {
   job.textContent = jobInput.value;
   checkIfShouldClosePopup(evt);
 }
+
 
 const validationSettings = {
   formSelector: '.popup__form',

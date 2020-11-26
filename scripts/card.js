@@ -1,3 +1,5 @@
+import {togglePopup} from './script.js'
+
 export class Card {
   constructor(data, cardSelector) {
     this._title = data.title;
@@ -53,7 +55,8 @@ export class Card {
     const _zoomPlaceImg = document.querySelector('.popup__img');
     const _zoomPlaceCaption = document.querySelector('.popup__caption');
 
-    _zoomPlace.classList.add('popup_opened');
+    togglePopup(_zoomPlace);
+    /*_zoomPlace.classList.add('popup_opened');*/
     _zoomPlaceImg.src = this._backgroundImage;
     _zoomPlaceCaption.innerText = this._title;
   }
