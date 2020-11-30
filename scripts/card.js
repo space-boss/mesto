@@ -1,17 +1,15 @@
-import {togglePopup} from './script.js'
-
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, cardClickHandler) {
     this._title = data.title;
     this._backgroundImage = data.backgroundImage;
     this._cardSelector = cardSelector;
+    this._cardClickHandler = cardClickHandler;
   }
 
   _getTemplate() {
     const cardElement = document
     .querySelector(this._cardSelector)
     .content
-    .querySelector('.place')
     .cloneNode(true);
 
     return cardElement;
@@ -22,6 +20,7 @@ export class Card {
     this._setEventListeners();
 
     this._element.querySelector('.place__cover').src = this._backgroundImage;
+    this._element.querySelector('.place__cover').alt = this._title;
     this._element.querySelector('.place__title').textContent = this._title;
 
     return this._element;
@@ -36,8 +35,8 @@ export class Card {
       this._deleteCard(evt);
     });
 
-    this._element.querySelector('.place__cover-button').addEventListener('click', (evt) => {
-      this._openPopupZoom(evt);
+    this._element.querySelector('.place__cover-button').addEventListener('click', () => {
+      this._cardClickHandler(this._backgroundImage, this._title);
     });
   }
 
@@ -48,16 +47,6 @@ export class Card {
 
   _deleteCard(evt) {
     evt.target.closest('.place').remove();
-  }
-
-  _openPopupZoom() {
-    const _zoomPlace = document.querySelector('.popup__zoom');
-    const _zoomPlaceImg = document.querySelector('.popup__img');
-    const _zoomPlaceCaption = document.querySelector('.popup__caption');
-
-    togglePopup(_zoomPlace);
-    _zoomPlaceImg.src = this._backgroundImage;
-    _zoomPlaceCaption.innerText = this._title;
   }
 }
 
