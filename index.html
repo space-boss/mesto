@@ -52,7 +52,7 @@
       <div class="popup__container">
         <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
         <h3 class="popup__title">Новое место</h3>
-        <form name="editValues" method="post" class="popup__form" novalidate>
+        <form name="editValues" method="post" class="popup__form popup__form-place" novalidate>
           <input type="text" class="popup__input-field popup__input-field_value_place" id="place-name" name="place" placeholder="Название" required minlength="2" maxlength="30">
           <span id="place-name-error" class="popup__input-field_error"></span>
           <input type="url" class="popup__input-field popup__input-field_value_placeurl" id="place-url" name="placeUrl" placeholder="Ссылка на картинку" required>
@@ -65,7 +65,7 @@
     <section class="popup popup__zoom" id="popup">
       <div class="popup__picture">
         <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
-        <img class="popup__img" src="" alt="Изображение места">
+        <img class="popup__img" src="" alt="">
         <p class="popup__caption"></p>
       </div>
     </section>

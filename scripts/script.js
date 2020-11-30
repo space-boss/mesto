@@ -24,13 +24,13 @@ const cards = [{
 
 const places = document.querySelector('.places');
 const addPlace = document.querySelector('.profile__add-button');
-const savePlace = document.querySelector('.popup__submit-button_place');
+const placeForm = document.querySelector('.popup__form-place');
+
 const template = '.template';
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
 
 const editProfile = document.querySelector('.profile__edit-button');
-const popups = document.querySelectorAll('.popup');
 
 const formElement = document.querySelector('.popup__form');
 const popupProfile = document.querySelector('.popup__profile');
@@ -41,10 +41,14 @@ const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
+const zoomPlace = document.querySelector('.popup__zoom');
+const zoomPlaceImg = document.querySelector('.popup__img');
+const zoomPlaceCaption = document.querySelector('.popup__caption');
+
 
 // renders cards to the page
 cards.forEach((item) => {
-  const card = new Card(item, template);
+  const card = new Card(item, template, openCardHandler);
   const cardElement = card.generateCard();
 
   places.append(cardElement);
@@ -53,7 +57,7 @@ cards.forEach((item) => {
 
 //adds a new custom card
 const addCards = () => {
-  savePlace.addEventListener('click', (evt) => {
+  placeForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const newCard = {};
@@ -61,55 +65,58 @@ const addCards = () => {
     newCard.title = inputPlaceName.value;
     newCard.backgroundImage = inputPlaceUrl.value;
 
-    const cardItem = new Card(newCard, template);
+    const cardItem = new Card(newCard, template, openCardHandler);
     const newCardElement = cardItem.generateCard();
 
     places.prepend(newCardElement);
     inputPlaceName.value = '';
     inputPlaceUrl.value = '';
-    popupPlace.classList.toggle('popup_opened');
+    closePopup(popupPlace);
   });
 };
 
 addCards();
 
-//opens popups
-export function togglePopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeOnEsc);
+//zooms up a popup
+function openCardHandler(link, name) {
+  zoomPlaceImg.src = link;
+  zoomPlaceCaption.textContent = name;
+  showPopup(zoomPlace);
 }
 
-function openPopupPlace() {
-  togglePopup(popupPlace);
+//opens popups
+function showPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeOnEsc);
 }
 
 function openPopupProfile() {
   nameInput.value = userName.textContent;
   jobInput.value = job.textContent;
-  togglePopup(popupProfile);
+  showPopup(popupProfile);
 }
 
 //closes popup
-function closePopup() {
-  popups.forEach((p) => {
-    p.classList.remove('popup_opened');
-  });
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeOnEsc);
 }
 
-
 //checks if popup should be closed
-function checkIfShouldClosePopup(evt) {
+function checkIfShouldclosePopup(evt) {
   const eventTarget = evt.target;
+  const openedPopup = document.querySelector('.popup_opened');
   if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || eventTarget.classList.contains('popup__submit-button')) {
-    closePopup();
+    closePopup(openedPopup);
   }
 }
 
 //checks if popup should be closed if esc is pressed
 function closeOnEsc(evt) {
+  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    closePopup();
+    closePopup(openedPopup);
   }
 }
 
@@ -118,7 +125,7 @@ function submitFormHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   job.textContent = jobInput.value;
-  checkIfShouldClosePopup(evt);
+  checkIfShouldclosePopup(evt);
 }
 
 
@@ -140,8 +147,10 @@ formElements.forEach((form) => {
 
 editProfile.addEventListener('click', openPopupProfile);
 
-addPlace.addEventListener('click', openPopupPlace);
+addPlace.addEventListener('click', function() {
+  showPopup(popupPlace);
+});
 
-window.addEventListener('click', checkIfShouldClosePopup);
+window.addEventListener('click', checkIfShouldclosePopup);
 
 formElement.addEventListener('submit', submitFormHandler);
