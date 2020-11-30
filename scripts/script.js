@@ -130,7 +130,7 @@ const validationSettings = {
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_invalid',
   inputErrorClass: 'popup__input-field_invalid',
-  errorClass: 'popup__input_type_error'
+  errorClass: 'popup__input-field_error'
 }
 
 const formElements = Array.from(document.querySelectorAll('.popup__form'));
