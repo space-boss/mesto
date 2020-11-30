@@ -96,23 +96,18 @@ function openPopupProfile() {
   showPopup(popupProfile);
 }
 
-//closes popup
-
+//closes popup after different actions
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeOnEsc);
 }
 
-//checks if popup should be closed
-function checkIfShouldclosePopup(evt) {
-  const eventTarget = evt.target;
-  const openedPopup = document.querySelector('.popup_opened');
-  if (eventTarget.classList.contains('popup') || eventTarget.classList.contains('popup__close') || eventTarget.classList.contains('popup__submit-button')) {
-    closePopup(openedPopup);
+function closePopupByClickOnOverlay(event) {
+  if (event.target.classList.contains('popup')) {
+    closePopup(event.target);
   }
 }
 
-//checks if popup should be closed if esc is pressed
 function closeOnEsc(evt) {
   const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
@@ -125,10 +120,10 @@ function submitFormHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   job.textContent = jobInput.value;
-  checkIfShouldclosePopup(evt);
+  closePopup(popupProfile);
 }
 
-
+//variables used in form validation
 const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input-field',
@@ -147,10 +142,16 @@ formElements.forEach((form) => {
 
 editProfile.addEventListener('click', openPopupProfile);
 
-addPlace.addEventListener('click', function() {
-  showPopup(popupPlace);
-});
-
-window.addEventListener('click', checkIfShouldclosePopup);
+addPlace.addEventListener('click', () => showPopup(popupPlace));
 
 formElement.addEventListener('submit', submitFormHandler);
+
+
+//event listeners responsible for different ways to close popups
+popupProfile.addEventListener('click', closePopupByClickOnOverlay);
+popupPlace.addEventListener('click', closePopupByClickOnOverlay);
+zoomPlace.addEventListener('click', closePopupByClickOnOverlay);
+
+popupProfile.querySelector('.popup__close').addEventListener('click', () => closePopup(popupProfile));
+zoomPlace.querySelector('.popup__close').addEventListener('click', () => closePopup(zoomPlace));
+popupPlace.querySelector('.popup__close').addEventListener('click', () => closePopup(popupPlace));
