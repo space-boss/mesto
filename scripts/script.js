@@ -33,15 +33,15 @@ const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl
 const editProfile = document.querySelector('.profile__edit-button');
 
 const formElement = document.querySelector('.popup__form');
-const popupProfile = document.querySelector('.popup__profile');
-const popupPlace = document.querySelector('.popup__place');
+const popupProfile = document.querySelector('.popup_profile');
+const popupPlace = document.querySelector('.popup_place');
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
-const zoomPlace = document.querySelector('.popup__zoom');
+const zoomPlace = document.querySelector('.popup_zoom');
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
 
@@ -130,7 +130,7 @@ const validationSettings = {
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_invalid',
   inputErrorClass: 'popup__input-field_invalid',
-  errorClass: 'popup__input-field_error'
+  errorClass: 'popup__input_type_error'
 }
 
 const formElements = Array.from(document.querySelectorAll('.popup__form'));
