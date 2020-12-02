@@ -18,9 +18,10 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    const placeCover = this._element.querySelector('.place__cover');
 
-    this._element.querySelector('.place__cover').src = this._backgroundImage;
-    this._element.querySelector('.place__cover').alt = this._title;
+    placeCover.src = this._backgroundImage;
+    placeCover.alt = this._title;
     this._element.querySelector('.place__title').textContent = this._title;
 
     return this._element;

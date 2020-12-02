@@ -8,6 +8,7 @@
   background: rgba(255, 255, 255, 0.7);
   display: block;
   box-sizing: border-box;
+  border: none;
 
   transform: translateY(-80%);
 }
