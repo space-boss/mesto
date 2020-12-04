@@ -1,28 +1,13 @@
-import {Card} from './card.js';
-import {FormValidator} from './formValidator.js';
-
-const cards = [{
-  title: 'Исландия',
-  backgroundImage: './images/iceland.jpg'
-}, {
-  title: 'Порт в Антверпене',
-  backgroundImage: './images/antwerpen.jpeg'
-}, {
-  title: 'Мыс Доброй Надежды',
-  backgroundImage: './images/capetown.jpg'
-}, {
-  title: 'Марианская Впадина',
-  backgroundImage: './images/mariana.jpg'
-}, {
-  title: 'Териберка',
-  backgroundImage: './images/teriberka.jpg'
-}, {
-  title: 'Карибские острова',
-  backgroundImage: './images/caribbean-island.jpg'
-}];
+import {Card} from '../components/card.js';
+import {FormValidator} from '../utils/formValidator.js';
+import {Section} from '../components/section.js';
+import {
+  cards
+} from '../utils/constants.js';
+import {Popup} from '../components/card.js';
 
 
-const places = document.querySelector('.places');
+const places = '.places';
 const addPlace = document.querySelector('.profile__add-button');
 const placeForm = document.querySelector('.popup__form-place');
 
@@ -45,14 +30,30 @@ const zoomPlace = document.querySelector('.popup_zoom');
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
 
-
 // renders cards to the page
+const defaultCardList = new Section (
+  {
+    items: cards,
+    renderer: (item) => {
+      const card = new Card(item, template, openCardHandler);
+      const cardElement = card.generateCard();
+
+      defaultCardList.addItem(cardElement);
+    }
+  },
+  places
+);
+
+defaultCardList.renderItems();
+
+
+/*
 cards.forEach((item) => {
   const card = new Card(item, template, openCardHandler);
   const cardElement = card.generateCard();
 
   places.append(cardElement);
-});
+});*/
 
 
 //adds a new custom card
@@ -84,7 +85,7 @@ function openCardHandler(link, name) {
   showPopup(zoomPlace);
 }
 
-//opens popups
+/*//opens popups
 function showPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeOnEsc);
@@ -113,7 +114,7 @@ function closeOnEsc(evt) {
   if (evt.key === 'Escape') {
     closePopup(openedPopup);
   }
-}
+}*/
 
 //edits profile
 function submitFormHandler(evt) {
@@ -140,7 +141,7 @@ formElements.forEach((form) => {
 });
 
 
-editProfile.addEventListener('click', openPopupProfile);
+/*editProfile.addEventListener('click', openPopupProfile);
 
 addPlace.addEventListener('click', () => showPopup(popupPlace));
 
@@ -154,4 +155,4 @@ zoomPlace.addEventListener('click', closePopupByClickOnOverlay);
 
 popupProfile.querySelector('.popup__close').addEventListener('click', () => closePopup(popupProfile));
 zoomPlace.querySelector('.popup__close').addEventListener('click', () => closePopup(zoomPlace));
-popupPlace.querySelector('.popup__close').addEventListener('click', () => closePopup(popupPlace));
+popupPlace.querySelector('.popup__close').addEventListener('click', () => closePopup(popupPlace));*/
