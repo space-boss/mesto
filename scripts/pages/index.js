@@ -4,7 +4,7 @@ import {Section} from '../components/section.js';
 import {
   cards
 } from '../utils/constants.js';
-import {Popup} from '../components/card.js';
+import {Popup} from '../components/popup.js';
 
 
 const places = '.places';
@@ -18,15 +18,16 @@ const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl
 const editProfile = document.querySelector('.profile__edit-button');
 
 const formElement = document.querySelector('.popup__form');
-const popupProfile = document.querySelector('.popup_profile');
-const popupPlace = document.querySelector('.popup_place');
+const popupProfileSelector = document.querySelector('.popup_profile');
+const popupPlaceSelector = document.querySelector('.popup_place');
+const popupZoomSelector = document.querySelector('.popup_zoom');
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
-const zoomPlace = document.querySelector('.popup_zoom');
+
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
 
@@ -46,14 +47,15 @@ const defaultCardList = new Section (
 
 defaultCardList.renderItems();
 
+const popupProfile = new Popup({popupSelector: popupProfileSelector});
 
-/*
-cards.forEach((item) => {
-  const card = new Card(item, template, openCardHandler);
-  const cardElement = card.generateCard();
+const popupPlace = new Popup({popupSelector: popupPlaceSelector});
 
-  places.append(cardElement);
-});*/
+const popupZoom = new Popup({popupSelector: popupZoomSelector});
+
+popupProfile.setEventListeners();
+popupPlace.setEventListeners();
+popupZoom.setEventListeners();
 
 
 //adds a new custom card
@@ -72,7 +74,7 @@ const addCards = () => {
     places.prepend(newCardElement);
     inputPlaceName.value = '';
     inputPlaceUrl.value = '';
-    closePopup(popupPlace);
+    popupPlace.close()
   });
 };
 
@@ -82,46 +84,21 @@ addCards();
 function openCardHandler(link, name) {
   zoomPlaceImg.src = link;
   zoomPlaceCaption.textContent = name;
-  showPopup(zoomPlace);
+  popupZoom.open();
 }
 
-/*//opens popups
-function showPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeOnEsc);
-}
-
-function openPopupProfile() {
+function openpopupProfile() {
   nameInput.value = userName.textContent;
   jobInput.value = job.textContent;
-  showPopup(popupProfile);
+  popupProfile.open()
 }
-
-//closes popup after different actions
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeOnEsc);
-}
-
-function closePopupByClickOnOverlay(event) {
-  if (event.target.classList.contains('popup')) {
-    closePopup(event.target);
-  }
-}
-
-function closeOnEsc(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
-    closePopup(openedPopup);
-  }
-}*/
 
 //edits profile
 function submitFormHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   job.textContent = jobInput.value;
-  closePopup(popupProfile);
+  popupProfile.close();
 }
 
 //variables used in form validation
@@ -141,18 +118,15 @@ formElements.forEach((form) => {
 });
 
 
-/*editProfile.addEventListener('click', openPopupProfile);
 
-addPlace.addEventListener('click', () => showPopup(popupPlace));
+editProfile.addEventListener('click', openpopupProfile);
+
+addPlace.addEventListener('click', () => popupPlace.open());
 
 formElement.addEventListener('submit', submitFormHandler);
 
 
-//event listeners responsible for different ways to close popups
-popupProfile.addEventListener('click', closePopupByClickOnOverlay);
-popupPlace.addEventListener('click', closePopupByClickOnOverlay);
-zoomPlace.addEventListener('click', closePopupByClickOnOverlay);
-
-popupProfile.querySelector('.popup__close').addEventListener('click', () => closePopup(popupProfile));
-zoomPlace.querySelector('.popup__close').addEventListener('click', () => closePopup(zoomPlace));
-popupPlace.querySelector('.popup__close').addEventListener('click', () => closePopup(popupPlace));*/
+/*event listeners responsible for different ways to close popups
+popupProfileSelector.addEventListener('click', closePopupByClickOnOverlay);
+popupPlaceSelector.addEventListener('click', closePopupByClickOnOverlay);
+zoomPlace.addEventListener('click', closePopupByClickOnOverlay); */
