@@ -5,6 +5,7 @@ import {
   cards
 } from '../utils/constants.js';
 import {Popup} from '../components/popup.js';
+import {PopupWithImage} from '../components/popupimg.js'
 
 
 const places = '.places';
@@ -27,16 +28,35 @@ const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
-
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
+
+
+const popupProfile = new Popup({popupSelector: popupProfileSelector});
+const popupPlace = new Popup({popupSelector: popupPlaceSelector});
+const popupZoom = new PopupWithImage({
+  popupSelector: popupZoomSelector,
+  imageSelector:  zoomPlaceImg,
+  captionSelector: zoomPlaceCaption
+});
+
+popupProfile.setEventListeners();
+popupPlace.setEventListeners();
+popupZoom.setEventListeners();
+
 
 // renders cards to the page
 const defaultCardList = new Section (
   {
     items: cards,
     renderer: (item) => {
-      const card = new Card(item, template, openCardHandler);
+      const card = new Card(
+        item,
+        template,
+        function handleCardClick() {
+          popupZoom.open(this)
+        }
+      );
       const cardElement = card.generateCard();
 
       defaultCardList.addItem(cardElement);
@@ -46,17 +66,6 @@ const defaultCardList = new Section (
 );
 
 defaultCardList.renderItems();
-
-const popupProfile = new Popup({popupSelector: popupProfileSelector});
-
-const popupPlace = new Popup({popupSelector: popupPlaceSelector});
-
-const popupZoom = new Popup({popupSelector: popupZoomSelector});
-
-popupProfile.setEventListeners();
-popupPlace.setEventListeners();
-popupZoom.setEventListeners();
-
 
 //adds a new custom card
 const addCards = () => {
@@ -68,7 +77,13 @@ const addCards = () => {
     newCard.title = inputPlaceName.value;
     newCard.backgroundImage = inputPlaceUrl.value;
 
-    const cardItem = new Card(newCard, template, openCardHandler);
+    const cardItem = new Card(
+      newCard,
+      template,
+      function handleCardClick() {
+        popupZoom.open(this)
+      }
+      );
     const newCardElement = cardItem.generateCard();
 
     places.prepend(newCardElement);
@@ -80,12 +95,6 @@ const addCards = () => {
 
 addCards();
 
-//zooms up a popup
-function openCardHandler(link, name) {
-  zoomPlaceImg.src = link;
-  zoomPlaceCaption.textContent = name;
-  popupZoom.open();
-}
 
 function openpopupProfile() {
   nameInput.value = userName.textContent;
@@ -119,14 +128,15 @@ formElements.forEach((form) => {
 
 
 
+
 editProfile.addEventListener('click', openpopupProfile);
 
 addPlace.addEventListener('click', () => popupPlace.open());
 
 formElement.addEventListener('submit', submitFormHandler);
 
-
-/*event listeners responsible for different ways to close popups
+/*
+// event listeners responsible for different ways to close popups
 popupProfileSelector.addEventListener('click', closePopupByClickOnOverlay);
 popupPlaceSelector.addEventListener('click', closePopupByClickOnOverlay);
 zoomPlace.addEventListener('click', closePopupByClickOnOverlay); */
