@@ -1,10 +1,11 @@
-import {Card} from '../components/card.js';
+import {Card} from '../components/Card.js';
 import {FormValidator} from '../utils/formValidator.js';
-import {Section} from '../components/section.js';
+import {Section} from '../components/Section.js';
 
-import {Popup} from '../components/popup.js';
-import {PopupWithImage} from '../components/popupimg.js';
-import {PopupWithForm} from '../components/popupform.js';
+import {Popup} from '../components/Popup.js';
+import {PopupWithImage} from '../components/PopupWithImg.js';
+/*import {PopupWithForm} from '../components/PopupWithForm.js';*/
+import {UserInfo} from '..//components/UserInfo.js';
 
 import {
   cards,
@@ -23,8 +24,6 @@ import {
 
   userName,
   job,
-  nameInput,
-  jobInput,
   zoomPlaceImg,
   zoomPlaceCaption
 } from '../utils/constants.js';
@@ -41,6 +40,11 @@ const popupZoom = new PopupWithImage({
 popupProfile.setEventListeners();
 popupPlace.setEventListeners();
 popupZoom.setEventListeners();
+
+const userInfo = new UserInfo({
+  userNameSelector: userName,
+  userBioSelector: job
+});
 
 
 // renders cards to the page
@@ -95,16 +99,14 @@ addCards();
 
 
 function openpopupProfile() {
-  nameInput.value = userName.textContent;
-  jobInput.value = job.textContent;
+  userInfo.getUserInfo()
   popupProfile.open()
 }
 
 //edits profile
 function submitFormHandler(evt) {
   evt.preventDefault();
-  userName.textContent = nameInput.value;
-  job.textContent = jobInput.value;
+  userInfo.setUserInfo();
   popupProfile.close();
 }
 
