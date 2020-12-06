@@ -1,9 +1,17 @@
 export class Card {
-  constructor(data, cardSelector, cardClickHandler) {
+  constructor(
+    data,
+    cardSelector,
+    handleCardClick
+    /*zoomPlaceImg,
+    zoomPlaceCaption*/
+  ) {
     this._title = data.title;
     this._backgroundImage = data.backgroundImage;
     this._cardSelector = cardSelector;
-    this._cardClickHandler = cardClickHandler;
+    this._handleCardClick = handleCardClick;
+    /*this._zoomPlaceImg = zoomPlaceImg;
+    this._zoomPlaceCaption = zoomPlaceCaption;*/
   }
 
   _getTemplate() {
@@ -36,9 +44,9 @@ export class Card {
       this._deleteCard(evt);
     });
 
-    /*this._element.querySelector('.place__cover-button').addEventListener('click', () => {
-      this._cardClickHandler(this._backgroundImage, this._title);
-    });*/
+    this._element.querySelector('.place__cover-button').addEventListener('click', () => {
+      this._handleCardClick(this._backgroundImage, this._title);
+    });
   }
 
 

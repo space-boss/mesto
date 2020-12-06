@@ -29,28 +29,42 @@ const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
 
-const zoomPlaceImg = document.querySelector('.popup__img');
-const zoomPlaceCaption = document.querySelector('.popup__caption');
-
-
+/*const zoomPlaceImg = document.querySelector('.popup__img');
+const zoomPlaceCaption = document.querySelector('.popup__caption');*/
 
 const popupProfile = new Popup({popupSelector: popupProfileSelector});
-
 const popupPlace = new Popup({popupSelector: popupPlaceSelector});
-
 const popupZoom = new PopupWithImage({popupSelector: popupZoomSelector});
 
 popupProfile.setEventListeners();
 popupPlace.setEventListeners();
-/*popupZoom.setEventListeners();*/
+popupZoom.setEventListeners();
 
+
+/*function handleCardClick() {
+  popupZoom.open()
+}*/
+
+function handleCardClick(image, caption) {
+  image = zoomPlaceImg.scr;
+  caption = zoomPlaceCaption.textContent;
+  popupZoom.open()
+}
 
 // renders cards to the page
 const defaultCardList = new Section (
   {
     items: cards,
     renderer: (item) => {
-      const card = new Card(item, template, popupZoom);
+      const card = new Card(
+        item,
+        template,
+        handleCardClick
+      ); /*
+        popupZoom,
+        zoomPlaceImg,
+        zoomPlaceCaption
+      );*/
       const cardElement = card.generateCard();
 
       defaultCardList.addItem(cardElement);
@@ -71,7 +85,11 @@ const addCards = () => {
     newCard.title = inputPlaceName.value;
     newCard.backgroundImage = inputPlaceUrl.value;
 
-    const cardItem = new Card(newCard, template, popupZoom);
+    const cardItem = new Card(
+      newCard,
+      template,
+      handleCardClick
+      );
     const newCardElement = cardItem.generateCard();
 
     places.prepend(newCardElement);
