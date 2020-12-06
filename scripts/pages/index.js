@@ -5,6 +5,7 @@ import {
   cards
 } from '../utils/constants.js';
 import {Popup} from '../components/popup.js';
+import {PopupWithImage} from '../components/popupimg.js'
 
 
 const places = '.places';
@@ -31,12 +32,25 @@ const jobInput = document.querySelector('.popup__input-field_value_job');
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
 
+
+
+const popupProfile = new Popup({popupSelector: popupProfileSelector});
+
+const popupPlace = new Popup({popupSelector: popupPlaceSelector});
+
+const popupZoom = new PopupWithImage({popupSelector: popupZoomSelector});
+
+popupProfile.setEventListeners();
+popupPlace.setEventListeners();
+/*popupZoom.setEventListeners();*/
+
+
 // renders cards to the page
 const defaultCardList = new Section (
   {
     items: cards,
     renderer: (item) => {
-      const card = new Card(item, template, openCardHandler);
+      const card = new Card(item, template, popupZoom);
       const cardElement = card.generateCard();
 
       defaultCardList.addItem(cardElement);
@@ -46,17 +60,6 @@ const defaultCardList = new Section (
 );
 
 defaultCardList.renderItems();
-
-const popupProfile = new Popup({popupSelector: popupProfileSelector});
-
-const popupPlace = new Popup({popupSelector: popupPlaceSelector});
-
-const popupZoom = new Popup({popupSelector: popupZoomSelector});
-
-popupProfile.setEventListeners();
-popupPlace.setEventListeners();
-popupZoom.setEventListeners();
-
 
 //adds a new custom card
 const addCards = () => {
@@ -68,7 +71,7 @@ const addCards = () => {
     newCard.title = inputPlaceName.value;
     newCard.backgroundImage = inputPlaceUrl.value;
 
-    const cardItem = new Card(newCard, template, openCardHandler);
+    const cardItem = new Card(newCard, template, popupZoom);
     const newCardElement = cardItem.generateCard();
 
     places.prepend(newCardElement);
@@ -80,12 +83,12 @@ const addCards = () => {
 
 addCards();
 
-//zooms up a popup
+/*//zooms up a popup
 function openCardHandler(link, name) {
   zoomPlaceImg.src = link;
   zoomPlaceCaption.textContent = name;
   popupZoom.open();
-}
+} */
 
 function openpopupProfile() {
   nameInput.value = userName.textContent;
@@ -116,6 +119,7 @@ const formElements = Array.from(document.querySelectorAll('.popup__form'));
 formElements.forEach((form) => {
   new FormValidator(validationSettings, form).enableValidation();
 });
+
 
 
 

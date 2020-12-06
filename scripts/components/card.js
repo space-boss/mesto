@@ -36,10 +36,11 @@ export class Card {
       this._deleteCard(evt);
     });
 
-    this._element.querySelector('.place__cover-button').addEventListener('click', () => {
+    /*this._element.querySelector('.place__cover-button').addEventListener('click', () => {
       this._cardClickHandler(this._backgroundImage, this._title);
-    });
+    });*/
   }
+
 
   _handleLike(evt) {
     const _likeTarget = evt.target;
