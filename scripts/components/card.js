@@ -3,15 +3,11 @@ export class Card {
     data,
     cardSelector,
     handleCardClick
-    /*zoomPlaceImg,
-    zoomPlaceCaption*/
   ) {
     this._title = data.title;
     this._backgroundImage = data.backgroundImage;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    /*this._zoomPlaceImg = zoomPlaceImg;
-    this._zoomPlaceCaption = zoomPlaceCaption;*/
   }
 
   _getTemplate() {
@@ -45,7 +41,7 @@ export class Card {
     });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
-      this._handleCardClick(this._backgroundImage, this._title);
+      this._handleCardClick(this);
     });
   }
 

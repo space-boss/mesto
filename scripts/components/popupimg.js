@@ -1,28 +1,15 @@
 import {Popup} from './popup.js';
 
 export class PopupWithImage extends Popup {
-  constructor(popupSelector) {
-    super(popupSelector);
+  constructor({popupSelector, imageSelector, captionSelector}) {
+    super({popupSelector});
+    this._zoomPlaceImg = imageSelector;
+    this._zoomCaption = captionSelector
   }
 
-  open(link, name) {
-    _zoomPlaceImg.src = link;
-    _zoomPlaceImg.alt = name;
-    _zoomPlaceCaption.textContent = card._name;
+  open(card) {
+    this._zoomPlaceImg.src = card._backgroundImage;
+    this._zoomCaption.textContent = card._title;
     super.open();
   }
 }
-
-/*export class PopupWithImage extends Popup {
-  constructor(popupSelector, imageSelector, captionSelector) {
-    super(popupSelector);
-    this._popupImageSelector = imageSelector;
-    this._popupCaptionSelector = captionSelector;
-  }
-
-  open(link, name) {
-    this._popupImageSelector.src = link;
-    this._popupCaptionSelector.textContent = name;
-    super.open();
-  }
-}*/

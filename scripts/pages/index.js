@@ -28,28 +28,22 @@ const job = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.popup__input-field_value_name');
 const jobInput = document.querySelector('.popup__input-field_value_job');
 
+const zoomPlaceImg = document.querySelector('.popup__img');
+const zoomPlaceCaption = document.querySelector('.popup__caption');
 
-/*const zoomPlaceImg = document.querySelector('.popup__img');
-const zoomPlaceCaption = document.querySelector('.popup__caption');*/
 
 const popupProfile = new Popup({popupSelector: popupProfileSelector});
 const popupPlace = new Popup({popupSelector: popupPlaceSelector});
-const popupZoom = new PopupWithImage({popupSelector: popupZoomSelector});
+const popupZoom = new PopupWithImage({
+  popupSelector: popupZoomSelector,
+  imageSelector:  zoomPlaceImg,
+  captionSelector: zoomPlaceCaption
+});
 
 popupProfile.setEventListeners();
 popupPlace.setEventListeners();
 popupZoom.setEventListeners();
 
-
-/*function handleCardClick() {
-  popupZoom.open()
-}*/
-
-function handleCardClick(image, caption) {
-  image = zoomPlaceImg.scr;
-  caption = zoomPlaceCaption.textContent;
-  popupZoom.open()
-}
 
 // renders cards to the page
 const defaultCardList = new Section (
@@ -59,12 +53,10 @@ const defaultCardList = new Section (
       const card = new Card(
         item,
         template,
-        handleCardClick
-      ); /*
-        popupZoom,
-        zoomPlaceImg,
-        zoomPlaceCaption
-      );*/
+        function handleCardClick() {
+          popupZoom.open(this)
+        }
+      );
       const cardElement = card.generateCard();
 
       defaultCardList.addItem(cardElement);
@@ -88,7 +80,9 @@ const addCards = () => {
     const cardItem = new Card(
       newCard,
       template,
-      handleCardClick
+      function handleCardClick() {
+        popupZoom.open(this)
+      }
       );
     const newCardElement = cardItem.generateCard();
 
@@ -101,12 +95,6 @@ const addCards = () => {
 
 addCards();
 
-/*//zooms up a popup
-function openCardHandler(link, name) {
-  zoomPlaceImg.src = link;
-  zoomPlaceCaption.textContent = name;
-  popupZoom.open();
-} */
 
 function openpopupProfile() {
   nameInput.value = userName.textContent;
@@ -147,8 +135,8 @@ addPlace.addEventListener('click', () => popupPlace.open());
 
 formElement.addEventListener('submit', submitFormHandler);
 
-
-/*event listeners responsible for different ways to close popups
+/*
+// event listeners responsible for different ways to close popups
 popupProfileSelector.addEventListener('click', closePopupByClickOnOverlay);
 popupPlaceSelector.addEventListener('click', closePopupByClickOnOverlay);
 zoomPlace.addEventListener('click', closePopupByClickOnOverlay); */
