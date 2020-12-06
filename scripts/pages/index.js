@@ -1,35 +1,33 @@
 import {Card} from '../components/card.js';
 import {FormValidator} from '../utils/formValidator.js';
 import {Section} from '../components/section.js';
-import {
-  cards
-} from '../utils/constants.js';
+
 import {Popup} from '../components/popup.js';
-import {PopupWithImage} from '../components/popupimg.js'
+import {PopupWithImage} from '../components/popupimg.js';
+import {PopupWithForm} from '../components/popupform.js';
 
+import {
+  cards,
+  places,
+  addPlace,
+  placeForm,
+  template,
+  inputPlaceName,
+  inputPlaceUrl,
+  editProfile,
 
-const places = '.places';
-const addPlace = document.querySelector('.profile__add-button');
-const placeForm = document.querySelector('.popup__form-place');
+  formElement,
+  popupProfileSelector,
+  popupPlaceSelector,
+  popupZoomSelector,
 
-const template = '.template';
-const inputPlaceName = document.querySelector('.popup__input-field_value_place');
-const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
-
-const editProfile = document.querySelector('.profile__edit-button');
-
-const formElement = document.querySelector('.popup__form');
-const popupProfileSelector = document.querySelector('.popup_profile');
-const popupPlaceSelector = document.querySelector('.popup_place');
-const popupZoomSelector = document.querySelector('.popup_zoom');
-
-const userName = document.querySelector('.profile__title');
-const job = document.querySelector('.profile__subtitle');
-const nameInput = document.querySelector('.popup__input-field_value_name');
-const jobInput = document.querySelector('.popup__input-field_value_job');
-
-const zoomPlaceImg = document.querySelector('.popup__img');
-const zoomPlaceCaption = document.querySelector('.popup__caption');
+  userName,
+  job,
+  nameInput,
+  jobInput,
+  zoomPlaceImg,
+  zoomPlaceCaption
+} from '../utils/constants.js';
 
 
 const popupProfile = new Popup({popupSelector: popupProfileSelector});
@@ -63,7 +61,7 @@ const defaultCardList = new Section (
     }
   },
   places
-);
+)
 
 defaultCardList.renderItems();
 
@@ -125,8 +123,6 @@ const formElements = Array.from(document.querySelectorAll('.popup__form'));
 formElements.forEach((form) => {
   new FormValidator(validationSettings, form).enableValidation();
 });
-
-
 
 
 editProfile.addEventListener('click', openpopupProfile);
