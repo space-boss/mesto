@@ -4,7 +4,7 @@ import {Section} from '../components/Section.js';
 
 import {Popup} from '../components/Popup.js';
 import {PopupWithImage} from '../components/PopupWithImg.js';
-/*import {PopupWithForm} from '../components/PopupWithForm.js';*/
+import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '..//components/UserInfo.js';
 
 import {
@@ -29,7 +29,17 @@ import {
 } from '../utils/constants.js';
 
 
-const popupProfile = new Popup({popupSelector: popupProfileSelector});
+const popupProfile = new PopupWithForm({
+  popupSelector: popupProfileSelector,
+  formSubmitHandler: function formSubmitHandler(evt) {
+    evt.preventDefault();
+    userInfo.setUserInfo();
+    popupProfile.close();
+  }
+});
+
+
+/*const popupProfile = new Popup({popupSelector: popupProfileSelector});*/
 const popupPlace = new Popup({popupSelector: popupPlaceSelector});
 const popupZoom = new PopupWithImage({
   popupSelector: popupZoomSelector,
@@ -97,18 +107,17 @@ const addCards = () => {
 
 addCards();
 
-
 function openpopupProfile() {
   userInfo.getUserInfo()
   popupProfile.open()
 }
 
-//edits profile
+/*//edits profile
 function submitFormHandler(evt) {
   evt.preventDefault();
   userInfo.setUserInfo();
   popupProfile.close();
-}
+} */
 
 //variables used in form validation
 const validationSettings = {
@@ -131,7 +140,7 @@ editProfile.addEventListener('click', openpopupProfile);
 
 addPlace.addEventListener('click', () => popupPlace.open());
 
-formElement.addEventListener('submit', submitFormHandler);
+/*formElement.addEventListener('submit', submitFormHandler);*/
 
 /*
 // event listeners responsible for different ways to close popups
