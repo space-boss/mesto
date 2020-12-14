@@ -1,13 +1,9 @@
 export class Card {
-  constructor(
-    data,
-    cardSelector,
-    handleCardClick
-  ) {
+  constructor(data, cardSelector, cardClickHandler) {
     this._title = data.title;
     this._backgroundImage = data.backgroundImage;
     this._cardSelector = cardSelector;
-    this._handleCardClick = handleCardClick;
+    this._cardClickHandler = cardClickHandler;
   }
 
   _getTemplate() {
@@ -41,10 +37,9 @@ export class Card {
     });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
-      this._handleCardClick(this);
+      this._cardClickHandler(this._backgroundImage, this._title);
     });
   }
-
 
   _handleLike(evt) {
     const _likeTarget = evt.target;
