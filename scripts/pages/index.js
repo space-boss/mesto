@@ -29,6 +29,13 @@ import {
 } from '../utils/constants.js';
 
 
+const popupPlace = new PopupWithForm({
+  popupSelector: popupPlaceSelector,
+  formSubmitHandler: function formSubmitHandler(evt) {
+    addCards();
+  }
+});
+
 const popupProfile = new PopupWithForm({
   popupSelector: popupProfileSelector,
   formSubmitHandler: function formSubmitHandler(evt) {
@@ -38,9 +45,6 @@ const popupProfile = new PopupWithForm({
   }
 });
 
-
-/*const popupProfile = new Popup({popupSelector: popupProfileSelector});*/
-const popupPlace = new Popup({popupSelector: popupPlaceSelector});
 const popupZoom = new PopupWithImage({
   popupSelector: popupZoomSelector,
   imageSelector:  zoomPlaceImg,
@@ -55,6 +59,11 @@ const userInfo = new UserInfo({
   userNameSelector: userName,
   userBioSelector: job
 });
+
+function openpopupProfile() {
+  userInfo.getUserInfo()
+  popupProfile.open()
+}
 
 
 // renders cards to the page
@@ -98,26 +107,12 @@ const addCards = () => {
       );
     const newCardElement = cardItem.generateCard();
 
-    places.prepend(newCardElement);
+    document.querySelector(places).prepend(newCardElement);
     inputPlaceName.value = '';
     inputPlaceUrl.value = '';
     popupPlace.close()
   });
 };
-
-addCards();
-
-function openpopupProfile() {
-  userInfo.getUserInfo()
-  popupProfile.open()
-}
-
-/*//edits profile
-function submitFormHandler(evt) {
-  evt.preventDefault();
-  userInfo.setUserInfo();
-  popupProfile.close();
-} */
 
 //variables used in form validation
 const validationSettings = {

@@ -1,15 +1,18 @@
 import {Popup} from './Popup.js';
 
+//Buggy - can save new card only after PopupProfile was changed
+
 export class PopupWithForm extends Popup {
   constructor({popupSelector, formSubmitHandler}) {
     super({popupSelector});
     this._formSubmitHandler = formSubmitHandler;
     this._formElement = document.querySelector('.popup__form');
+    this._inputFields = document.querySelectorAll('popup__input-field')
+    this._inputArray = Array.from(document.querySelectorAll('popup__input-field'));
   }
 
   _getInputValues() {
-    const inputArray = Array.from(document.querySelectorAll('popup__input-field'));
-    inputArray.forEach((item) => {
+     this._inputArray.forEach((item) => {
       item.value = item.textContent;
     });
   }
@@ -20,28 +23,10 @@ export class PopupWithForm extends Popup {
   }
 
   close() {
-    this._popupSelector.querySelectorAll('.popup__input-field').value = '';
+    this._inputArray.forEach((item) => {
+      item.value = '';
+    });
     super.close();
   }
 }
 
-/*formElements.forEach((form) => {
-  new FormValidator(validationSettings, form).enableValidation();
-});
-
-
-formElement.addEventListener('submit', submitFormHandler);
-
-function openpopupProfile() {
-  nameInput.value = userName.textContent;
-  jobInput.value = job.textContent;
-  popupProfile.open()
-}
-
-//edits profile
-function submitFormHandler(evt) {
-  evt.preventDefault();
-  userName.textContent = nameInput.value;
-  job.textContent = jobInput.value;
-  popupProfile.close();
-}*/
