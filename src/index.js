@@ -1,11 +1,13 @@
-import {Card} from '../components/Card.js';
-import {FormValidator} from '../utils/formValidator.js';
-import {Section} from '../components/Section.js';
+import {Card} from '../scripts/components/card.js';
+import {FormValidator} from '../scripts/utils/formValidator.js';
+import {Section} from '../scripts/components/Section.js';
 
-import {Popup} from '../components/Popup.js';
-import {PopupWithImage} from '../components/PopupWithImg.js';
-import {PopupWithForm} from '../components/PopupWithForm.js';
-import {UserInfo} from '..//components/UserInfo.js';
+import {Popup} from '../scripts/components/Popup.js';
+import {PopupWithImage} from '../scripts/components/PopupWithImg.js';
+import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
+import {UserInfo} from '../scripts/components/UserInfo.js';
+
+
 
 import {
   cards,
@@ -26,7 +28,7 @@ import {
   job,
   zoomPlaceImg,
   zoomPlaceCaption
-} from '../utils/constants.js';
+} from '../scripts/utils/constants.js';
 
 
 const popupPlace = new PopupWithForm({
