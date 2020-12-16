@@ -4,9 +4,9 @@ import {Card} from './scripts/components/card.js';
 import {FormValidator} from './scripts/utils/formValidator.js';
 import {Section} from './scripts/components/Section.js';
 
-import {PopupWithImage} from './scripts/components/PopupWithImg.js';
-import {PopupWithForm} from './scripts/components/PopupWithForm.js';
-import {UserInfo} from './scripts/components/UserInfo.js';
+import {PopupWithImage} from './scripts/components/popup-with-image.js';
+import {PopupWithForm} from './scripts/components/popup-with-form.js';
+import {UserInfo} from './scripts/components/user-info.js';
 
 
 
