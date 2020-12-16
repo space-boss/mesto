@@ -1,7 +1,5 @@
 import {Popup} from './Popup.js';
 
-//Buggy - can save new card only after PopupProfile was changed
-
 export class PopupWithForm extends Popup {
   constructor({popupSelector, formSubmitHandler}) {
     super({popupSelector});

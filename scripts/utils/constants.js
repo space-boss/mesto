@@ -1,26 +1,33 @@
+const icelandImage = new URL('../../images/iceland.jpg', import.meta.url);
+const antwerpImage = new URL('../../images/antwerpen.jpeg', import.meta.url);
+const capetownImage = new URL('../../images/capetown.jpg', import.meta.url);
+const marianaImage = new URL('../../images/mariana.jpg', import.meta.url);
+const teriberkaImage = new URL('../../images/teriberka.jpg', import.meta.url);
+const carribeanImage = new URL('../../images/caribbean-island.jpg', import.meta.url);
+
+
 const cards = [{
   title: 'Исландия',
-  backgroundImage: './images/iceland.jpg'
+  backgroundImage: icelandImage
 }, {
   title: 'Порт в Антверпене',
-  backgroundImage: './images/antwerpen.jpeg'
+  backgroundImage: antwerpImage
 }, {
   title: 'Мыс Доброй Надежды',
-  backgroundImage: './images/capetown.jpg'
+  backgroundImage: capetownImage
 }, {
   title: 'Марианская Впадина',
-  backgroundImage: './images/mariana.jpg'
+  backgroundImage: marianaImage
 }, {
   title: 'Териберка',
-  backgroundImage: './images/teriberka.jpg'
+  backgroundImage: teriberkaImage
 }, {
   title: 'Карибские острова',
-  backgroundImage: './images/caribbean-island.jpg'
-}];
+  backgroundImage: carribeanImage
+},];
 
 const places = '.places';
 const addPlace = document.querySelector('.profile__add-button');
-const placeForm = document.querySelector('.popup__form-place');
 
 const template = '.template';
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
@@ -43,7 +50,7 @@ export {
   cards,
   places,
   addPlace,
-  placeForm,
+
   template,
   inputPlaceName,
   inputPlaceUrl,

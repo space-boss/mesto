@@ -1,3 +1,5 @@
+import '../styles/index.css';
+
 import {Card} from '../scripts/components/card.js';
 import {FormValidator} from '../scripts/utils/formValidator.js';
 import {Section} from '../scripts/components/Section.js';
@@ -12,7 +14,6 @@ import {
   cards,
   places,
   addPlace,
-  placeForm,
   template,
   inputPlaceName,
   inputPlaceUrl,
@@ -70,6 +71,7 @@ const addCards = () => {
     document.querySelector(places).prepend(newCardElement);
 };
 
+//opens popup with a new place
 const popupPlace = new PopupWithForm({
   popupSelector: popupPlaceSelector,
   formSubmitHandler: () => {
@@ -78,6 +80,7 @@ const popupPlace = new PopupWithForm({
   }
 });
 
+//opens popup with user info
 const popupProfile = new PopupWithForm({
   popupSelector: popupProfileSelector,
   formSubmitHandler: () => {
@@ -86,16 +89,19 @@ const popupProfile = new PopupWithForm({
   }
 });
 
+//zooms up a place picture
 const popupZoom = new PopupWithImage({
   popupSelector: popupZoomSelector,
   imageSelector:  zoomPlaceImg,
   captionSelector: zoomPlaceCaption
 });
 
+//event listeners for popups
 popupProfile.setEventListeners();
 popupPlace.setEventListeners();
 popupZoom.setEventListeners();
 
+//filling in of user info
 const userInfo = new UserInfo({
   userNameSelector: userName,
   userBioSelector: job
@@ -117,12 +123,12 @@ formElements.forEach((form) => {
   new FormValidator(validationSettings, form).enableValidation();
 });
 
-
+//opening popups by clicking on elements
 editProfile.addEventListener('click', () => popupProfile.open());
 
 addPlace.addEventListener('click', () => popupPlace.open());
 
-/*formElement.addEventListener('submit', submitFormHandler);*/
+
 
 /*
 // event listeners responsible for different ways to close popups
