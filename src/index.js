@@ -1,12 +1,12 @@
 import './styles/index.css';
 
-import {Card} from './scripts/components/card.js';
+import {Card} from './scripts/components/Сard.js';
 import {FormValidator} from './scripts/utils/formValidator.js';
 import {Section} from './scripts/components/Section.js';
 
-import {PopupWithImage} from './scripts/components/popup-with-image.js';
-import {PopupWithForm} from './scripts/components/popup-with-form.js';
-import {UserInfo} from './scripts/components/user-info.js';
+import {PopupWithImage} from './scripts/components/PopupWithImage.js';
+import {PopupWithForm} from './scripts/components/PopupWithForm.js';
+import {UserInfo} from './scripts/components/UserInfo.js';
 
 
 
