@@ -1,5 +1,5 @@
 .place__like_pressed {
-  background-image: url(../../../../images/like-button-pressed.svg);
+  background-image: url(../../../../../images/like-button-pressed.svg);
   display: flex;
   position: relative;
   z-index: 3;

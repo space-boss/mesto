@@ -1,12 +1,12 @@
-import '../styles/index.css';
+import './styles/index.css';
 
-import {Card} from '../scripts/components/card.js';
-import {FormValidator} from '../scripts/utils/formValidator.js';
-import {Section} from '../scripts/components/Section.js';
+import {Card} from './scripts/components/card.js';
+import {FormValidator} from './scripts/utils/formValidator.js';
+import {Section} from './scripts/components/Section.js';
 
-import {PopupWithImage} from '../scripts/components/PopupWithImg.js';
-import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
-import {UserInfo} from '../scripts/components/UserInfo.js';
+import {PopupWithImage} from './scripts/components/PopupWithImg.js';
+import {PopupWithForm} from './scripts/components/PopupWithForm.js';
+import {UserInfo} from './scripts/components/UserInfo.js';
 
 
 
@@ -27,7 +27,7 @@ import {
   job,
   zoomPlaceImg,
   zoomPlaceCaption
-} from '../scripts/utils/constants.js';
+} from './scripts/utils/constants.js';
 
 
 // renders cards to the page
@@ -129,9 +129,3 @@ editProfile.addEventListener('click', () => popupProfile.open());
 addPlace.addEventListener('click', () => popupPlace.open());
 
 
-
-/*
-// event listeners responsible for different ways to close popups
-popupProfileSelector.addEventListener('click', closePopupByClickOnOverlay);
-popupPlaceSelector.addEventListener('click', closePopupByClickOnOverlay);
-zoomPlace.addEventListener('click', closePopupByClickOnOverlay); */

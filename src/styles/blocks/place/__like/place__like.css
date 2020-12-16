@@ -1,5 +1,5 @@
 .place__like {
-  background-image: url(../../../images/like-button.svg);
+  background-image: url(../../../../images/like-button.svg);
   display: flex;
   position: relative;
   z-index: 2;

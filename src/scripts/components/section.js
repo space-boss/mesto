@@ -6,7 +6,7 @@ export class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  addItem(element) { //setItem в тренажере
+  addItem(element) {
     this._container.append(element);
   }
 
@@ -14,8 +14,7 @@ export class Section {
     this._container.innerHTML = '';
   }
 
-  renderItems() { // публичный метод, который отвечает за отрисовку всех элементов
-    //this.clear();
+  renderItems() {
     this._initialArray.forEach((item) => {
       this._renderer(item);
     });
