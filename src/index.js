@@ -1,10 +1,6 @@
 import './styles/index.css';
 
-<<<<<<< HEAD
-import {Card} from './scripts/components/Сard.js';
-=======
 import {Card} from './scripts/components/Card.js';
->>>>>>> 72349f0... Fixes console errors
 import {FormValidator} from './scripts/utils/formValidator.js';
 import {Section} from './scripts/components/Section.js';
 
