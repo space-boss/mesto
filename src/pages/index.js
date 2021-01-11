@@ -1,12 +1,12 @@
-import './styles/index.css';
+import './index.css';
 
-import {Card} from './scripts/components/Card.js';
-import {FormValidator} from './scripts/utils/FormValidator.js';
-import {Section} from './scripts/components/Section.js';
+import {Card} from '../scripts/components/Card.js';
+import {FormValidator} from '../scripts/utils/FormValidator.js';
+import {Section} from '../scripts/components/Section.js';
 
-import {PopupWithImage} from './scripts/components/PopupWithImage.js';
-import {PopupWithForm} from './scripts/components/PopupWithForm.js';
-import {UserInfo} from './scripts/components/UserInfo.js';
+import {PopupWithImage} from '../scripts/components/PopupWithImage.js';
+import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
+import {UserInfo} from '../scripts/components/UserInfo.js';
 
 
 
@@ -28,7 +28,7 @@ import {
   job,
   zoomPlaceImg,
   zoomPlaceCaption
-} from './scripts/utils/Constants.js';
+} from '../scripts/utils/Constants.js';
 
 
 // renders cards to the page
