@@ -7,8 +7,8 @@ module.exports = {
   entry: { main: './src/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
-        publicPath: ''
+    filename: 'main.js',
+    publicPath: ''
   },
   mode: 'development',
   devServer: {
