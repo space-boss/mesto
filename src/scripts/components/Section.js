@@ -10,10 +10,6 @@ export class Section {
     this._container.append(element);
   }
 
-  clear() {
-    this._container.innerHTML = '';
-  }
-
   renderItems() {
     this._initialArray.forEach((item) => {
       this._renderer(item);
