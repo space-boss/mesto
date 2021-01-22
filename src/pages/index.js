@@ -9,8 +9,6 @@ import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
 import {UserInfo} from '../scripts/components/UserInfo.js';
 
 
-
-
 import {
   cards,
   places,
@@ -28,7 +26,20 @@ import {
   job,
   zoomPlaceImg,
   zoomPlaceCaption
-} from '../scripts/utils/Constants.js';
+} from '../scripts/utils/constants.js';
+
+
+function createCard(item) {
+  const card = new Card(
+    item,
+    template,
+    function handleCardClick(name, link) {
+      popupZoom.open(name, link)
+    }
+  );
+  const cardElement = card.generateCard();
+  return cardElement
+}
 
 
 // renders cards to the page
@@ -36,15 +47,7 @@ const defaultCardList = new Section (
   {
     items: cards,
     renderer: (item) => {
-      const card = new Card(
-        item,
-        template,
-        function handleCardClick() {
-          popupZoom.open(this)
-        }
-      );
-      const cardElement = card.generateCard();
-
+      const cardElement = createCard(item)
       defaultCardList.addItem(cardElement);
     }
   },
@@ -52,6 +55,7 @@ const defaultCardList = new Section (
 )
 
 defaultCardList.renderItems();
+
 
 //adds a new custom card
 const addCards = () => {
@@ -63,8 +67,8 @@ const addCards = () => {
     const cardItem = new Card(
       newCard,
       template,
-      function handleCardClick() {
-        popupZoom.open(this)
+      function handleCardClick(name, link) {
+        popupZoom.open(name, link)
       }
       );
     const newCardElement = cardItem.generateCard();
