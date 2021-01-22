@@ -7,9 +7,9 @@ export class PopupWithImage extends Popup {
     this._zoomCaption = captionSelector
   }
 
-  open(card) {
-    this._zoomPlaceImg.src = card._backgroundImage;
-    this._zoomCaption.textContent = card._title;
+  open(title, backgroundImage) {
+    this._zoomPlaceImg.src = backgroundImage;
+    this._zoomCaption.textContent = title;
     super.open();
   }
 }

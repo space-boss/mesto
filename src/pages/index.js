@@ -31,20 +31,25 @@ import {
 } from '../scripts/utils/Constants.js';
 
 
+function createCard(item) {
+  const card = new Card(
+    item,
+    template,
+    function handleCardClick(_title, _backgroundImage) {
+      popupZoom.open(_title, _backgroundImage)
+    }
+  );
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+
 // renders cards to the page
 const defaultCardList = new Section (
   {
     items: cards,
     renderer: (item) => {
-      const card = new Card(
-        item,
-        template,
-        function handleCardClick() {
-          popupZoom.open(this)
-        }
-      );
-      const cardElement = card.generateCard();
-
+      const cardElement = createCard(item)
       defaultCardList.addItem(cardElement);
     }
   },
@@ -60,23 +65,15 @@ const addCards = () => {
     newCard.title = inputPlaceName.value;
     newCard.backgroundImage = inputPlaceUrl.value;
 
-    const cardItem = new Card(
-      newCard,
-      template,
-      function handleCardClick() {
-        popupZoom.open(this)
-      }
-      );
-    const newCardElement = cardItem.generateCard();
-
-    document.querySelector(places).prepend(newCardElement);
+    const newCardElement = createCard(newCard)
+    defaultCardList.prependItem(newCardElement);
 };
 
 //opens popup with a new place
 const popupPlace = new PopupWithForm({
   popupSelector: popupPlaceSelector,
-  formSubmitHandler: () => {
-    addCards();
+  formSubmitHandler: (data) => {
+    addCards(data);
     popupPlace.close();
   }
 });
@@ -84,8 +81,8 @@ const popupPlace = new PopupWithForm({
 //opens popup with user info
 const popupProfile = new PopupWithForm({
   popupSelector: popupProfileSelector,
-  formSubmitHandler: () => {
-    userInfo.setUserInfo();
+  formSubmitHandler: (data) => {
+    userInfo.setUserInfo(data);
     popupProfile.close();
   }
 });
