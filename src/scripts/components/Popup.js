@@ -33,3 +33,4 @@ export class Popup {
     this._popup.querySelector('.popup__close').addEventListener('click', this.close.bind(this));
   }
 }
+

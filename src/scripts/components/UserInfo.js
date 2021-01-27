@@ -12,8 +12,8 @@ export class UserInfo {
       return userInfo;
   }
 
-  setUserInfo() {
-    this._userName.textContent = document.querySelector('.popup__input-field_value_name').value;
-    this._userBio.textContent = document.querySelector('.popup__input-field_value_job').value;
+  setUserInfo(data) {
+    this._userName.textContent = data.username;
+    this._userBio.textContent = data.job;
   }
 }

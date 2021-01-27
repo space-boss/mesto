@@ -35,8 +35,8 @@ function createCard(item) {
   const card = new Card(
     item,
     template,
-    function handleCardClick(_title, _backgroundImage) {
-      popupZoom.open(_title, _backgroundImage)
+    function handleCardClick(title, backgroundImage) {
+      popupZoom.open(title, backgroundImage)
     }
   );
   const cardElement = card.generateCard();
@@ -78,6 +78,12 @@ const popupPlace = new PopupWithForm({
   }
 });
 
+//filling in of user info
+const userInfo = new UserInfo({
+  userNameSelector: userName,
+  userBioSelector: job
+});
+
 //opens popup with user info
 const popupProfile = new PopupWithForm({
   popupSelector: popupProfileSelector,
@@ -90,8 +96,8 @@ const popupProfile = new PopupWithForm({
 //zooms up a place picture
 const popupZoom = new PopupWithImage({
   popupSelector: popupZoomSelector,
-  imageSelector:  zoomPlaceImg,
-  captionSelector: zoomPlaceCaption
+  image: zoomPlaceImg,
+  caption: zoomPlaceCaption
 });
 
 //event listeners for popups
@@ -99,11 +105,6 @@ popupProfile.setEventListeners();
 popupPlace.setEventListeners();
 popupZoom.setEventListeners();
 
-//filling in of user info
-const userInfo = new UserInfo({
-  userNameSelector: userName,
-  userBioSelector: job
-});
 
 //variables used in form validation
 const validationSettings = {

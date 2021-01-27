@@ -9,22 +9,22 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-     this._inputArray.forEach((item) => {
-      item.value = item.textContent;
+    this._formValues = {};
+    this._inputArray.forEach((input) => {
+      this._formValues[input.name] = input.value;
     });
+    return this._formValues;
   }
 
   setEventListeners() {
     this._formElement.addEventListener('submit', () => {
-      this._formSubmitHandler(this._getInputValues.bind(this))
+      this._formSubmitHandler(this._getInputValues())
     });
     super.setEventListeners();
   }
 
   close() {
-    this._inputArray.forEach((item) => {
-      item.value = '';
-    });
+    this._formElement.reset();
     super.close();
   }
 }
