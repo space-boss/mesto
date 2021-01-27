@@ -31,20 +31,25 @@ import {
 } from '../scripts/utils/Constants.js';
 
 
+function createCard(item) {
+  const card = new Card(
+    item,
+    template,
+    function handleCardClick(title, backgroundImage) {
+      popupZoom.open(title, backgroundImage)
+    }
+  );
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+
 // renders cards to the page
 const defaultCardList = new Section (
   {
     items: cards,
     renderer: (item) => {
-      const card = new Card(
-        item,
-        template,
-        function handleCardClick() {
-          popupZoom.open(this)
-        }
-      );
-      const cardElement = card.generateCard();
-
+      const cardElement = createCard(item)
       defaultCardList.addItem(cardElement);
     }
   },
@@ -60,47 +65,18 @@ const addCards = () => {
     newCard.title = inputPlaceName.value;
     newCard.backgroundImage = inputPlaceUrl.value;
 
-    const cardItem = new Card(
-      newCard,
-      template,
-      function handleCardClick() {
-        popupZoom.open(this)
-      }
-      );
-    const newCardElement = cardItem.generateCard();
-
-    document.querySelector(places).prepend(newCardElement);
+    const newCardElement = createCard(newCard)
+    defaultCardList.prependItem(newCardElement);
 };
 
 //opens popup with a new place
 const popupPlace = new PopupWithForm({
   popupSelector: popupPlaceSelector,
-  formSubmitHandler: () => {
-    addCards();
+  formSubmitHandler: (data) => {
+    addCards(data);
     popupPlace.close();
   }
 });
-
-//opens popup with user info
-const popupProfile = new PopupWithForm({
-  popupSelector: popupProfileSelector,
-  formSubmitHandler: () => {
-    userInfo.setUserInfo();
-    popupProfile.close();
-  }
-});
-
-//zooms up a place picture
-const popupZoom = new PopupWithImage({
-  popupSelector: popupZoomSelector,
-  imageSelector:  zoomPlaceImg,
-  captionSelector: zoomPlaceCaption
-});
-
-//event listeners for popups
-popupProfile.setEventListeners();
-popupPlace.setEventListeners();
-popupZoom.setEventListeners();
 
 //filling in of user info
 const userInfo = new UserInfo({
@@ -108,6 +84,28 @@ const userInfo = new UserInfo({
   userBioSelector: job
 });
 
+//opens popup with user info
+const popupProfile = new PopupWithForm({
+  popupSelector: popupProfileSelector,
+  formSubmitHandler: (data) => {
+    userInfo.setUserInfo(data);
+    popupProfile.close();
+  }
+});
+
+//zooms up a place picture
+const popupZoom = new PopupWithImage({
+  popupSelector: popupZoomSelector,
+  image: zoomPlaceImg,
+  caption: zoomPlaceCaption
+});
+
+//event listeners for popups
+popupProfile.setEventListeners();
+popupPlace.setEventListeners();
+popupZoom.setEventListeners();
+
+ 
 //variables used in form validation
 const validationSettings = {
   formSelector: '.popup__form',

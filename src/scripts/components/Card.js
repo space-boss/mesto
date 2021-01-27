@@ -41,7 +41,7 @@ export class Card {
     });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
-      this._handleCardClick(this);
+      this._handleCardClick(this._title, this._backgroundImage);
     });
   }
 
