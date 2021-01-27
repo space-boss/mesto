@@ -105,7 +105,7 @@ popupProfile.setEventListeners();
 popupPlace.setEventListeners();
 popupZoom.setEventListeners();
 
-
+ 
 //variables used in form validation
 const validationSettings = {
   formSelector: '.popup__form',
