@@ -1,10 +1,10 @@
 import {Popup} from './Popup.js';
 
 export class PopupWithImage extends Popup {
-  constructor({popupSelector, imageSelector, captionSelector}) {
+  constructor({popupSelector, image, caption}) {
     super({popupSelector});
-    this._zoomPlaceImg = imageSelector;
-    this._zoomCaption = captionSelector
+    this._zoomPlaceImg = image;
+    this._zoomCaption = caption;
   }
 
   open(title, backgroundImage) {

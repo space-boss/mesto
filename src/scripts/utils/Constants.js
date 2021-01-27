@@ -36,9 +36,9 @@ const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl
 const editProfile = document.querySelector('.profile__edit-button');
 
 const formElement = document.querySelector('.popup__form');
-const popupProfileSelector = document.querySelector('.popup_profile');
-const popupPlaceSelector = document.querySelector('.popup_place');
-const popupZoomSelector = document.querySelector('.popup_zoom');
+const popupProfileSelector = '.popup_profile';
+const popupPlaceSelector = '.popup_place';
+const popupZoomSelector = '.popup_zoom';
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
