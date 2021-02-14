@@ -4,8 +4,8 @@ export class Card {
     cardSelector,
     handleCardClick
   ) {
-    this._title = data.title;
-    this._backgroundImage = data.backgroundImage;
+    this._title = data.name;
+    this._backgroundImage = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }

@@ -7,15 +7,13 @@ import {Section} from '../scripts/components/Section.js';
 import {PopupWithImage} from '../scripts/components/PopupWithImage.js';
 import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
 import {UserInfo} from '../scripts/components/UserInfo.js';
-
-
+import {Api} from '../scripts/components/Api.js';
 
 
 import {
-  cards,
   places,
   addPlace,
-  template,
+  template, 
   inputPlaceName,
   inputPlaceUrl,
   editProfile,
@@ -28,7 +26,33 @@ import {
   job,
   zoomPlaceImg,
   zoomPlaceCaption
-} from '../scripts/utils/Constants.js';
+} from '../scripts/utils/constants.js';
+
+
+const api = new Api({
+  url:"https://mesto.nomoreparties.co/v1/cohort-20/cards",
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
+  }
+})
+
+// renders cards from the server to the page
+api
+  .getAllCards()
+  .then((data) => {
+  const defaultCardList = new Section (
+    {
+      items: data,
+      renderer: (item) => { 
+        const cardElement = createCard(item)
+        defaultCardList.addItem(cardElement);
+      }
+    },
+    places
+  )
+  defaultCardList.renderItems();
+})
 
 
 function createCard(item) {
@@ -43,20 +67,6 @@ function createCard(item) {
   return cardElement
 }
 
-
-// renders cards to the page
-const defaultCardList = new Section (
-  {
-    items: cards,
-    renderer: (item) => {
-      const cardElement = createCard(item)
-      defaultCardList.addItem(cardElement);
-    }
-  },
-  places
-)
-
-defaultCardList.renderItems();
 
 //adds a new custom card
 const addCards = () => {
