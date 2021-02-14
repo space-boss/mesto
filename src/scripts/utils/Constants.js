@@ -1,31 +1,3 @@
-const icelandImage = new URL('../../images/iceland.jpg', import.meta.url);
-const antwerpImage = new URL('../../images/antwerpen.jpeg', import.meta.url);
-const capetownImage = new URL('../../images/capetown.jpg', import.meta.url);
-const marianaImage = new URL('../../images/mariana.jpg', import.meta.url);
-const teriberkaImage = new URL('../../images/teriberka.jpg', import.meta.url);
-const carribeanImage = new URL('../../images/caribbean-island.jpg', import.meta.url);
-
-
-const cards = [{
-  title: 'Исландия',
-  backgroundImage: icelandImage
-}, {
-  title: 'Порт в Антверпене',
-  backgroundImage: antwerpImage
-}, {
-  title: 'Мыс Доброй Надежды',
-  backgroundImage: capetownImage
-}, {
-  title: 'Марианская Впадина',
-  backgroundImage: marianaImage
-}, {
-  title: 'Териберка',
-  backgroundImage: teriberkaImage
-}, {
-  title: 'Карибские острова',
-  backgroundImage: carribeanImage
-},];
-
 const places = '.places';
 const addPlace = document.querySelector('.profile__add-button');
 
@@ -47,7 +19,6 @@ const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
 
 export {
-  cards,
   places,
   addPlace,
 

@@ -11,7 +11,6 @@ import {Api} from '../scripts/components/Api.js';
 
 
 import {
-  cards,
   places,
   addPlace,
   template, 
@@ -38,13 +37,13 @@ const api = new Api({
   }
 })
 
+// renders cards from the server to the page
 api
   .getAllCards()
   .then((data) => {
   const defaultCardList = new Section (
     {
-      items: data.map(i => {
-        return i.name}),
+      items: data,
       renderer: (item) => { 
         const cardElement = createCard(item)
         defaultCardList.addItem(cardElement);
@@ -68,18 +67,6 @@ function createCard(item) {
   return cardElement
 }
 
-
-/*// renders cards to the page
-const defaultCardList = new Section (
-  {
-    items: cards,
-    renderer: (item) => { 
-      const cardElement = createCard(item)
-      defaultCardList.addItem(cardElement);
-    }
-  },
-  places
-)*/
 
 //adds a new custom card
 const addCards = () => {
