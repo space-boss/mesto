@@ -14,6 +14,7 @@ const popupZoomSelector = '.popup_zoom';
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
+const userPic = document.querySelector('.profile__pic');
 
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
@@ -34,6 +35,7 @@ export {
 
   userName,
   job,
+  userPic,
   zoomPlaceImg,
   zoomPlaceCaption
 }

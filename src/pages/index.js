@@ -24,9 +24,10 @@ import {
 
   userName,
   job,
+  userPic,
   zoomPlaceImg,
   zoomPlaceCaption
-} from '../scripts/utils/constants.js';
+} from '../scripts/utils/Constants.js';
 
 
 const apiCards = new Api({
@@ -70,9 +71,13 @@ apiUserInfo
   .then((data) => {
     const userInfo = new UserInfo({
       userNameSelector: userName,
-      userBioSelector: job
+      userBioSelector: job,
+      userPicSelector: userPic
     });
+    console.log(data.avatar);
+
     userInfo.setUserInfo(data)
+
     //opens popup with user info
     const popupProfile = new PopupWithForm({
       popupSelector: popupProfileSelector,
@@ -81,7 +86,6 @@ apiUserInfo
         popupProfile.close();
       }
     });
-
     popupProfile.setEventListeners();
     
   //opening popups by clicking on elements

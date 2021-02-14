@@ -1,7 +1,8 @@
 export class UserInfo {
-  constructor({userNameSelector, userBioSelector}){
+  constructor({userNameSelector, userBioSelector, userPicSelector}){
     this._userName = userNameSelector;
     this._userBio = userBioSelector;
+    this._userPic = userPicSelector;
   }
 
   getUserInfo() {
@@ -15,5 +16,6 @@ export class UserInfo {
   setUserInfo(data) {
     this._userName.textContent = data.name;
     this._userBio.textContent = data.about;
+    this._userPic.src = data.avatar;
   }
 }
