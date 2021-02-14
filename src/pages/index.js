@@ -29,7 +29,7 @@ import {
 } from '../scripts/utils/constants.js';
 
 
-const api = new Api({
+const apiCards = new Api({
   url:"https://mesto.nomoreparties.co/v1/cohort-20/cards",
   headers: {
     'Content-Type': 'application/json',
@@ -38,21 +38,59 @@ const api = new Api({
 })
 
 // renders cards from the server to the page
-api
-  .getAllCards()
+apiCards
+  .getInfo()
   .then((data) => {
-  const defaultCardList = new Section (
-    {
-      items: data,
-      renderer: (item) => { 
-        const cardElement = createCard(item)
-        defaultCardList.addItem(cardElement);
-      }
-    },
-    places
-  )
-  defaultCardList.renderItems();
+    const defaultCardList = new Section (
+      {
+        items: data,
+        renderer: (item) => { 
+          const cardElement = createCard(item)
+          defaultCardList.addItem(cardElement);
+        }
+      },
+      places
+    )
+    defaultCardList.renderItems();
+  })
+  .catch(err => console.log(err))   
+
+
+
+const apiUserInfo = new Api({
+  url:"https://mesto.nomoreparties.co/v1/cohort-20/users/me",
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
+  }
 })
+
+apiUserInfo 
+  .getInfo()
+  .then((data) => {
+    const userInfo = new UserInfo({
+      userNameSelector: userName,
+      userBioSelector: job
+    });
+    userInfo.setUserInfo(data)
+    //opens popup with user info
+    const popupProfile = new PopupWithForm({
+      popupSelector: popupProfileSelector,
+      formSubmitHandler: (data) => {
+        userInfo.setUserInfo(data);
+        popupProfile.close();
+      }
+    });
+
+    popupProfile.setEventListeners();
+    
+  //opening popups by clicking on elements
+  editProfile.addEventListener('click', () => popupProfile.open());
+  })
+
+
+
+
 
 
 function createCard(item) {
@@ -88,20 +126,6 @@ const popupPlace = new PopupWithForm({
   }
 });
 
-//filling in of user info
-const userInfo = new UserInfo({
-  userNameSelector: userName,
-  userBioSelector: job
-});
-
-//opens popup with user info
-const popupProfile = new PopupWithForm({
-  popupSelector: popupProfileSelector,
-  formSubmitHandler: (data) => {
-    userInfo.setUserInfo(data);
-    popupProfile.close();
-  }
-});
 
 //zooms up a place picture
 const popupZoom = new PopupWithImage({
@@ -111,7 +135,6 @@ const popupZoom = new PopupWithImage({
 });
 
 //event listeners for popups
-popupProfile.setEventListeners();
 popupPlace.setEventListeners();
 popupZoom.setEventListeners();
 
@@ -131,9 +154,6 @@ const formElements = Array.from(document.querySelectorAll('.popup__form'));
 formElements.forEach((form) => {
   new FormValidator(validationSettings, form).enableValidation();
 });
-
-//opening popups by clicking on elements
-editProfile.addEventListener('click', () => popupProfile.open());
 
 addPlace.addEventListener('click', () => popupPlace.open());
 
