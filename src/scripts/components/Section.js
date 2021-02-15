@@ -10,9 +10,6 @@ export class Section {
   saveItem(newName, newLink) {
     this._api
     .postCard({name: newName, link: newLink})
-    .then((data) => {
-      this._prependItem({name: data.name, link: data.link})   
-    })
     .catch(err => console.log(err))
   }
 
@@ -20,7 +17,8 @@ export class Section {
     this._container.append(element);
   }
 
-  _prependItem(element) {
+  prependItem(element) {
+    console.log(element);
     this._container.prepend(element);
   }
 

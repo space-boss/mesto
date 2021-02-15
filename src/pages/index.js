@@ -59,24 +59,24 @@ apiCards
       const card = new Card(
         item,
         template,
-        function handleCardClick(title, backgroundImage) {
-          popupZoom.open(title, backgroundImage)
+        function handleCardClick(name, link) {
+          popupZoom.open(name, link)
         }
       );
       const cardElement = card.generateCard();
       return cardElement
-      
     }
       
     //adds a new custom card
     const addCards = () => {
         const newCard = {};
       
-        newCard.title = inputPlaceName.value;
-        newCard.backgroundImage = inputPlaceUrl.value;
+        newCard.name = inputPlaceName.value;
+        newCard.link = inputPlaceUrl.value;
       
+        defaultCardList.saveItem(newCard.name, newCard.link);
         const newCardElement = createCard(newCard);
-        defaultCardList.saveItem(newCardElement);
+        defaultCardList.prependItem(newCardElement);
     };
       
     //opens popup with a new place
