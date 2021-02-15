@@ -50,12 +50,48 @@ apiCards
           defaultCardList.addItem(cardElement);
         }
       },
-      places
+      places,
+      apiCards
     )
     defaultCardList.renderItems();
+
+    function createCard(item) {
+      const card = new Card(
+        item,
+        template,
+        function handleCardClick(title, backgroundImage) {
+          popupZoom.open(title, backgroundImage)
+        }
+      );
+      const cardElement = card.generateCard();
+      return cardElement
+      
+    }
+      
+    //adds a new custom card
+    const addCards = () => {
+        const newCard = {};
+      
+        newCard.title = inputPlaceName.value;
+        newCard.backgroundImage = inputPlaceUrl.value;
+      
+        const newCardElement = createCard(newCard);
+        defaultCardList.saveItem(newCardElement);
+    };
+      
+    //opens popup with a new place
+    const popupPlace = new PopupWithForm({
+      popupSelector: popupPlaceSelector,
+      formSubmitHandler: (data) => {
+        addCards(data);
+        popupPlace.close();
+      }
+    });
+    popupPlace.setEventListeners();
+
+    addPlace.addEventListener('click', () => popupPlace.open());
   })
   .catch(err => console.log(err))   
-
 
 
 const apiUserInfo = new Api({
@@ -74,61 +110,24 @@ apiUserInfo
       userBioSelector: job,
       userPicSelector: userPic
     });
-    console.log(data.avatar);
 
     userInfo.setUserInfo(data)
-
-    //opens popup with user info
-    const popupProfile = new PopupWithForm({
-      popupSelector: popupProfileSelector,
-      formSubmitHandler: (data) => {
-        userInfo.setUserInfo(data);
-        popupProfile.close();
-      }
-    });
-    popupProfile.setEventListeners();
-    
-  //opening popups by clicking on elements
-  editProfile.addEventListener('click', () => popupProfile.open());
   })
+  .catch(err => console.log(err))   
 
 
-
-
-
-
-function createCard(item) {
-  const card = new Card(
-    item,
-    template,
-    function handleCardClick(title, backgroundImage) {
-      popupZoom.open(title, backgroundImage)
-    }
-  );
-  const cardElement = card.generateCard();
-  return cardElement
-}
-
-
-//adds a new custom card
-const addCards = () => {
-    const newCard = {};
-
-    newCard.title = inputPlaceName.value;
-    newCard.backgroundImage = inputPlaceUrl.value;
-
-    const newCardElement = createCard(newCard)
-    defaultCardList.prependItem(newCardElement);
-};
-
-//opens popup with a new place
-const popupPlace = new PopupWithForm({
-  popupSelector: popupPlaceSelector,
+//opens popup with user info
+const popupProfile = new PopupWithForm({
+  popupSelector: popupProfileSelector,
   formSubmitHandler: (data) => {
-    addCards(data);
-    popupPlace.close();
-  }
-});
+      apiUserInfo.updateInfo(data);
+      popupProfile.close();
+    }
+  });
+popupProfile.setEventListeners();
+  
+//opening popups by clicking on elements
+editProfile.addEventListener('click', () => popupProfile.open());
 
 
 //zooms up a place picture
@@ -139,7 +138,6 @@ const popupZoom = new PopupWithImage({
 });
 
 //event listeners for popups
-popupPlace.setEventListeners();
 popupZoom.setEventListeners();
 
  
@@ -158,7 +156,3 @@ const formElements = Array.from(document.querySelectorAll('.popup__form'));
 formElements.forEach((form) => {
   new FormValidator(validationSettings, form).enableValidation();
 });
-
-addPlace.addEventListener('click', () => popupPlace.open());
-
-

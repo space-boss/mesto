@@ -7,8 +7,8 @@ export class UserInfo {
 
   getUserInfo() {
     const userInfo = {
-      username: this._userName.textContent,
-      job: this._userBio.textContent
+      name: this._userName.textContent,
+      about: this._userBio.textContent
     }
       return userInfo;
   }
