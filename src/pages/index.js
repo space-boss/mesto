@@ -17,6 +17,7 @@ import {
   inputPlaceName,
   inputPlaceUrl,
   editProfile,
+  likeCount,
 
   popupProfileSelector,
   popupPlaceSelector,
@@ -47,7 +48,7 @@ apiCards
         items: data,
         renderer: (item) => { 
           const cardElement = createCard(item)
-          defaultCardList.addItem(cardElement);
+          defaultCardList.addItem(cardElement);    
         }
       },
       places,
@@ -90,6 +91,7 @@ apiCards
     popupPlace.setEventListeners();
 
     addPlace.addEventListener('click', () => popupPlace.open());
+
   })
   .catch(err => console.log(err))   
 

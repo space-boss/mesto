@@ -6,6 +6,7 @@ export class Card {
   ) {
     this._title = data.name;
     this._backgroundImage = data.link;
+    this._likeCount = data.likes.length;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -22,6 +23,7 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    this._showLikes();
     const placeCover = this._element.querySelector('.place__cover');
 
     placeCover.src = this._backgroundImage;
@@ -49,6 +51,10 @@ export class Card {
   _handleLike(evt) {
     const _likeTarget = evt.target;
     _likeTarget.classList.toggle('place__like_pressed');
+  }
+
+  _showLikes() {
+    this._element.querySelector('.place__like-count').textContent = this._likeCount;
   }
 
   _deleteCard(evt) {
