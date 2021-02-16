@@ -1,7 +1,8 @@
 .place__like_pressed {
   background-image: url(../../../../../images/like-button-pressed.svg);
-  display: flex;
-  position: relative;
+  display: block;
+  position: absolute;
+  margin: 22px 20px 38px 240px;
   z-index: 3;
 
   width: 20.76px;

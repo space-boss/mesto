@@ -4,6 +4,7 @@ const addPlace = document.querySelector('.profile__add-button');
 const template = '.template';
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
+const likeCount = document.querySelector('.place__like-count');
 
 const editProfile = document.querySelector('.profile__edit-button');
 
@@ -27,6 +28,7 @@ export {
   inputPlaceName,
   inputPlaceUrl,
   editProfile,
+  likeCount,
 
   formElement,
   popupProfileSelector,

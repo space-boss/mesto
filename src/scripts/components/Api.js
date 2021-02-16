@@ -44,5 +44,4 @@ export class Api {
       return Promise.reject('Сервер не доступен')
     })
   }
-
 }   
