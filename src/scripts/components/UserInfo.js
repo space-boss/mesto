@@ -5,13 +5,13 @@ export class UserInfo {
     this._userPic = userPicSelector;
   }
 
-  getUserInfo() {
+  /*getUserInfo() {
     const userInfo = {
       name: this._userName.textContent,
       about: this._userBio.textContent
     }
-      return userInfo;
-  }
+    return userInfo;
+  }*/
 
   setUserInfo(data) {
     this._userName.textContent = data.name;
@@ -19,3 +19,4 @@ export class UserInfo {
     this._userPic.src = data.avatar;
   }
 }
+ 
