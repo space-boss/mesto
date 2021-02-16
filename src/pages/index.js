@@ -110,8 +110,22 @@ apiUserInfo
       userBioSelector: job,
       userPicSelector: userPic
     });
+    userInfo.setUserInfo(data);
 
-    userInfo.setUserInfo(data)
+  //opens popup with user info
+  const popupProfile = new PopupWithForm({
+    popupSelector: popupProfileSelector,
+    formSubmitHandler: (data) => {
+        userInfo.setUserInfo(data);
+        apiUserInfo.updateInfo(data);
+        popupProfile.close();
+      }
+    });
+  popupProfile.setEventListeners();
+    
+  //opening popups by clicking on elements
+  editProfile.addEventListener('click', () => popupProfile.open());
+
   })
   .catch(err => console.log(err))   
 
@@ -120,6 +134,7 @@ apiUserInfo
 const popupProfile = new PopupWithForm({
   popupSelector: popupProfileSelector,
   formSubmitHandler: (data) => {
+      userInfo.setUserInfo(data);
       apiUserInfo.updateInfo(data);
       popupProfile.close();
     }
