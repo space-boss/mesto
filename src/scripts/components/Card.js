@@ -2,13 +2,16 @@ export class Card {
   constructor(
     data,
     cardSelector,
+    myId,
     handleCardClick,
-    handleDeleteClick
+    handleDeleteClick,
   ) {
     this._title = data.name;
     this._backgroundImage = data.link;
     this._likeCount = data.likes.length;
-    this._id = data._id;
+    this._cardId = data._id;
+    this._ownerId = data.owner._id;
+    this._myId = myId;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCLick = handleDeleteClick;
@@ -25,6 +28,12 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+
+    if (!this._checkMyCard()) {
+      const deleteBtn = this._element.querySelector('.place__delete');
+      deleteBtn.remove();
+    }
+
     this._setEventListeners();
     this._showLikes();
     const placeCover = this._element.querySelector('.place__cover');
@@ -34,17 +43,17 @@ export class Card {
     this._element.querySelector('.place__title').textContent = this._title;
 
     return this._element;
-  }
+  } 
 
   _setEventListeners() {
     this._element.querySelector('.place__like').addEventListener('click', (evt) => {
       this._handleLike(evt);
     });
 
-    this._element.querySelector('.place__delete').addEventListener('click', (evt) => {
+    /*this._element.querySelector('.place__delete').addEventListener('click', (evt) => {
       this._handleDeleteCLick();
       //this._deleteCard(evt);
-    });
+    });*/
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
       this._handleCardClick(this._title, this._backgroundImage);
@@ -62,6 +71,13 @@ export class Card {
 
   _deleteCard(evt) {
     evt.target.closest('.place').remove();
+  }
+
+  _checkMyCard() {
+    if (this._ownerId === this._myId) {
+      return true
+    }
+    else return false
   }
 }
 

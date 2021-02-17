@@ -31,6 +31,43 @@ import {
   zoomPlaceCaption
 } from '../scripts/utils/Constants.js';
 
+const userInfo = new UserInfo({
+  userNameSelector: userName,
+  userBioSelector: job,
+  userPicSelector: userPic
+});
+
+const apiUserInfo = new Api({
+  url:"https://mesto.nomoreparties.co/v1/cohort-20/users/me",
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
+  }
+})
+
+apiUserInfo 
+  .getInfo()
+  .then((data) => {
+    userInfo.setUserInfo(data);
+
+    //opens popup with user info
+    const popupProfile = new PopupWithForm({
+      popupSelector: popupProfileSelector,
+      formSubmitHandler: (data) => {
+          userInfo.setUserInfo(data);
+          apiUserInfo.updateInfo(data);
+          popupProfile.close();
+        }
+      });
+    popupProfile.setEventListeners();
+      
+    //opening popups by clicking on elements
+    editProfile.addEventListener('click', () => popupProfile.open());
+
+})
+  .catch(err => console.log(err))   
+
+
 const apiCards = new Api({
   url:"https://mesto.nomoreparties.co/v1/cohort-20/cards",
   headers: {
@@ -38,6 +75,7 @@ const apiCards = new Api({
     'Authorization': 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
   }
 })
+
 
 // renders cards from the server to the page
 apiCards
@@ -60,6 +98,7 @@ apiCards
       const card = new Card(
         item,
         template,
+        userInfo.getUserId(),
         function handleCardClick(name, link) {
           popupZoom.open(name, link)
         },
@@ -73,7 +112,6 @@ apiCards
       
     //adds a new custom card
     const addCards = () => {
-
       defaultSection.saveItem(inputPlaceName.value, inputPlaceUrl.value).then((card) => {
         defaultSection.prependItem(createCard(card));
       });
@@ -100,41 +138,6 @@ apiCards
   })
   .catch(err => console.log(err))   
 
-
-const apiUserInfo = new Api({
-  url:"https://mesto.nomoreparties.co/v1/cohort-20/users/me",
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
-  }
-})
-
-apiUserInfo 
-  .getInfo()
-  .then((data) => {
-    const userInfo = new UserInfo({
-      userNameSelector: userName,
-      userBioSelector: job,
-      userPicSelector: userPic
-    });
-    userInfo.setUserInfo(data);
-
-  //opens popup with user info
-  const popupProfile = new PopupWithForm({
-    popupSelector: popupProfileSelector,
-    formSubmitHandler: (data) => {
-        userInfo.setUserInfo(data);
-        apiUserInfo.updateInfo(data);
-        popupProfile.close();
-      }
-    });
-  popupProfile.setEventListeners();
-    
-  //opening popups by clicking on elements
-  editProfile.addEventListener('click', () => popupProfile.open());
-
-})
-  .catch(err => console.log(err))   
 
 //zooms up a place picture
 const popupZoom = new PopupWithImage({
