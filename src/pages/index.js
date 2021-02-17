@@ -77,8 +77,9 @@ apiCards
       
         newCard.name = inputPlaceName.value;
         newCard.link = inputPlaceUrl.value;
+        newCard.likes = [];
       
-        defaultCardList.saveItem(newCard.name, newCard.link);
+        defaultCardList.saveItem(newCard.name, newCard.link, newCard.likes);
         const newCardElement = createCard(newCard);
         defaultCardList.prependItem(newCardElement);
     };
