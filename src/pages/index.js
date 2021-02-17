@@ -17,8 +17,7 @@ import {
   template, 
   inputPlaceName,
   inputPlaceUrl,
-  editProfile,
-  placeDelete,
+  editProfile, 
 
   popupProfileSelector,
   popupPlaceSelector,
@@ -84,6 +83,7 @@ apiCards
         defaultCardList.prependItem(newCardElement);
     };
       
+    //opens popup that asks for confirmation before card is deleted
     const popupDeleteConfirmation = new Popup({
       popupSelector: popupDeleteSelector
     });
