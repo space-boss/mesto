@@ -8,6 +8,7 @@ export class Card {
     this._title = data.name;
     this._backgroundImage = data.link;
     this._likeCount = data.likes.length;
+    this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCLick = handleDeleteClick;

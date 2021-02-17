@@ -43,18 +43,18 @@ const apiCards = new Api({
 apiCards
   .getInfo()
   .then((data) => {
-    const defaultCardList = new Section (
+    const defaultSection = new Section (
       {
         items: data,
         renderer: (item) => { 
           const cardElement = createCard(item)
-          defaultCardList.addItem(cardElement);    
+          defaultSection.addItem(cardElement);    
         }
       },
       places,
       apiCards
     )
-    defaultCardList.renderItems();
+    defaultSection.renderItems();
 
     function createCard(item) {
       const card = new Card(
@@ -74,10 +74,9 @@ apiCards
     //adds a new custom card
     const addCards = () => {
 
-      const newCard = defaultCardList.saveItem(inputPlaceName.value, inputPlaceUrl.value);
-      console.log(newCard)
-      const newCardElement = createCard(newCard);
-      defaultCardList.prependItem(newCardElement);
+      defaultSection.saveItem(inputPlaceName.value, inputPlaceUrl.value).then((card) => {
+        defaultSection.prependItem(createCard(card));
+      });
     };
       
     //opens popup that asks for confirmation before card is deleted
