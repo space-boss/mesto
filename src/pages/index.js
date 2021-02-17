@@ -73,15 +73,11 @@ apiCards
       
     //adds a new custom card
     const addCards = () => {
-        const newCard = {};
-      
-        newCard.name = inputPlaceName.value;
-        newCard.link = inputPlaceUrl.value;
-        newCard.likes = [];
-      
-        defaultCardList.saveItem(newCard.name, newCard.link, newCard.likes);
-        const newCardElement = createCard(newCard);
-        defaultCardList.prependItem(newCardElement);
+
+      const newCard = defaultCardList.saveItem(inputPlaceName.value, inputPlaceUrl.value);
+      console.log(newCard)
+      const newCardElement = createCard(newCard);
+      defaultCardList.prependItem(newCardElement);
     };
       
     //opens popup that asks for confirmation before card is deleted

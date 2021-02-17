@@ -10,6 +10,9 @@ export class Section {
   saveItem(newName, newLink) {
     this._api
     .postCard({name: newName, link: newLink})
+    .then((card) => {
+      return card;
+    })
     .catch(err => console.log(err))
   }
 
