@@ -5,6 +5,7 @@ import {FormValidator} from '../scripts/components/FormValidator.js';
 import {Section} from '../scripts/components/Section.js';
 
 import {PopupWithImage} from '../scripts/components/PopupWithImage.js';
+import {Popup} from '../scripts/components/Popup.js';
 import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
 import {UserInfo} from '../scripts/components/UserInfo.js';
 import {Api} from '../scripts/components/Api.js';
@@ -17,11 +18,12 @@ import {
   inputPlaceName,
   inputPlaceUrl,
   editProfile,
-  likeCount,
+  placeDelete,
 
   popupProfileSelector,
   popupPlaceSelector,
   popupZoomSelector,
+  popupDeleteSelector,
 
   userName,
   job,
@@ -29,7 +31,6 @@ import {
   zoomPlaceImg,
   zoomPlaceCaption
 } from '../scripts/utils/Constants.js';
-
 
 const apiCards = new Api({
   url:"https://mesto.nomoreparties.co/v1/cohort-20/cards",
@@ -62,6 +63,9 @@ apiCards
         template,
         function handleCardClick(name, link) {
           popupZoom.open(name, link)
+        },
+        function handleDeleteClick() {
+          popupDeleteConfirmation.open();
         }
       );
       const cardElement = card.generateCard();
@@ -80,6 +84,11 @@ apiCards
         defaultCardList.prependItem(newCardElement);
     };
       
+    const popupDeleteConfirmation = new Popup({
+      popupSelector: popupDeleteSelector
+    });
+    popupDeleteConfirmation.setEventListeners();
+
     //opens popup with a new place
     const popupPlace = new PopupWithForm({
       popupSelector: popupPlaceSelector,
@@ -96,7 +105,7 @@ apiCards
   .catch(err => console.log(err))   
 
 
-const apiUserInfo = new Api({
+  const apiUserInfo = new Api({
   url:"https://mesto.nomoreparties.co/v1/cohort-20/users/me",
   headers: {
     'Content-Type': 'application/json',
@@ -145,7 +154,6 @@ popupProfile.setEventListeners();
   
 //opening popups by clicking on elements
 editProfile.addEventListener('click', () => popupProfile.open());
-
 
 //zooms up a place picture
 const popupZoom = new PopupWithImage({
