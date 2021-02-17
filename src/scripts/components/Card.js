@@ -2,12 +2,14 @@ export class Card {
   constructor(
     data,
     cardSelector,
-    handleCardClick
+    handleCardClick,
+    handleDeleteClick
   ) {
     this._title = data.title;
     this._backgroundImage = data.backgroundImage;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCLick = handleDeleteClick;
   }
 
   _getTemplate() {
@@ -37,7 +39,8 @@ export class Card {
     });
 
     this._element.querySelector('.place__delete').addEventListener('click', (evt) => {
-      this._deleteCard(evt);
+      this._handleDeleteCLick();
+      //this._deleteCard(evt);
     });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {

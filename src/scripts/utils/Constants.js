@@ -39,6 +39,7 @@ const formElement = document.querySelector('.popup__form');
 const popupProfileSelector = '.popup_profile';
 const popupPlaceSelector = '.popup_place';
 const popupZoomSelector = '.popup_zoom';
+const popupDeleteSelector = '.popup_delete-confirmation';
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
@@ -60,6 +61,7 @@ export {
   popupProfileSelector,
   popupPlaceSelector,
   popupZoomSelector,
+  popupDeleteSelector,
 
   userName,
   job,

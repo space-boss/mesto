@@ -7,8 +7,7 @@ import {Section} from '../scripts/components/Section.js';
 import {PopupWithImage} from '../scripts/components/PopupWithImage.js';
 import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
 import {UserInfo} from '../scripts/components/UserInfo.js';
-
-
+import {Popup} from '../scripts/components/Popup.js';
 
 
 import {
@@ -23,6 +22,7 @@ import {
   popupProfileSelector,
   popupPlaceSelector,
   popupZoomSelector,
+  popupDeleteSelector,
 
   userName,
   job,
@@ -37,11 +37,20 @@ function createCard(item) {
     template,
     function handleCardClick(title, backgroundImage) {
       popupZoom.open(title, backgroundImage)
+    },
+    function handleDeleteClick() {
+      popupDeleteConfirmation.open();
     }
   );
   const cardElement = card.generateCard();
   return cardElement
 }
+
+
+const popupDeleteConfirmation = new Popup({
+  popupSelector: popupDeleteSelector
+});
+popupDeleteConfirmation.setEventListeners();
 
 
 // renders cards to the page
