@@ -105,7 +105,7 @@ apiCards
   .catch(err => console.log(err))   
 
 
-  const apiUserInfo = new Api({
+const apiUserInfo = new Api({
   url:"https://mesto.nomoreparties.co/v1/cohort-20/users/me",
   headers: {
     'Content-Type': 'application/json',
@@ -137,23 +137,8 @@ apiUserInfo
   //opening popups by clicking on elements
   editProfile.addEventListener('click', () => popupProfile.open());
 
-  })
+})
   .catch(err => console.log(err))   
-
-
-//opens popup with user info
-const popupProfile = new PopupWithForm({
-  popupSelector: popupProfileSelector,
-  formSubmitHandler: (data) => {
-      userInfo.setUserInfo(data);
-      apiUserInfo.updateInfo(data);
-      popupProfile.close();
-    }
-  });
-popupProfile.setEventListeners();
-  
-//opening popups by clicking on elements
-editProfile.addEventListener('click', () => popupProfile.open());
 
 //zooms up a place picture
 const popupZoom = new PopupWithImage({
