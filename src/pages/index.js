@@ -5,6 +5,7 @@ import {FormValidator} from '../scripts/components/FormValidator.js';
 import {Section} from '../scripts/components/Section.js';
 
 import {PopupWithImage} from '../scripts/components/PopupWithImage.js';
+import {Popup} from '../scripts/components/Popup.js';
 import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
 import {UserInfo} from '../scripts/components/UserInfo.js';
 import {Api} from '../scripts/components/Api.js';
@@ -16,12 +17,12 @@ import {
   template, 
   inputPlaceName,
   inputPlaceUrl,
-  editProfile,
-  likeCount,
+  editProfile, 
 
   popupProfileSelector,
   popupPlaceSelector,
   popupZoomSelector,
+  popupDeleteSelector,
 
   userName,
   job,
@@ -29,7 +30,6 @@ import {
   zoomPlaceImg,
   zoomPlaceCaption
 } from '../scripts/utils/Constants.js';
-
 
 const apiCards = new Api({
   url:"https://mesto.nomoreparties.co/v1/cohort-20/cards",
@@ -62,6 +62,9 @@ apiCards
         template,
         function handleCardClick(name, link) {
           popupZoom.open(name, link)
+        },
+        function handleDeleteClick() {
+          popupDeleteConfirmation.open();
         }
       );
       const cardElement = card.generateCard();
@@ -74,12 +77,19 @@ apiCards
       
         newCard.name = inputPlaceName.value;
         newCard.link = inputPlaceUrl.value;
+        newCard.likes = [];
       
-        defaultCardList.saveItem(newCard.name, newCard.link);
+        defaultCardList.saveItem(newCard.name, newCard.link, newCard.likes);
         const newCardElement = createCard(newCard);
         defaultCardList.prependItem(newCardElement);
     };
       
+    //opens popup that asks for confirmation before card is deleted
+    const popupDeleteConfirmation = new Popup({
+      popupSelector: popupDeleteSelector
+    });
+    popupDeleteConfirmation.setEventListeners();
+
     //opens popup with a new place
     const popupPlace = new PopupWithForm({
       popupSelector: popupPlaceSelector,
@@ -128,24 +138,8 @@ apiUserInfo
   //opening popups by clicking on elements
   editProfile.addEventListener('click', () => popupProfile.open());
 
-  })
+})
   .catch(err => console.log(err))   
-
-
-//opens popup with user info
-const popupProfile = new PopupWithForm({
-  popupSelector: popupProfileSelector,
-  formSubmitHandler: (data) => {
-      userInfo.setUserInfo(data);
-      apiUserInfo.updateInfo(data);
-      popupProfile.close();
-    }
-  });
-popupProfile.setEventListeners();
-  
-//opening popups by clicking on elements
-editProfile.addEventListener('click', () => popupProfile.open());
-
 
 //zooms up a place picture
 const popupZoom = new PopupWithImage({

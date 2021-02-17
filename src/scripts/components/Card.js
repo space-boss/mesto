@@ -2,13 +2,15 @@ export class Card {
   constructor(
     data,
     cardSelector,
-    handleCardClick
+    handleCardClick,
+    handleDeleteClick
   ) {
     this._title = data.name;
     this._backgroundImage = data.link;
     this._likeCount = data.likes.length;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCLick = handleDeleteClick;
   }
 
   _getTemplate() {
@@ -39,14 +41,14 @@ export class Card {
     });
 
     this._element.querySelector('.place__delete').addEventListener('click', (evt) => {
-      this._deleteCard(evt);
+      this._handleDeleteCLick();
+      //this._deleteCard(evt);
     });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
       this._handleCardClick(this._title, this._backgroundImage);
     });
   }
-
 
   _handleLike(evt) {
     const _likeTarget = evt.target;
