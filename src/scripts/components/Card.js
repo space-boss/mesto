@@ -30,8 +30,7 @@ export class Card {
     this._element = this._getTemplate();
 
     if (!this._checkMyCard()) {
-      const deleteBtn = this._element.querySelector('.place__delete');
-      deleteBtn.remove();
+     this._element.querySelector('.place__delete').classList.toggle('place__delete_shown');
     }
 
     this._setEventListeners();
