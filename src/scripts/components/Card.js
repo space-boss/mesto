@@ -14,7 +14,7 @@ export class Card {
     this._myId = myId;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._handleDeleteCLick = handleDeleteClick;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   _getTemplate() {
@@ -49,10 +49,9 @@ export class Card {
       this._handleLike(evt);
     });
 
-    /*this._element.querySelector('.place__delete').addEventListener('click', (evt) => {
-      this._handleDeleteCLick();
-      //this._deleteCard(evt);
-    });*/
+    this._element.querySelector('.place__delete').addEventListener('click', (evt) => {
+      this._handleDeleteClick();
+    });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
       this._handleCardClick(this._title, this._backgroundImage);
@@ -68,9 +67,10 @@ export class Card {
     this._element.querySelector('.place__like-count').textContent = this._likeCount;
   }
 
-  _deleteCard(evt) {
-    evt.target.closest('.place').remove();
-  }
+  /*deleteCard(evt) {
+    console.log(evt);
+    evt.target.closest('.place').remove(); 
+  }*/
 
   _checkMyCard() {
     if (this._ownerId === this._myId) {

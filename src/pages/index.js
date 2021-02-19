@@ -5,7 +5,7 @@ import {FormValidator} from '../scripts/components/FormValidator.js';
 import {Section} from '../scripts/components/Section.js';
 
 import {PopupWithImage} from '../scripts/components/PopupWithImage.js';
-import {Popup} from '../scripts/components/Popup.js';
+import {PopupWithDelete} from '../scripts/components/PopupWithDelete.js';
 import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
 import {UserInfo} from '../scripts/components/UserInfo.js';
 import {Api} from '../scripts/components/Api.js';
@@ -37,15 +37,12 @@ const userInfo = new UserInfo({
   userPicSelector: userPic
 });
 
-const apiUserInfo = new Api({
-  url:"https://mesto.nomoreparties.co/v1/cohort-20/users/me",
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
-  }
+const api = new Api({
+  url:"https://mesto.nomoreparties.co/v1/cohort-20",
+  authorization: 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
 })
 
-apiUserInfo 
+api 
   .getInfo()
   .then((data) => {
     userInfo.setUserInfo(data);
@@ -55,7 +52,7 @@ apiUserInfo
       popupSelector: popupProfileSelector,
       formSubmitHandler: (data) => {
           userInfo.setUserInfo(data);
-          apiUserInfo.updateInfo(data);
+          api.updateInfo(data);
           popupProfile.close();
         }
       });
@@ -68,18 +65,9 @@ apiUserInfo
   .catch(err => console.log(err))   
 
 
-const apiCards = new Api({
-  url:"https://mesto.nomoreparties.co/v1/cohort-20/cards",
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
-  }
-})
-
-
-// renders cards from the server to the page
-apiCards
-  .getInfo()
+  // renders cards from the server to the page
+api
+  .getCard()
   .then((data) => {
     const defaultSection = new Section (
       {
@@ -90,7 +78,7 @@ apiCards
         }
       },
       places,
-      apiCards
+      api
     )
     defaultSection.renderItems();
 
@@ -103,7 +91,7 @@ apiCards
           popupZoom.open(name, link)
         },
         function handleDeleteClick() {
-          popupDeleteConfirmation.open();
+          popupDeleteConfirmation.open(this);
         }
       );
       const cardElement = card.generateCard();
@@ -118,9 +106,15 @@ apiCards
     };
       
     //opens popup that asks for confirmation before card is deleted
-    const popupDeleteConfirmation = new Popup({
-      popupSelector: popupDeleteSelector
-    });
+    const popupDeleteConfirmation = new PopupWithDelete({
+      popupSelector: popupDeleteSelector /*,
+      cardDeleteHandler: (evt) => {
+        evt.target.closest('.place').remove(); 
+        popupDeleteConfirmation.close();
+      }*/
+      },
+      api
+    )
     popupDeleteConfirmation.setEventListeners();
 
     //opens popup with a new place
