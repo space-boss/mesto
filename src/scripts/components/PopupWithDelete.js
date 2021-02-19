@@ -3,7 +3,6 @@ import {Popup} from './Popup.js';
 export class PopupWithDelete extends Popup {
   constructor({popupSelector}, api) {
       super({popupSelector});
-			/*this._cardDeleteHandler = cardDeleteHandler;*/
 			this._submitButton = document.querySelector('.popup__submit-button_delete');
 			this._place = document.querySelector('.place');
 			this._api = api;
@@ -18,14 +17,15 @@ export class PopupWithDelete extends Popup {
 		super.setEventListeners();
 	}
 
-	open(card){
+	open(card, cardId) {
 		this.card = card;
+		this._cardId = cardId;
 		super.open();
-		console.log(this.card);
 	}
 
-	_deleteCardFromDom(evt) {
-		evt.target.closest('place').remove();
+	_deleteCardFromDom() {
+		const card = document.getElementById(this._cardId);
+		card.remove();
 	}
 
 	_deleteMyCard() {

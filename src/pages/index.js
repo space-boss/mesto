@@ -90,8 +90,8 @@ api
         function handleCardClick(name, link) {
           popupZoom.open(name, link)
         },
-        function handleDeleteClick() {
-          popupDeleteConfirmation.open(this);
+        function handleDeleteClick(cardId) {
+          popupDeleteConfirmation.open(this, cardId);
         }
       );
       const cardElement = card.generateCard();
@@ -107,11 +107,7 @@ api
       
     //opens popup that asks for confirmation before card is deleted
     const popupDeleteConfirmation = new PopupWithDelete({
-      popupSelector: popupDeleteSelector /*,
-      cardDeleteHandler: (evt) => {
-        evt.target.closest('.place').remove(); 
-        popupDeleteConfirmation.close();
-      }*/
+      popupSelector: popupDeleteSelector
       },
       api
     )
