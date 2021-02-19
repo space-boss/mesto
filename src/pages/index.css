@@ -42,6 +42,7 @@
 @import url(../styles/blocks/place/__like/_pressed/place__like_pressed.css);
 @import url(../styles/blocks/place/__title/place__title.css);
 @import url(../styles/blocks/place/__delete/place__delete.css);
+@import url(../styles/blocks/place/__delete/_shown/place__delete_shown.css);
 
 @import url(../styles/blocks/footer/footer.css);
 @import url(../styles/blocks/footer/__copyright/footer__copyright.css);

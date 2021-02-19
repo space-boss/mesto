@@ -8,8 +8,11 @@ export class Section {
   }
 
   saveItem(newName, newLink) {
-    this._api
+    return this._api
     .postCard({name: newName, link: newLink})
+    .then((card) => {
+      return card;
+    })
     .catch(err => console.log(err))
   }
 
@@ -18,7 +21,6 @@ export class Section {
   }
 
   prependItem(element) {
-    console.log(element);
     this._container.prepend(element);
   }
 
