@@ -36,3 +36,4 @@ export class PopupWithDelete extends Popup {
 		});
 	}		
 }
+

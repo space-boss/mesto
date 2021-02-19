@@ -70,5 +70,34 @@ export class Api {
         return Promise.reject('Не удалось удалить карточку')
       }
     })
-  }  
-}   
+  }
+  
+  likeCard(cardId) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+    .then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      return Promise.reject('Сервер не доступен')
+    })
+  }
+
+  unlikeCard(cardId) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      return Promise.reject('Сервер не доступен')
+    })
+  }
+}
+
+
+   

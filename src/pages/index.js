@@ -92,8 +92,9 @@ api
         },
         function handleDeleteClick(cardId) {
           popupDeleteConfirmation.open(this, cardId);
-        }
-      );
+        },
+        api        
+      )
       const cardElement = card.generateCard();
       return cardElement
     }
