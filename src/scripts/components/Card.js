@@ -48,7 +48,7 @@ export class Card {
     this._element.querySelector('.place__title').textContent = this._title;
     this._element.querySelector('.place').setAttribute('id', this._cardId);
     this._changeLikeCount();
-
+    console.log(this._element);
     return this._element;
   } 
   
@@ -59,6 +59,7 @@ export class Card {
 
     this._element.querySelector('.place__delete').addEventListener('click', () => {
       this._handleDeleteClick(this._cardId);
+      this._element.querySelector('.place__like-count').textContent = this._likes.length;
     });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
