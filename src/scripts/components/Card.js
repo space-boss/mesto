@@ -32,7 +32,6 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-
     if (!this._checkMyCard()) {
      this._element.querySelector('.place__delete').classList.toggle('place__delete_shown');
     }
@@ -48,11 +47,11 @@ export class Card {
     placeCover.alt = this._title;
     this._element.querySelector('.place__title').textContent = this._title;
     this._element.querySelector('.place').setAttribute('id', this._cardId);
-    this._element.querySelector('.place__like-count').textContent = this._likes.length;
+    this._changeLikeCount();
 
     return this._element;
   } 
-
+  
   _setEventListeners() {
     this._element.querySelector('.place__like').addEventListener('click', (evt) => {
       this.handleLikes(evt);
@@ -67,7 +66,7 @@ export class Card {
     });
   }
 
-  _toggleLike(data, res) {
+  _toggleLike(data) {
     const _likeTarget = data.target;
     if (!this._checkMyLikes()) {
       _likeTarget.classList.add('place__like_pressed');
@@ -75,7 +74,10 @@ export class Card {
     else {
       _likeTarget.classList.remove('place__like_pressed');
     }
-    this._element.querySelector('.place__like-count').textContent = res.likes.length;
+  }
+
+  _changeLikeCount () {
+    this._element.querySelector('.place__like-count').textContent = this._likes.length;
   }
 
   _checkMyCard() {
@@ -87,7 +89,7 @@ export class Card {
 
   _checkMyLikes() {
     return this._likes.some(like => {
-      return like._id === this._myId
+      return like._id === this._myId;
     })
   }
 
@@ -97,6 +99,7 @@ export class Card {
         .unlikeCard(this._cardId)
         .then((res) => {
           this._toggleLike(data, res);
+          this._changeLikeCount();
         })
         .catch((err) => {
           console.log(err);
@@ -105,8 +108,8 @@ export class Card {
         this._api 
           .likeCard(this._cardId)
           .then((res) => {
-            console.log(res);
             this._toggleLike(data, res);
+            this._changeLikeCount();
           })
           .catch((err) => {
             console.log(err);
