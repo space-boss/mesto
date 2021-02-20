@@ -65,7 +65,7 @@ api
   .catch(err => console.log(err))   
 
 
-  // renders cards from the server to the page
+// renders cards from the server to the page
 api
   .getCard()
   .then((data) => {
@@ -126,6 +126,10 @@ api
 
     addPlace.addEventListener('click', () => popupPlace.open());
 
+    const popupAvatarChange = new PopupWithForm({
+      
+    })
+
   })
   .catch(err => console.log(err))   
 
@@ -136,6 +140,7 @@ const popupZoom = new PopupWithImage({
   image: zoomPlaceImg,
   caption: zoomPlaceCaption
 });
+
 
 //event listeners for popups
 popupZoom.setEventListeners();
