@@ -91,9 +91,34 @@ api
           popupZoom.open(name, link)
         },
         function handleDeleteClick(cardId) {
+          console.log(cardId);
           popupDeleteConfirmation.open(this, cardId);
         },
-        api        
+        function handleLikeClick(cardId) {
+          if (this.checkMyLikes(this)) {
+            console.log(cardId);
+          api
+            .unlikeCard(cardId)
+            .then((res) => {
+            this.toggleLike(res);
+                  //this._changeLikeCount();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+            } else {
+              console.log(cardId);
+              api 
+                .likeCard(cardId)
+                .then((res) => {
+                this.toggleLike(res);
+                //this._changeLikeCount();
+                })
+                .catch((err) => {
+                console.log(err);
+                });        
+              }
+        }
       )
       const cardElement = card.generateCard();
       return cardElement
