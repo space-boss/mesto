@@ -31,12 +31,15 @@ import {
   zoomPlaceCaption
 } from '../scripts/utils/Constants.js';
 
+
+//creates an empty class for user information
 const userInfo = new UserInfo({
   userNameSelector: userName,
   userBioSelector: job,
   userPicSelector: userPic
 });
 
+//function used for filling user information with data
 function createUserInfo(data) {
   userInfo.setUserInfo(data);
 
@@ -55,6 +58,68 @@ function createUserInfo(data) {
   editProfile.addEventListener('click', () => popupProfile.open());
 }
 
+/*//renders card items into the layout
+const defaultSection = new Section (
+  {
+    items: data,
+    renderer: (item) => { 
+      const cardElement = createCard(item)
+      defaultSection.addItem(cardElement);    
+    }
+  },
+  places,
+  api
+)
+defaultSection.renderItems();
+
+//generates a card element out of a template
+function createCard(item) {
+  const card = new Card(
+    item,
+    template,
+    userInfo.getUserId(),
+    function handleCardClick(name, link) {
+      popupZoom.open(name, link)
+    },
+    function handleDeleteClick(cardId) {
+      popupDeleteConfirmation.open(this, cardId);
+    },
+    api        
+  )
+  const cardElement = card.generateCard();
+  return cardElement
+}
+  
+//adds a new custom card
+const addCards = () => {
+  defaultSection.saveItem(inputPlaceName.value, inputPlaceUrl.value).then((card) => {
+    defaultSection.prependItem(createCard(card));
+  });
+};
+  
+//opens popup that asks for confirmation before card is deleted
+const popupDeleteConfirmation = new PopupWithDelete({
+  popupSelector: popupDeleteSelector
+  },
+  api
+)
+///popupDeleteConfirmation.setEventListeners();
+
+//opens popup with a new place
+const popupPlace = new PopupWithForm({
+  popupSelector: popupPlaceSelector,
+  formSubmitHandler: (data) => {
+    addCards(data);
+    popupPlace.close();
+  }
+});
+//popupPlace.setEventListeners();
+
+//addPlace.addEventListener('click', () => popupPlace.open());
+
+const popupAvatarChange = new PopupWithForm({
+  
+})*/
 
 
 
@@ -63,17 +128,86 @@ const api = new Api({
   authorization: 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
 })
 
+//api query used to fill user infor with data from the server
 api 
   .getInfo()
-  .then(data => createUserInfo(data))
+  .then(res => createUserInfo(res))
   .catch(err => console.log(err)) 
 
+function createSection(data) {
+  const defaultSection = new Section (
+    {
+      items: data,
+      renderer: (item) => { 
+        const cardElement = createCard(item)
+        defaultSection.addItem(cardElement);    
+      }
+    },
+    places,
+    api
+  )
+  defaultSection.renderItems();
+}
+
+function createCard(item) {
+  const card = new Card(
+    item,
+    template,
+    userInfo.getUserId(),
+    function handleCardClick(name, link) {
+      popupZoom.open(name, link)
+    },
+    function handleDeleteClick(cardId) {
+      popupDeleteConfirmation.open(this, cardId);
+    },
+    api        
+  )
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+function addCards(data) {
+
+  const section = createSection(data);
+
+  section.saveItem(inputPlaceName.value, inputPlaceUrl.value).then((card) => {
+    section.prependItem(createCard(card));
+  });
+};
+
+const popupDeleteConfirmation = new PopupWithDelete({
+  popupSelector: popupDeleteSelector
+  },
+  api
+)
+//popupDeleteConfirmation.setEventListeners();
+
+//opens popup with a new place
+const popupPlace = new PopupWithForm({
+  popupSelector: popupPlaceSelector,
+  formSubmitHandler: (data) => {
+    addCards(data);
+    popupPlace.close();
+  }
+});
+popupPlace.setEventListeners();
+
+addPlace.addEventListener('click', () => popupPlace.open());
 
 // renders cards from the server to the page
 api
   .getCard()
-  .then((data) => {
-    const defaultSection = new Section (
+  .then((data) => createSection(data))
+  .then((item) => {
+    createCard(item);
+    popupDeleteConfirmation.setEventListeners();
+    popupPlace.setEventListeners();
+  })
+  .then(() => addCards())
+
+
+   
+      /*const defaultSection = new Section (
       {
         items: data,
         renderer: (item) => { 
@@ -130,13 +264,13 @@ api
 
     addPlace.addEventListener('click', () => popupPlace.open());
 
-    const popupAvatarChange = new PopupWithForm({
+    /*const popupAvatarChange = new PopupWithForm({
       
     })
 
   })
-  .catch(err => console.log(err))   
-
+  .catch(err => console.log(err)) */
+    
 
 //zooms up a place picture
 const popupZoom = new PopupWithImage({
