@@ -37,6 +37,27 @@ const userInfo = new UserInfo({
   userPicSelector: userPic
 });
 
+function createUserInfo(data) {
+  userInfo.setUserInfo(data);
+
+  //opens popup with user info
+  const popupProfile = new PopupWithForm({
+    popupSelector: popupProfileSelector,
+    formSubmitHandler: (data) => {
+        userInfo.setUserInfo(data);
+        api.updateInfo(data);
+        popupProfile.close();
+      }
+    });
+  popupProfile.setEventListeners();
+    
+  //opening popups by clicking on elements
+  editProfile.addEventListener('click', () => popupProfile.open());
+}
+
+
+
+
 const api = new Api({
   url:"https://mesto.nomoreparties.co/v1/cohort-20",
   authorization: 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
@@ -44,25 +65,8 @@ const api = new Api({
 
 api 
   .getInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data);
-
-    //opens popup with user info
-    const popupProfile = new PopupWithForm({
-      popupSelector: popupProfileSelector,
-      formSubmitHandler: (data) => {
-          userInfo.setUserInfo(data);
-          api.updateInfo(data);
-          popupProfile.close();
-        }
-      });
-    popupProfile.setEventListeners();
-      
-    //opening popups by clicking on elements
-    editProfile.addEventListener('click', () => popupProfile.open());
-
-})
-  .catch(err => console.log(err))   
+  .then(data => createUserInfo(data))
+  .catch(err => console.log(err)) 
 
 
 // renders cards from the server to the page
