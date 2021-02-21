@@ -4,8 +4,10 @@ export class Card {
     cardSelector,
     myId,
     handleCardClick,
-    handleDeleteClick,
-    api
+    { 
+      handleLikeClick, 
+      handleDeleteClick
+    }
   ) {
     this._data = data;
     this._likes = data.likes;
@@ -17,8 +19,8 @@ export class Card {
     this._myId = myId;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
     this._handleDeleteClick = handleDeleteClick;
-    this._api = api;
   }
 
   _getTemplate() {
@@ -48,9 +50,13 @@ export class Card {
     this._element.querySelector('.place__title').textContent = this._title;
     this._element.querySelector('.place').setAttribute('id', this._cardId);
     this._changeLikeCount();
-    console.log(this._element);
     return this._element;
   } 
+
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
   
   _setEventListeners() {
     this._element.querySelector('.place__like').addEventListener('click', (evt) => {

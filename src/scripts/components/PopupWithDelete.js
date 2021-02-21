@@ -3,37 +3,33 @@ import {Popup} from './Popup.js';
 export class PopupWithDelete extends Popup {
   constructor({popupSelector}, api) {
       super({popupSelector});
-			this._submitButton = document.querySelector('.popup__submit-button_delete');
-			this._place = document.querySelector('.place');
-			this._api = api;
+      this._submitButton = document.querySelector('.popup__submit-button_delete');
+      this._place = document.querySelector('.place');
 }
 
-	setEventListeners() {
-		this._submitButton.addEventListener('click', (evt) => {
-			this._deleteMyCard();
-			this._deleteCardFromDom(evt);
+  setFormSubmitHandler(handler) {
+    this.setFormSubmitHandler = handler;
+  }
 
-		});
-		super.setEventListeners();
-	}
+  setEventListeners() {
+    this._submitButton.addEventListener('click', (evt) => {
+      this._deleteMyCard();
+      this._deleteCardFromDom(evt);
 
-	open(card, cardId) {
-		this.card = card;
-		this._cardId = cardId;
-		super.open();
-	}
+    });
+    super.setEventListeners();
+  }
 
-	_deleteCardFromDom() {
-		const card = document.getElementById(this._cardId);
-		card.remove();
-	}
+  open(card, cardId) {
+    this.card = card;
+    this._cardId = cardId;
+    super.open();
+  }
 
-	_deleteMyCard() {
-		return this._api
-		.deleteCard(this.card)
-		.then(() => {
-			super.close();
-		});
-	}		
+  _deleteCardFromDom() {
+    const card = document.getElementById(this._cardId);
+    card.remove();
+  }
+  
 }
 
