@@ -1,19 +1,28 @@
 export class UserInfo {
-  constructor({userNameSelector, userBioSelector}){
+  constructor({userNameSelector, userBioSelector, userPicSelector}){
     this._userName = userNameSelector;
     this._userBio = userBioSelector;
+    this._userPic = userPicSelector;
   }
 
   getUserInfo() {
     const userInfo = {
-      username: this._userName.textContent,
-      job: this._userBio.textContent
+      name: this._userName.textContent,
+      about: this._userBio.textContent,
+      avatar: this._userPic.src
     }
-      return userInfo;
+    return userInfo;
   }
 
   setUserInfo(data) {
-    this._userName.textContent = data.username;
-    this._userBio.textContent = data.job;
+    this._userName.textContent = data.name;
+    this._userBio.textContent = data.about;
+    this._userPic.src = data.avatar;
+    this.myId = data._id;
+  }
+
+  getUserId() {
+    return this.myId;
   }
 }
+ 

@@ -1,5 +1,5 @@
 .place__cover {
   width: 282px;
   height: 282px;
-  background-size: cover;
+  object-fit: cover;
 }

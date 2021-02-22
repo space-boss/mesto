@@ -15,10 +15,11 @@
 
     <main class="content">
       <section class="profile">
-        <img class="profile__pic" src="<%=require('./images/Avatar.svg')%>" alt="Фото пользователя">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <div class="profile__userpic-edit-button"></div>
+        <img class="profile__pic" src="#" alt="Фото пользователя">
+        <h1 class="profile__title"></h1>
         <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <p class="profile__subtitle"></p>
         <button type="button" class="profile__add-button" aria-label="Добавить новое место"></button>
       </section>
 
@@ -37,11 +38,11 @@
         <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
         <form name="editValues" method="post" class="popup__form" novalidate>
-          <input type="text" class="popup__input-field popup__input-field_value_name" id="profile-username" name="username" placeholder="Имя" required minlength="2" maxlength="40">
+          <input type="text" class="popup__input-field popup__input-field_value_name" id="profile-username" name="name" placeholder="Имя" required minlength="2" maxlength="40">
           <span id="profile-username-error" class="popup__input-field popup__input-field_error"></span>
-          <input type="text" class="popup__input-field popup__input-field_value_job" id="profile-job" name="job" placeholder="О себе" required minlength="2" maxlength="200">
+          <input type="text" class="popup__input-field popup__input-field_value_job" id="profile-job" name="about" placeholder="О себе" required minlength="2" maxlength="200">
           <span id="profile-job-error" class="popup__input-field popup__input-field_error"></span>
-          <button type="submit" class="popup__submit-button">Сохранить</button>
+          <input name="submit" type="submit" value="Сохранить" class="popup__submit-button">
         </form>
       </div>
     </section>
@@ -53,10 +54,30 @@
         <form name="editValues" method="post" class="popup__form popup__form-place" novalidate>
           <input type="text" class="popup__input-field popup__input-field_value_place" id="place-name" name="place" placeholder="Название" required minlength="2" maxlength="30">
           <span id="place-name-error" class="popup__input-field popup__input-field_error"></span>
-          <input type="url" class="popup__input-field popup__input-field_value_placeurl" id="place-url" name="placeUrl" placeholder="Ссылка на картинку" required>
+          <input type="url" class="popup__input-field popup__input-field_value_placeurl" id="place-url" name="link" placeholder="Ссылка на картинку" required>
           <span id="place-url-error" class="popup__input-field popup__input-field_error"></span>
-          <button type="submit" class="popup__submit-button popup__submit-button_place">Сохранить</button>
+          <input name="submit" type="submit" value="Сохранить" class="popup__submit-button popup__submit-button_place">
         </form>
+     </div>
+    </section>
+    
+    <section class="popup popup_avatar">
+      <div class="popup__container-avatar">
+        <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <form name="editValues" method="post" class="popup__form" novalidate>
+          <input type="url" class="popup__input-field popup__input-field_value_userpic" id="userpic" name="avatar" placeholder="Ссылка" required>
+          <span id="userpic-error" class="popup__input-field popup__input-field_error"></span>
+          <input name="submit" type="submit" value="Сохранить" class="popup__submit-button">
+        </form>
+      </div>
+    </section>
+
+    <section class="popup popup_delete-confirmation">
+      <div class="popup__container-confirmation">
+        <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
+        <h3 class="popup__title">Вы уверены?</h3>
+        <button type="button" class="popup__submit-button popup__submit-button_delete">Да</button>
      </div>
     </section>
 
@@ -68,14 +89,14 @@
       </div>
     </section>
 
-
-  <template class="template">
+   <template class="template">
       <div class="place">
-      <button type="button" class="place__delete" aria-label="Удалить элемeнт"></button>
+      <button type="button" class="place__delete place__delete_shown" aria-label="Удалить элемeнт"></button>
       <button type="button" class="place__cover-button" aria-label="Увеличить картинку"><img class="place__cover" alt="Изображение места" src=" "></button>
       <div class="place__description">
         <h2 class="place__title"></h2>
         <button type="button" class="place__like" aria-label="Добавить в избранное"></button>
+        <p class="place__like-count"></p>
       </div>
     </div>
   </template>

@@ -1,53 +1,31 @@
-const icelandImage = new URL('../../images/iceland.jpg', import.meta.url);
-const antwerpImage = new URL('../../images/antwerpen.jpeg', import.meta.url);
-const capetownImage = new URL('../../images/capetown.jpg', import.meta.url);
-const marianaImage = new URL('../../images/mariana.jpg', import.meta.url);
-const teriberkaImage = new URL('../../images/teriberka.jpg', import.meta.url);
-const carribeanImage = new URL('../../images/caribbean-island.jpg', import.meta.url);
-
-
-const cards = [{
-  title: 'Исландия',
-  backgroundImage: icelandImage
-}, {
-  title: 'Порт в Антверпене',
-  backgroundImage: antwerpImage
-}, {
-  title: 'Мыс Доброй Надежды',
-  backgroundImage: capetownImage
-}, {
-  title: 'Марианская Впадина',
-  backgroundImage: marianaImage
-}, {
-  title: 'Териберка',
-  backgroundImage: teriberkaImage
-}, {
-  title: 'Карибские острова',
-  backgroundImage: carribeanImage
-},];
-
 const places = '.places';
 const addPlace = document.querySelector('.profile__add-button');
 
 const template = '.template';
 const inputPlaceName = document.querySelector('.popup__input-field_value_place');
 const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
+const likeCount = document.querySelector('.place__like-count');
 
 const editProfile = document.querySelector('.profile__edit-button');
+const editAvatar = document.querySelector('.profile__userpic-edit-button');
 
 const formElement = document.querySelector('.popup__form');
 const popupProfileSelector = '.popup_profile';
+const popupAvatarSelector = '.popup_avatar';
 const popupPlaceSelector = '.popup_place';
 const popupZoomSelector = '.popup_zoom';
+const popupDeleteSelector = '.popup_delete-confirmation';
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
+const userPic = document.querySelector('.profile__pic');
 
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
 
+const submitButtons = document.querySelectorAll('.popup__submit-button');
+
 export {
-  cards,
   places,
   addPlace,
 
@@ -55,14 +33,21 @@ export {
   inputPlaceName,
   inputPlaceUrl,
   editProfile,
+  editAvatar,
+  likeCount,
 
   formElement,
   popupProfileSelector,
+  popupAvatarSelector,
   popupPlaceSelector,
   popupZoomSelector,
+  popupDeleteSelector,
 
   userName,
   job,
+  userPic,
   zoomPlaceImg,
-  zoomPlaceCaption
+  zoomPlaceCaption,
+
+  submitButtons
 }
