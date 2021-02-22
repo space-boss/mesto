@@ -7,8 +7,8 @@ export class Card {
     { 
       handleLikeClick, 
       handleDeleteClick
-    }
-  ) {
+    }) 
+    {
     this._data = data;
     this._likes = data.likes;
     this._title = data.name;
@@ -34,6 +34,7 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+
     if (!this._checkMyCard()) {
      this._element.querySelector('.place__delete').classList.toggle('place__delete_shown');
     }
@@ -43,13 +44,16 @@ export class Card {
      }
 
     this._setEventListeners();
-    const placeCover = this._element.querySelector('.place__cover');
 
+    const placeCover = this._element.querySelector('.place__cover');   
     placeCover.src = this._backgroundImage;
     placeCover.alt = this._title;
+
     this._element.querySelector('.place__title').textContent = this._title;
     this._element.querySelector('.place').setAttribute('id', this._cardId);
+
     this._changeLikeCount();
+
     return this._element;
   } 
 
@@ -60,12 +64,13 @@ export class Card {
   
   _setEventListeners() {
     this._element.querySelector('.place__like').addEventListener('click', (evt) => {
-      this.handleLikes(evt);
+      console.log('picture is liked');
+      /*this.handleLikes(evt);*/
     });
 
     this._element.querySelector('.place__delete').addEventListener('click', () => {
       this._handleDeleteClick(this._cardId);
-      this._element.querySelector('.place__like-count').textContent = this._likes.length;
+      /*this._element.querySelector('.place__like-count').textContent = this._likes.length;*/
     });
 
     this._element.querySelector('.place__cover-button').addEventListener('click', () => {
@@ -100,7 +105,7 @@ export class Card {
     })
   }
 
-  handleLikes(data) {
+  /*handleLikes(data) {
     if (this._checkMyLikes()) {
       this._api
         .unlikeCard(this._cardId)
@@ -122,7 +127,7 @@ export class Card {
             console.log(err);
           });
       }
-  }
+  }*/
 }
 
 

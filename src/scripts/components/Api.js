@@ -46,6 +46,23 @@ export class Api {
     });
   }
 
+  generateCard(newCard) {
+    return fetch(`${this._url}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: newCard.name,
+        link: newCard.link,
+      })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject("Сервер не доступен");
+    });
+  }
+  
+
   postCard(data) {
     return fetch(`${this._url}/cards`, {
       method: "POST",

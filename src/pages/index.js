@@ -61,11 +61,11 @@ function handleCardClick(name, link) {
 
 ///////////////////////////////////////////////////////////////////////////////
 //opens popup that asks for confirmation before card is deleted
-const popupDeleteConfirmation = new PopupWithDelete({ popupSelector: popupDeleteSelector });
+/*const popupDeleteConfirmation = new PopupWithDelete({ popupSelector: popupDeleteSelector });
 popupDeleteConfirmation.setEventListeners();
 
 function handleDeleteClick(card) {
-  popupDeleteConfirmation.ssetFormSubmitHandler(() => {
+  popupDeleteConfirmation.setFormSubmitHandler(() => {
     api.deleteCard(card._id)
     .then(() => {
       card.deleteCard();
@@ -79,7 +79,7 @@ function handleDeleteClick(card) {
 
 function handleLikeClick(cardId) {
   console.log("like clicked");
-}
+}*/
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -92,7 +92,7 @@ function createCard(item, defaultSection, myId) {
     {
       handleLikeClick: () => handleLikeClick(card, item),
       handleDeleteClick: () => handleDeleteClick(card)
-    }    
+    }
   );
   const cardElement = card.generateCard();
   //card.handleLikes(item)
@@ -112,11 +112,12 @@ popupZoom.setEventListeners();
 
 const popupPlace = new PopupWithForm({
   popupSelector: popupPlaceSelector,
-  formSubmitHandler: (data) => {
-    api.postCard(data)
-    .then((data) => {
-      createCard(data, defaultSection, myId);
-      popupPlace.close();
+  formSubmitHandler: (item) => {
+    api.generateCard(item)
+      .then((data) => {
+        createCard(data, defaultSection, myId);
+
+        popupPlace.close();
     })
     .catch(err => console.log(err));
   }
