@@ -1,21 +1,21 @@
 import './index.css';
 
-import {Card} from '../scripts/components/Card.js';
-import {FormValidator} from '../scripts/components/FormValidator.js';
-import {Section} from '../scripts/components/Section.js';
+import { Card } from '../scripts/components/Card.js';
+import { FormValidator } from '../scripts/components/FormValidator.js';
+import { Section } from '../scripts/components/Section.js';
 
-import {PopupWithImage} from '../scripts/components/PopupWithImage.js';
-import {PopupWithDelete} from '../scripts/components/PopupWithDelete.js';
-import {PopupWithForm} from '../scripts/components/PopupWithForm.js';
-import {UserInfo} from '../scripts/components/UserInfo.js';
-import {Api} from '../scripts/components/Api.js';
+import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
+import { PopupWithDelete } from '../scripts/components/PopupWithDelete.js';
+import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
+import { UserInfo } from '../scripts/components/UserInfo.js';
+import { Api } from '../scripts/components/Api.js';
 
 
 import {
   places,
   addPlace,
-  template, 
-  editProfile, 
+  template,
+  editProfile,
   editAvatar,
 
   popupProfileSelector,
@@ -43,14 +43,14 @@ const userInfo = new UserInfo({
 });
 
 const api = new Api({
-  url:"https://mesto.nomoreparties.co/v1/cohort-20",
+  url: "https://mesto.nomoreparties.co/v1/cohort-20",
   authorization: 'e834f1b9-ceab-4d08-a43d-18df96eb5098'
 });
 
-const defaultSection = new Section (
+const defaultSection = new Section(
   {
-  renderer: (item) => { 
-    createCard(item, defaultSection, myId)
+    renderer: (item) => {
+      createCard(item, defaultSection, myId)
     }
   },
   places);
@@ -63,10 +63,10 @@ function showLoading(loadingState) {
       console.log("loading");
       submit.value = "Сохранение...";
     })
-  } 
+  }
   else {
     Array.from(submitButtons).forEach((submit) => {
-    submit.value = "Сохранить";
+      submit.value = "Сохранить";
     })
   }
 }
@@ -86,11 +86,11 @@ function handleDeleteClick(card) {
   console.log(card);
   popupDeleteConfirmation.setFormSubmitHandler(() => {
     api.deleteCard(card)
-    .then(() => {
-      card.deleteCard();
-      popupDeleteConfirmation.close();
-    })
-    .catch(err => console.log(err));
+      .then(() => {
+        card.deleteCard();
+        popupDeleteConfirmation.close();
+      })
+      .catch(err => console.log(err));
   });
   popupDeleteConfirmation.open();
 }
@@ -149,9 +149,9 @@ const popupPlace = new PopupWithForm({
         console.log(data);
         createCard(data, defaultSection, myId);
         popupPlace.close();
-    })
-    .catch(err => console.log(err))
-    .finally(() => showLoading(false))
+      })
+      .catch(err => console.log(err))
+      .finally(() => showLoading(false))
   }
 });
 
@@ -165,7 +165,7 @@ addPlace.addEventListener('click', () => {
 ///////////////////////////////////////////////////////////////////////////////
 
 //opens popup with user info
-const popupProfile = new PopupWithForm({ 
+const popupProfile = new PopupWithForm({
   popupSelector: popupProfileSelector,
   formSubmitHandler: (data) => {
     showLoading(true);
@@ -174,9 +174,9 @@ const popupProfile = new PopupWithForm({
         userInfo.setUserInfo(data);
         popupProfile.close();
       })
-    .catch(err => console.log(err))
-    .finally(() => showLoading(false))
-  }  
+      .catch(err => console.log(err))
+      .finally(() => showLoading(false))
+  }
 });
 popupProfile.setEventListeners();
 
@@ -188,7 +188,7 @@ editProfile.addEventListener('click', () => {
 });
 
 //opens popup with user avatar
-const popupAvatar = new PopupWithForm({ 
+const popupAvatar = new PopupWithForm({
   popupSelector: popupAvatarSelector,
   formSubmitHandler: (data) => {
     showLoading(true);
@@ -197,8 +197,8 @@ const popupAvatar = new PopupWithForm({
         userInfo.setUserInfo(data);
         popupAvatar.close();
       })
-    .catch(err => console.log(err))
-    .finally(() => showLoading(false))
+      .catch(err => console.log(err))
+      .finally(() => showLoading(false))
   }
 });
 popupAvatar.setEventListeners();
@@ -221,7 +221,7 @@ Promise.all([api.getCard(), api.getInfo()])
   .catch(err => console.log(err));
 
 
-  ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 //variables used in form validation
 const validationSettings = {
