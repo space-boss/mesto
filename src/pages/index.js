@@ -15,11 +15,11 @@ import {
   places,
   addPlace,
   template, 
-  inputPlaceName,
-  inputPlaceUrl,
   editProfile, 
+  editAvatar,
 
   popupProfileSelector,
+  popupAvatarSelector,
   popupPlaceSelector,
   popupZoomSelector,
   popupDeleteSelector,
@@ -61,12 +61,13 @@ function handleCardClick(name, link) {
 
 ///////////////////////////////////////////////////////////////////////////////
 //opens popup that asks for confirmation before card is deleted
-/*const popupDeleteConfirmation = new PopupWithDelete({ popupSelector: popupDeleteSelector });
+const popupDeleteConfirmation = new PopupWithDelete({ popupSelector: popupDeleteSelector });
 popupDeleteConfirmation.setEventListeners();
 
 function handleDeleteClick(card) {
+  console.log(card);
   popupDeleteConfirmation.setFormSubmitHandler(() => {
-    api.deleteCard(card._id)
+    api.deleteCard(card)
     .then(() => {
       card.deleteCard();
       popupDeleteConfirmation.close();
@@ -77,9 +78,20 @@ function handleDeleteClick(card) {
 }
 ///////////////////////////////////////////////////////////////////////////////
 
-function handleLikeClick(cardId) {
-  console.log("like clicked");
-}*/
+function handleLikeClick(card, item) {
+  var promise;
+  if (card.checkMyLikes()) {
+    promise = api.unlikeCard(card._cardId);
+  }
+  else {
+    promise = api.likeCard(card._cardId);
+  }
+  promise
+    .then((item) => {
+      card.toggleLike(item);
+    })
+    .catch(err => console.log(err));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -96,7 +108,7 @@ function createCard(item, defaultSection, myId) {
   );
   const cardElement = card.generateCard();
   //card.handleLikes(item)
-  defaultSection.prependItem(cardElement);
+  defaultSection.addItem(cardElement);
 }
 
 //zooms up a place picture
@@ -115,8 +127,8 @@ const popupPlace = new PopupWithForm({
   formSubmitHandler: (item) => {
     api.generateCard(item)
       .then((data) => {
+        console.log(data);
         createCard(data, defaultSection, myId);
-
         popupPlace.close();
     })
     .catch(err => console.log(err));
@@ -137,11 +149,10 @@ const popupProfile = new PopupWithForm({
   popupSelector: popupProfileSelector,
   formSubmitHandler: (data) => {
     api.updateInfo(data)
-    .then((data) => {
-      console.log(data);
-      userInfo.setUserInfo(data);
-      popupProfile.close();
-    })
+      .then((data) => {
+        userInfo.setUserInfo(data);
+        popupProfile.close();
+      })
     .catch(err => console.log(err));
   }
 });
@@ -154,6 +165,26 @@ editProfile.addEventListener('click', () => {
   popupProfile.open();
 });
 
+//opens popup with user avatar
+const popupAvatar = new PopupWithForm({ 
+  popupSelector: popupAvatarSelector,
+  formSubmitHandler: (data) => {
+    api.updateAvatar(data)
+      .then((data) => {
+        userInfo.setUserInfo(data);
+        popupAvatar.close();
+      })
+    .catch(err => console.log(err));
+  }
+});
+popupAvatar.setEventListeners();
+
+editAvatar.addEventListener('click', () => {
+  const userData = userInfo.getUserInfo();
+  userPic.src = userData.avatar;
+  popupAvatar.open();
+});
+
 ///////////////////////////////////////////////////////////////////////////////
 
 //api query used to fill user info with data from the server
@@ -161,7 +192,25 @@ Promise.all([api.getCard(), api.getInfo()])
   .then(([cards, user]) => {
     userInfo.setUserInfo(user);
     myId = user._id;
-    // TODO: Set avatar
     defaultSection.renderItems(cards);
   })
   .catch(err => console.log(err));
+
+
+  ///////////////////////////////////////////////////////////////////////////////
+  
+//variables used in form validation
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input-field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_invalid',
+  inputErrorClass: 'popup__input-field_invalid',
+  errorClass: 'popup__input-field_error'
+}
+
+const formElements = Array.from(document.querySelectorAll('.popup__form'));
+
+formElements.forEach((form) => {
+  new FormValidator(validationSettings, form).enableValidation();
+});

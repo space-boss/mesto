@@ -8,7 +8,8 @@ export class UserInfo {
   getUserInfo() {
     const userInfo = {
       name: this._userName.textContent,
-      about: this._userBio.textContent
+      about: this._userBio.textContent,
+      avatar: this._userPic.src
     }
     return userInfo;
   }

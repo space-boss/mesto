@@ -7,9 +7,11 @@ const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl
 const likeCount = document.querySelector('.place__like-count');
 
 const editProfile = document.querySelector('.profile__edit-button');
+const editAvatar = document.querySelector('.profile__userpic-edit-button');
 
 const formElement = document.querySelector('.popup__form');
 const popupProfileSelector = '.popup_profile';
+const popupAvatarSelector = '.popup_avatar';
 const popupPlaceSelector = '.popup_place';
 const popupZoomSelector = '.popup_zoom';
 const popupDeleteSelector = '.popup_delete-confirmation';
@@ -29,10 +31,12 @@ export {
   inputPlaceName,
   inputPlaceUrl,
   editProfile,
+  editAvatar,
   likeCount,
 
   formElement,
   popupProfileSelector,
+  popupAvatarSelector,
   popupPlaceSelector,
   popupZoomSelector,
   popupDeleteSelector,

@@ -34,6 +34,21 @@ export class Api {
     })
   }
 
+  updateAvatar(data) {
+    console.log(data);
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+    .then((res) => {
+      if(res.ok) {
+        return res.json()
+      }
+      return Promise.reject('Сервер не доступен')
+    })
+  }
+
   getCard() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
@@ -51,7 +66,7 @@ export class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: newCard.name,
+        name: newCard.place,
         link: newCard.link,
       })
     }).then((res) => {

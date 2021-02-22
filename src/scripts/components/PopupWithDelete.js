@@ -12,10 +12,9 @@ export class PopupWithDelete extends Popup {
   }
 
   setEventListeners() {
-    this._submitButton.addEventListener('click', (evt) => {
-      this._deleteMyCard();
-      this._deleteCardFromDom(evt);
-
+    this._submitButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.setFormSubmitHandler();
     });
     super.setEventListeners();
   }
