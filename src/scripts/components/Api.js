@@ -16,7 +16,7 @@ export class Api {
       if(res.ok) {
         return res.json()
       }
-      return Promise.reject('Сервер не доступен')
+      return Promise.reject('Не удалось загрузить данные с сервера')
     })
   }
 
@@ -30,12 +30,11 @@ export class Api {
       if(res.ok) {
         return res.json()
       }
-      return Promise.reject('Сервер не доступен')
+      return Promise.reject('Не удалось загрузить данные')
     })
   }
 
   updateAvatar(data) {
-    console.log(data);
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
@@ -45,7 +44,7 @@ export class Api {
       if(res.ok) {
         return res.json()
       }
-      return Promise.reject('Сервер не доступен')
+      return Promise.reject('Не удалось обновить аватар')
     })
   }
 
@@ -57,7 +56,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject("Сервер не доступен");
+      return Promise.reject('Не удалось загрузить данные с сервера');
     });
   }
 
@@ -73,7 +72,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject("Сервер не доступен");
+      return Promise.reject('Не удалось создать объект');
     });
   }
   
@@ -88,7 +87,7 @@ export class Api {
       if(res.ok) {
         return res.json()
       }
-      return Promise.reject('Сервер не доступен')
+      return Promise.reject('Сохранение карточки не возможно')
     })
   }
 
@@ -113,7 +112,7 @@ export class Api {
       if(res.ok) {
         return res.json()
       }
-      return Promise.reject('Сервер не доступен')
+      return Promise.reject('Отметка Нравится не поставлена')
     })
   }
 
@@ -126,7 +125,7 @@ export class Api {
       if(res.ok) {
         return res.json()
       }
-      return Promise.reject('Сервер не доступен')
+      return Promise.reject('Не удалось отменить отметку Нравится')
     })
   }
 }

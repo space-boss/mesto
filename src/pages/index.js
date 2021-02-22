@@ -28,7 +28,9 @@ import {
   job,
   userPic,
   zoomPlaceImg,
-  zoomPlaceCaption
+  zoomPlaceCaption,
+
+  submitButtons,
 } from '../scripts/utils/Constants.js';
 
 let myId = null;
@@ -52,6 +54,22 @@ const defaultSection = new Section (
     }
   },
   places);
+
+
+function showLoading(loadingState) {
+  console.log(submitButtons);
+  if (loadingState) {
+    Array.from(submitButtons).forEach((submit) => {
+      console.log("loading");
+      submit.value = "Сохранение...";
+    })
+  } 
+  else {
+    Array.from(submitButtons).forEach((submit) => {
+    submit.value = "Сохранить";
+    })
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -125,13 +143,15 @@ popupZoom.setEventListeners();
 const popupPlace = new PopupWithForm({
   popupSelector: popupPlaceSelector,
   formSubmitHandler: (item) => {
+    showLoading(true);
     api.generateCard(item)
       .then((data) => {
         console.log(data);
         createCard(data, defaultSection, myId);
         popupPlace.close();
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => showLoading(false))
   }
 });
 
@@ -148,13 +168,15 @@ addPlace.addEventListener('click', () => {
 const popupProfile = new PopupWithForm({ 
   popupSelector: popupProfileSelector,
   formSubmitHandler: (data) => {
+    showLoading(true);
     api.updateInfo(data)
       .then((data) => {
         userInfo.setUserInfo(data);
         popupProfile.close();
       })
-    .catch(err => console.log(err));
-  }
+    .catch(err => console.log(err))
+    .finally(() => showLoading(false))
+  }  
 });
 popupProfile.setEventListeners();
 
@@ -169,12 +191,14 @@ editProfile.addEventListener('click', () => {
 const popupAvatar = new PopupWithForm({ 
   popupSelector: popupAvatarSelector,
   formSubmitHandler: (data) => {
+    showLoading(true);
     api.updateAvatar(data)
       .then((data) => {
         userInfo.setUserInfo(data);
         popupAvatar.close();
       })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => showLoading(false))
   }
 });
 popupAvatar.setEventListeners();
@@ -198,7 +222,7 @@ Promise.all([api.getCard(), api.getInfo()])
 
 
   ///////////////////////////////////////////////////////////////////////////////
-  
+
 //variables used in form validation
 const validationSettings = {
   formSelector: '.popup__form',

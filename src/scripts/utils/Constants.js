@@ -23,6 +23,8 @@ const userPic = document.querySelector('.profile__pic');
 const zoomPlaceImg = document.querySelector('.popup__img');
 const zoomPlaceCaption = document.querySelector('.popup__caption');
 
+const submitButtons = document.querySelectorAll('.popup__submit-button');
+
 export {
   places,
   addPlace,
@@ -45,5 +47,7 @@ export {
   job,
   userPic,
   zoomPlaceImg,
-  zoomPlaceCaption
+  zoomPlaceCaption,
+
+  submitButtons
 }
