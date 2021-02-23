@@ -2,8 +2,6 @@ const places = '.places';
 const addPlace = document.querySelector('.profile__add-button');
 
 const template = '.template';
-const inputPlaceName = document.querySelector('.popup__input-field_value_place');
-const inputPlaceUrl = document.querySelector('.popup__input-field_value_placeurl');
 const likeCount = document.querySelector('.place__like-count');
 
 const editProfile = document.querySelector('.profile__edit-button');
@@ -26,6 +24,8 @@ const popupDeleteSelector = '.popup_delete-confirmation';
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
 const userPic = document.querySelector('.profile__pic');
+const inputUserName = document.querySelector('.popup__input-field_value_name');
+const inputJob = document.querySelector('.popup__input-field_value_job');
 
 
 //variables used in form validation
@@ -35,7 +35,7 @@ const validationSettings = {
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_invalid',
   inputErrorClass: 'popup__input-field_invalid',
-  errorClass: 'popup__input-field_error'
+  errorClass: 'popup__input-field_error',
 }
 
 
@@ -44,8 +44,6 @@ export {
   addPlace,
 
   template,
-  inputPlaceName,
-  inputPlaceUrl,
   editProfile,
   editAvatar,
   likeCount,
@@ -63,7 +61,10 @@ export {
   userName,
   job,
   userPic,
+  inputUserName,
+  inputJob,
 
   validationSettings,
 }
+
 

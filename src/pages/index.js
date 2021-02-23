@@ -24,15 +24,15 @@ import {
   userName,
   job,
   userPic,
-  zoomPlaceImg,
-  zoomPlaceCaption,
+  inputUserName,
+  inputJob,
+
 
   popupAvatarForm,
   popupPlaceForm,
   popupProfileForm,
 
   validationSettings,
-
 } from '../scripts/utils/constants.js';
 
 let myId = null;
@@ -121,8 +121,6 @@ const popupZoom = new PopupWithImage({
 
 popupZoom.setEventListeners();
 
-
-
 const popupPlace = new PopupWithForm({
   popupSelector: '.popup_place',
   formSubmitHandler: (item) => {
@@ -140,11 +138,9 @@ const popupPlace = new PopupWithForm({
 popupPlace.setEventListeners();
 
 addPlace.addEventListener('click', () => {
-  //TODO: validate?
+  addPlaceFormValidator.resetForm(popupPlaceForm);
   popupPlace.open();
 });
-
-
 
 //opens popup with user info
 const popupProfile = new PopupWithForm({
@@ -163,9 +159,10 @@ const popupProfile = new PopupWithForm({
 popupProfile.setEventListeners();
 
 editProfile.addEventListener('click', () => {
+  editProfileFormValidator.resetForm(popupProfileForm);
   const userData = userInfo.getUserInfo();
-  userName.value = userData.name;
-  job.value = userData.about;
+  inputUserName.placeholder = userData.name;
+  inputJob.placeholder = userData.about;
   popupProfile.open();
 });
 
@@ -186,6 +183,7 @@ const popupAvatar = new PopupWithForm({
 popupAvatar.setEventListeners();
 
 editAvatar.addEventListener('click', () => {
+  changeAvatarFormValidator.resetForm(popupAvatarForm);
   const userData = userInfo.getUserInfo();
   userPic.src = userData.avatar;
   popupAvatar.open();
