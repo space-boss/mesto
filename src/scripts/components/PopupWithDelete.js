@@ -18,17 +18,5 @@ export class PopupWithDelete extends Popup {
     });
     super.setEventListeners();
   }
-
-  open(card, cardId) {
-    this.card = card;
-    this._cardId = cardId;
-    super.open();
-  }
-
-  _deleteCardFromDom() {
-    const card = document.getElementById(this._cardId);
-    card.remove();
-  }
-  
 }
 
