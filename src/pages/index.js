@@ -9,7 +9,7 @@ import { PopupWithDelete } from '../scripts/components/PopupWithDelete.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { Api } from '../scripts/components/Api.js';
-
+import { showLoading } from '../scripts/utils/utils.js';
 
 import {
   places,
@@ -18,9 +18,6 @@ import {
   editProfile,
   editAvatar,
 
-  popupProfileSelector,
-  popupAvatarSelector,
-  popupPlaceSelector,
   popupZoomSelector,
   popupDeleteSelector,
 
@@ -30,8 +27,13 @@ import {
   zoomPlaceImg,
   zoomPlaceCaption,
 
-  submitButtons,
-} from '../scripts/utils/Constants.js';
+  popupAvatarForm,
+  popupPlaceForm,
+  popupProfileForm,
+
+  validationSettings,
+
+} from '../scripts/utils/constants.js';
 
 let myId = null;
 
@@ -56,34 +58,16 @@ const defaultSection = new Section(
   places);
 
 
-function showLoading(loadingState) {
-  console.log(submitButtons);
-  if (loadingState) {
-    Array.from(submitButtons).forEach((submit) => {
-      console.log("loading");
-      submit.value = "Сохранение...";
-    })
-  }
-  else {
-    Array.from(submitButtons).forEach((submit) => {
-      submit.value = "Сохранить";
-    })
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
 function handleCardClick(name, link) {
   popupZoom.open(name, link);
 }
 
-///////////////////////////////////////////////////////////////////////////////
+
 //opens popup that asks for confirmation before card is deleted
 const popupDeleteConfirmation = new PopupWithDelete({ popupSelector: popupDeleteSelector });
 popupDeleteConfirmation.setEventListeners();
 
 function handleDeleteClick(card) {
-  console.log(card);
   popupDeleteConfirmation.setFormSubmitHandler(() => {
     api.deleteCard(card)
       .then(() => {
@@ -94,24 +78,25 @@ function handleDeleteClick(card) {
   });
   popupDeleteConfirmation.open();
 }
-///////////////////////////////////////////////////////////////////////////////
 
-function handleLikeClick(card, item) {
-  var promise;
+
+function handleLikeClick(card) {
   if (card.checkMyLikes()) {
-    promise = api.unlikeCard(card._cardId);
-  }
-  else {
-    promise = api.likeCard(card._cardId);
-  }
-  promise
+    api.unlikeCard(card._cardId)
     .then((item) => {
       card.toggleLike(item);
     })
     .catch(err => console.log(err));
+  }
+  else {
+    api.likeCard(card._cardId)
+    .then((item) => {
+      card.toggleLike(item);
+    })
+    .catch(err => console.log(err));
+  }
 }
 
-///////////////////////////////////////////////////////////////////////////////
 
 function createCard(item, defaultSection, myId) {
   const card = new Card(
@@ -131,27 +116,24 @@ function createCard(item, defaultSection, myId) {
 
 //zooms up a place picture
 const popupZoom = new PopupWithImage({
-  popupSelector: popupZoomSelector,
-  image: zoomPlaceImg,
-  caption: zoomPlaceCaption
+  popupSelector: popupZoomSelector
 });
 
 popupZoom.setEventListeners();
 
-///////////////////////////////////////////////////////////////////////////////
+
 
 const popupPlace = new PopupWithForm({
-  popupSelector: popupPlaceSelector,
+  popupSelector: '.popup_place',
   formSubmitHandler: (item) => {
-    showLoading(true);
+    showLoading(popupPlace.popupSubmitButton, true);
     api.generateCard(item)
       .then((data) => {
-        console.log(data);
         createCard(data, defaultSection, myId);
         popupPlace.close();
       })
       .catch(err => console.log(err))
-      .finally(() => showLoading(false))
+      .finally(() => showLoading(popupPlace.popupSubmitButton, false))
   }
 });
 
@@ -162,20 +144,20 @@ addPlace.addEventListener('click', () => {
   popupPlace.open();
 });
 
-///////////////////////////////////////////////////////////////////////////////
+
 
 //opens popup with user info
 const popupProfile = new PopupWithForm({
-  popupSelector: popupProfileSelector,
+  popupSelector: '.popup_profile',
   formSubmitHandler: (data) => {
-    showLoading(true);
+    showLoading(popupProfile.popupSubmitButton, true);
     api.updateInfo(data)
       .then((data) => {
         userInfo.setUserInfo(data);
         popupProfile.close();
       })
       .catch(err => console.log(err))
-      .finally(() => showLoading(false))
+      .finally(() => showLoading(popupProfile.popupSubmitButton, false))
   }
 });
 popupProfile.setEventListeners();
@@ -189,16 +171,16 @@ editProfile.addEventListener('click', () => {
 
 //opens popup with user avatar
 const popupAvatar = new PopupWithForm({
-  popupSelector: popupAvatarSelector,
+  popupSelector: '.popup_avatar',
   formSubmitHandler: (data) => {
-    showLoading(true);
+    showLoading(popupAvatar.popupSubmitButton, true);
     api.updateAvatar(data)
       .then((data) => {
         userInfo.setUserInfo(data);
         popupAvatar.close();
       })
       .catch(err => console.log(err))
-      .finally(() => showLoading(false))
+      .finally(() => showLoading(popupAvatar.popupSubmitButton, false))
   }
 });
 popupAvatar.setEventListeners();
@@ -209,7 +191,7 @@ editAvatar.addEventListener('click', () => {
   popupAvatar.open();
 });
 
-///////////////////////////////////////////////////////////////////////////////
+
 
 //api query used to fill user info with data from the server
 Promise.all([api.getCard(), api.getInfo()])
@@ -221,20 +203,13 @@ Promise.all([api.getCard(), api.getInfo()])
   .catch(err => console.log(err));
 
 
-///////////////////////////////////////////////////////////////////////////////
 
-//variables used in form validation
-const validationSettings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input-field',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_invalid',
-  inputErrorClass: 'popup__input-field_invalid',
-  errorClass: 'popup__input-field_error'
-}
+//enables validation of separate forms
+const changeAvatarFormValidator = new FormValidator(validationSettings, popupAvatarForm);
+changeAvatarFormValidator.enableValidation();
 
-const formElements = Array.from(document.querySelectorAll('.popup__form'));
+const addPlaceFormValidator = new FormValidator(validationSettings, popupPlaceForm);
+addPlaceFormValidator.enableValidation();
 
-formElements.forEach((form) => {
-  new FormValidator(validationSettings, form).enableValidation();
-});
+const editProfileFormValidator = new FormValidator(validationSettings, popupProfileForm);
+editProfileFormValidator.enableValidation();

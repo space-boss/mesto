@@ -10,9 +10,16 @@ const editProfile = document.querySelector('.profile__edit-button');
 const editAvatar = document.querySelector('.profile__userpic-edit-button');
 
 const formElement = document.querySelector('.popup__form');
-const popupProfileSelector = '.popup_profile';
-const popupAvatarSelector = '.popup_avatar';
-const popupPlaceSelector = '.popup_place';
+const popups = document.querySelectorAll('.popup');
+const popupProfile = document.querySelector('.popup_profile');
+const popupAvatar = document.querySelector('.popup_avatar');
+const popupPlace = document.querySelector('.popup_place');
+
+const popupProfileForm = popupProfile.querySelector('.popup__form');
+const popupAvatarForm = popupAvatar.querySelector('.popup__form');
+const popupPlaceForm = popupPlace.querySelector('.popup__form');
+
+
 const popupZoomSelector = '.popup_zoom';
 const popupDeleteSelector = '.popup_delete-confirmation';
 
@@ -20,10 +27,17 @@ const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
 const userPic = document.querySelector('.profile__pic');
 
-const zoomPlaceImg = document.querySelector('.popup__img');
-const zoomPlaceCaption = document.querySelector('.popup__caption');
 
-const submitButtons = document.querySelectorAll('.popup__submit-button');
+//variables used in form validation
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input-field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_invalid',
+  inputErrorClass: 'popup__input-field_invalid',
+  errorClass: 'popup__input-field_error'
+}
+
 
 export {
   places,
@@ -37,17 +51,19 @@ export {
   likeCount,
 
   formElement,
-  popupProfileSelector,
-  popupAvatarSelector,
-  popupPlaceSelector,
+  popups,
+
   popupZoomSelector,
   popupDeleteSelector,
+
+  popupAvatarForm,
+  popupPlaceForm,
+  popupProfileForm,
 
   userName,
   job,
   userPic,
-  zoomPlaceImg,
-  zoomPlaceCaption,
 
-  submitButtons
+  validationSettings,
 }
+
