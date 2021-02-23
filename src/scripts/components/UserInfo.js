@@ -15,10 +15,12 @@ export class UserInfo {
   }
 
   setUserInfo(data) {
-    this._userName.textContent = data.name;
-    this._userBio.textContent = data.about;
-    this._userPic.src = data.avatar;
-    this.myId = data._id;
+    if (data) {
+      this._userName.textContent = data.name;
+      this._userBio.textContent = data.about;
+      this._userPic.src = data.avatar;
+      this.myId = data._id;
+    }
   }
 
   getUserId() {

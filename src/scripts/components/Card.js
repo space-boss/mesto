@@ -36,7 +36,7 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
 
-    if (!this.checkMyCard()) {
+    if (!this._checkMyCard()) {
      this._element.querySelector('.place__delete').classList.toggle('place__delete_shown');
     }
 
@@ -89,7 +89,7 @@ export class Card {
     this._element.querySelector('.place__like-count').textContent = likes;
   }
 
-  checkMyCard() {
+  _checkMyCard() {
     if (this._ownerId === this._myId) {
       return true
     }
