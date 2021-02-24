@@ -36,7 +36,7 @@ import {
   popupProfileForm,
 
   validationSettings,
-} from '../scripts/utils/Constants.js';
+} from '../scripts/utils/сonstants.js';
 
 let myId = null;
 
