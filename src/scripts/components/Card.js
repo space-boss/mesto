@@ -36,12 +36,15 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
 
+    this._likeButton = this._element.querySelector('.place__like');
+    this._deleteButton = this._element.querySelector('.place__delete');
+
     if (!this._checkMyCard()) {
-     this._element.querySelector('.place__delete').classList.toggle('place__delete_shown');
+     this._deleteButton.classList.toggle('place__delete_shown');
     }
 
     if (this.checkMyLikes()) {
-      this._element.querySelector('.place__like').classList.toggle('place__like_pressed');
+      this._likeButton.classList.toggle('place__like_pressed');
      }
 
     this._setEventListeners();
@@ -63,10 +66,10 @@ export class Card {
   }
   
   _setEventListeners() {
-    this._element.querySelector('.place__like').addEventListener('click', () =>
+    this._likeButton.addEventListener('click', () =>
       this._handleLikeClick());
 
-    this._element.querySelector('.place__delete').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._handleDeleteClick(this._cardId);
     });
 
@@ -78,10 +81,10 @@ export class Card {
   toggleLike(data) {
     this._setLikeCount(data.likes.length);
     if (!this.checkMyLikes()) {
-      this._element.querySelector('.place__like').classList.add('place__like_pressed');
+      this._likeButton.classList.add('place__like_pressed');
     }
     else {
-      this._element.querySelector('.place__like').classList.remove('place__like_pressed');
+      this._likeButton.classList.remove('place__like_pressed');
     }
   }
 

@@ -9,6 +9,7 @@ const editAvatar = document.querySelector('.profile__userpic-edit-button');
 
 const formElement = document.querySelector('.popup__form');
 const popups = document.querySelectorAll('.popup');
+
 const popupProfile = document.querySelector('.popup_profile');
 const popupAvatar = document.querySelector('.popup_avatar');
 const popupPlace = document.querySelector('.popup_place');
@@ -17,6 +18,9 @@ const popupProfileForm = popupProfile.querySelector('.popup__form');
 const popupAvatarForm = popupAvatar.querySelector('.popup__form');
 const popupPlaceForm = popupPlace.querySelector('.popup__form');
 
+const PopupPlaceSelector = '.popup_place';
+const PopupProfileSelector = '.popup_profile';
+const PopupAvatarSelector = '.popup_avatar';
 
 const popupZoomSelector = '.popup_zoom';
 const popupDeleteSelector = '.popup_delete-confirmation';
@@ -50,6 +54,10 @@ export {
 
   formElement,
   popups,
+
+  PopupPlaceSelector,
+  PopupProfileSelector,
+  PopupAvatarSelector,
 
   popupZoomSelector,
   popupDeleteSelector,
