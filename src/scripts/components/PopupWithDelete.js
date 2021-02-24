@@ -1,7 +1,7 @@
 import {Popup} from './Popup.js';
 
 export class PopupWithDelete extends Popup {
-  constructor({popupSelector}, api) {
+  constructor({popupSelector}) {
       super({popupSelector});
       this._submitButton = document.querySelector('.popup__submit-button_delete');
       this._place = document.querySelector('.place');

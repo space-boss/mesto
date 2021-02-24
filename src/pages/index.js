@@ -21,6 +21,10 @@ import {
   popupZoomSelector,
   popupDeleteSelector,
 
+  popupPlaceSelector,
+  popupAvatarSelector,
+  popupProfileSelector,
+
   userName,
   job,
   userPic,
@@ -33,7 +37,7 @@ import {
   popupProfileForm,
 
   validationSettings,
-} from '../scripts/utils/constants.js';
+} from '../scripts/utils/сonstants.js';
 
 let myId = null;
 
@@ -122,7 +126,7 @@ const popupZoom = new PopupWithImage({
 popupZoom.setEventListeners();
 
 const popupPlace = new PopupWithForm({
-  popupSelector: '.popup_place',
+  popupSelector: popupPlaceSelector,
   formSubmitHandler: (item) => {
     showLoading(popupPlace.popupSubmitButton, true);
     api.generateCard(item)
@@ -144,7 +148,7 @@ addPlace.addEventListener('click', () => {
 
 //opens popup with user info
 const popupProfile = new PopupWithForm({
-  popupSelector: '.popup_profile',
+  popupSelector: popupProfileSelector,
   formSubmitHandler: (data) => {
     showLoading(popupProfile.popupSubmitButton, true);
     api.updateInfo(data)
@@ -168,7 +172,7 @@ editProfile.addEventListener('click', () => {
 
 //opens popup with user avatar
 const popupAvatar = new PopupWithForm({
-  popupSelector: '.popup_avatar',
+  popupSelector: popupAvatarSelector,
   formSubmitHandler: (data) => {
     showLoading(popupAvatar.popupSubmitButton, true);
     api.updateAvatar(data)
