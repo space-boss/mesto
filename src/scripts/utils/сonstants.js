@@ -10,20 +10,17 @@ const editAvatar = document.querySelector('.profile__userpic-edit-button');
 const formElement = document.querySelector('.popup__form');
 const popups = document.querySelectorAll('.popup');
 
-const popupProfile = document.querySelector('.popup_profile');
-const popupAvatar = document.querySelector('.popup_avatar');
-const popupPlace = document.querySelector('.popup_place');
+const popupProfileSelector = document.querySelector('.popup_profile');
+const popupAvatarSelector = document.querySelector('.popup_avatar');
+const popupPlaceSelector = document.querySelector('.popup_place');
 
-const popupProfileForm = popupProfile.querySelector('.popup__form');
-const popupAvatarForm = popupAvatar.querySelector('.popup__form');
-const popupPlaceForm = popupPlace.querySelector('.popup__form');
+const popupProfileForm = popupProfileSelector.querySelector('.popup__form');
+const popupAvatarForm = popupAvatarSelector.querySelector('.popup__form');
+const popupPlaceForm = popupPlaceSelector.querySelector('.popup__form');
 
-const PopupPlaceSelector = '.popup_place';
-const PopupProfileSelector = '.popup_profile';
-const PopupAvatarSelector = '.popup_avatar';
 
-const popupZoomSelector = '.popup_zoom';
-const popupDeleteSelector = '.popup_delete-confirmation';
+const popupZoomSelector = document.querySelector('.popup_zoom');
+const popupDeleteSelector = document.querySelector('.popup_delete-confirmation');
 
 const userName = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
@@ -55,9 +52,9 @@ export {
   formElement,
   popups,
 
-  PopupPlaceSelector,
-  PopupProfileSelector,
-  PopupAvatarSelector,
+  popupPlaceSelector,
+  popupAvatarSelector,
+  popupProfileSelector,
 
   popupZoomSelector,
   popupDeleteSelector,

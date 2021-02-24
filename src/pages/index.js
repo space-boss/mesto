@@ -20,9 +20,10 @@ import {
 
   popupZoomSelector,
   popupDeleteSelector,
-  PopupPlaceSelector,
-  PopupProfileSelector,
-  PopupAvatarSelector,
+
+  popupPlaceSelector,
+  popupAvatarSelector,
+  popupProfileSelector,
 
   userName,
   job,
@@ -125,7 +126,7 @@ const popupZoom = new PopupWithImage({
 popupZoom.setEventListeners();
 
 const popupPlace = new PopupWithForm({
-  popupSelector: PopupPlaceSelector,
+  popupSelector: popupPlaceSelector,
   formSubmitHandler: (item) => {
     showLoading(popupPlace.popupSubmitButton, true);
     api.generateCard(item)
@@ -147,7 +148,7 @@ addPlace.addEventListener('click', () => {
 
 //opens popup with user info
 const popupProfile = new PopupWithForm({
-  popupSelector: PopupProfileSelector,
+  popupSelector: popupProfileSelector,
   formSubmitHandler: (data) => {
     showLoading(popupProfile.popupSubmitButton, true);
     api.updateInfo(data)
@@ -171,7 +172,7 @@ editProfile.addEventListener('click', () => {
 
 //opens popup with user avatar
 const popupAvatar = new PopupWithForm({
-  popupSelector: PopupAvatarSelector,
+  popupSelector: popupAvatarSelector,
   formSubmitHandler: (data) => {
     showLoading(popupAvatar.popupSubmitButton, true);
     api.updateAvatar(data)
